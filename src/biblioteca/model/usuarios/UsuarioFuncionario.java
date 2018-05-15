@@ -10,7 +10,7 @@ package biblioteca.model.usuarios;
  * @author Bianca
  */
 public class UsuarioFuncionario 
-    extends Usuario{
+    extends Usuarios{
     private String cargo;
 
     public UsuarioFuncionario(int id, String nome, String login, String senha, String cargo) {
@@ -28,6 +28,6 @@ public class UsuarioFuncionario
     
        @Override
     public String toString() {
-        return " nome: "+ nome +"cargo: "+ cargo +",login: " + login ;
+        return " nome: "+ nome +"cargo: "+ cargo +",login: "+ login +"senha: "+ senha;
     }
 }

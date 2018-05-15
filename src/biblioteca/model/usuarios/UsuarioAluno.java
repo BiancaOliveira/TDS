@@ -10,7 +10,7 @@ package biblioteca.model.usuarios;
  * @author Bianca
  */
 public class UsuarioAluno 
-        extends Usuario{
+        extends Usuarios{
         private int numeroRegistro;
         private String telefone;
         
@@ -37,6 +37,6 @@ public class UsuarioAluno
     }
        @Override
     public String toString() {
-        return "Numeto de Reegistro:"+ numeroRegistro + ", nome: "+ nome +",login: " + login;
+        return "Numeto de Reegistro:"+ numeroRegistro +", nome: "+ nome +",login: "+ login +"senha: "+ senha;
     }
 }

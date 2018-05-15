@@ -9,13 +9,13 @@ package biblioteca.model.usuarios;
  *
  * @author Bianca
  */
-public class Usuario {
+public class Usuarios {
     private int id;
     String nome;
     String login;
     String senha;
     
-    public Usuario (int id, String nome, String login, String senha){
+    public Usuarios (int id, String nome, String login, String senha){
         this.id = id;
         this.nome = nome;
         this.login = login;
@@ -53,7 +53,7 @@ public class Usuario {
     public boolean equals(Object obj) {
         if (obj == null) return false;
         if (obj == this || obj.getClass() != this.getClass()) return false;
-        Usuario u = (Usuario) obj;
+        Usuarios u = (Usuarios) obj;
         return u.login == this.login;
     }
     
@@ -66,6 +66,6 @@ public class Usuario {
     
     @Override
     public String toString() {
-        return " nome: "+ nome +",login: " + login;
+        return " nome: "+ nome +",login: "+ login +"senha: "+ senha;
     }
 }
