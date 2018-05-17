@@ -9,11 +9,11 @@ package biblioteca.model.livros;
  *
  * @author Bianca
  */
-public class Genero {
+public class Generos {
     private int id;
     private String nome;
 
-    public Genero(int id, String nome) {
+    public Generos(int id, String nome) {
         this.id = id;
         this.nome = nome;
     }
@@ -29,6 +29,22 @@ public class Genero {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) return false;
+        if (obj == this || obj.getClass() != this.getClass()) return false;
+        Generos u = (Generos) obj;
+        return u.nome == this.nome; //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = hash * 13 * nome.hashCode();
+        return hash; //To change body of generated methods, choose Tools | Templates.
+    }
+    
 
     @Override
     public String toString() {

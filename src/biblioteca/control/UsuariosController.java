@@ -1,4 +1,5 @@
-
+package biblioteca.control;
+import biblioteca.model.bd.BD;
 import biblioteca.model.usuarios.Usuarios;
 import java.util.Set;
 
@@ -12,19 +13,26 @@ import java.util.Set;
  *
  * @author Bianca
  */
-public abstract class UsuariosController <C extends Usuarios> {
+public class UsuariosController <C extends Usuarios> {
     
-    public abstract boolean cadastrarUsuario(C usuario);
+    public  boolean cadastrarUsuario(C usuario){
+      return BD.getBanco().addUsuario(usuario);
+    }
     
-    public abstract boolean removerUsuario(C usuario);
-   
-    public abstract Set<C> listarUsuarios();
+    public boolean removerUsuario(C usuario){
+        return BD.getBanco().removerUsuario(usuario);
+    }
     
-    public C buscarUsuario(String login) {
-        for (C usuario : listarUsuarios()) {
+     public C buscarUsuario(String login) {
+        for (Usuarios usuario : listarUsuarios()) {
             if (usuario.getLogin() == login)
-                return usuario;
+                return (C) usuario;
         }
         return null;
-    }  
+    }
+    
+    public  Set<Usuarios> listarUsuarios(){
+        return BD.getBanco().listarUsuarios();
+    }
+  
 }

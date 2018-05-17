@@ -1,6 +1,7 @@
 
 package biblioteca.model.bd;
 
+import biblioteca.model.livros.Generos;
 import biblioteca.model.usuarios.UsuarioAdm;
 import biblioteca.model.usuarios.UsuarioAluno;
 import biblioteca.model.usuarios.UsuarioFuncionario;
@@ -20,6 +21,7 @@ import java.util.TreeSet;
  */
 public class BD {
     private Set<Usuarios> usuarios;
+    private Set<Generos> generos;
 
     //begin Singleton
     private static BD banco;
@@ -33,6 +35,7 @@ public class BD {
     //construtor private  - somente getBanco tem acesso
     private BD() {
         usuarios = new TreeSet<>();
+        generos = new TreeSet<>();
     }
     //end singleton
     
@@ -78,6 +81,20 @@ public class BD {
             }
         }
         return usuarios;
+    }
+    
+   // Funções do generos 
+    
+    public boolean addGenero(Generos genero) {
+        return generos.add(genero);
+    }
+    
+    public boolean removerGenero(Generos genero) {
+        return generos.remove(genero);      
+    }
+    
+    public Set<Generos> listarGeneros() {
+        return generos;
     }
     
 }
