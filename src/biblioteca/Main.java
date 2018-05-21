@@ -20,13 +20,22 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-    
-    UsuariosController<Usuarios> controleUsuarios = 
+        
+        UsuariosController<Usuarios> controleUsuarios = 
             new UsuariosController();
-    controleUsuarios.cadastrarUsuario(new UsuarioAdm(1, "Administrador", "Adm","123456"));
-    controleUsuarios.cadastrarUsuario(new UsuarioFuncionario(1, "Funcionario", "Fun","8542","Bibliotecario"));
-    controleUsuarios.cadastrarUsuario(new UsuarioAluno(1, "Aluno", "Aluno","123456",15420,"(45)9999-9999"));
-       
+        
+        controleUsuarios.cadastrarUsuario(new UsuarioAdm(1, "Administrador", "Adm","123456"));
+        controleUsuarios.cadastrarUsuario(new UsuarioFuncionario(1, "Funcionario", "Fun","8542","Bibliotecario"));
+        controleUsuarios.cadastrarUsuario(new UsuarioFuncionario(2, "Funcionario2", "Fun2","854222","Bibliotecario2"));
+        controleUsuarios.cadastrarUsuario(new UsuarioAluno(1, "Aluno", "Aluno","123456",15420,"(45)9999-9999"));
+   
+        System.out.println("Usuarios: " + controleUsuarios.listarUsuarios()+ "\n");
+        
+        
+        
+    
+
+    
         
         
         

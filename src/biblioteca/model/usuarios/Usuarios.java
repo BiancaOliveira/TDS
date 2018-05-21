@@ -9,7 +9,7 @@ package biblioteca.model.usuarios;
  *
  * @author Bianca
  */
-public class Usuarios {
+public class Usuarios implements Comparable<Usuarios> {
     private int id;
     String nome;
     String login;
@@ -64,8 +64,16 @@ public class Usuarios {
         return hash;
     }
     
+
+    
     @Override
     public String toString() {
-        return " nome: "+ nome +",login: "+ login +"senha: "+ senha;
+        return "Nome: "+ nome +" ,Login: "+ login +" ,Senha: "+ senha;
+    }
+
+    @Override
+    public int compareTo(Usuarios o) {
+       if (login != o.login) return -1;
+       else return 0;
     }
 }
