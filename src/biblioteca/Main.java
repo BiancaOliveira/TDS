@@ -7,6 +7,7 @@ package biblioteca;
 
 import biblioteca.control.AutorController;
 import biblioteca.control.EditoraController;
+import biblioteca.control.EditoraController;
 import biblioteca.control.GenerosController;
 import biblioteca.control.LivrosController;
 import biblioteca.control.UsuariosController;
@@ -30,41 +31,39 @@ public class Main {
     public static void main(String[] args) {
         
         
-        //Funções Usuarios
-        
+        //Funções Usuario
         UsuariosController<Usuarios> controleUsuarios = 
-            new UsuariosController();
+                new UsuariosController();
         
         //cadastrando usuarios
         controleUsuarios.cadastrarUsuario(new UsuarioAdm(1, "Administrador", "Adm","123456"));
         controleUsuarios.cadastrarUsuario(new UsuarioFuncionario(1, "Funcionario", "Fun","8542","Bibliotecario"));
         controleUsuarios.cadastrarUsuario(new UsuarioFuncionario(2, "Funcionario2", "Fun2","854222","Bibliotecario2"));
         controleUsuarios.cadastrarUsuario(new UsuarioAluno(1, "Aluno", "Aluno","123456",15420,"(45)9999-9999"));
-   
         //listar usuarios
-        System.out.println("Usuarios: " + controleUsuarios.listarUsuarios());
+        System.out.println("Lista de usuarios: " + controleUsuarios.listarUsuarios());
         //busca usuario pelo login
-        System.out.println("Usuario: " + controleUsuarios.buscarUsuario("Fun2"));
+        System.out.println("Buscar usuario 'Fun2': " + controleUsuarios.buscarUsuario("Fun2"));
         //remover usuario
         controleUsuarios.removerUsuario("Fun2");
         //busca usuario pelo login
-        System.out.println("Usuario: " + controleUsuarios.buscarUsuario("Fun2"));
+        System.out.println("Buscar usuario 'Fun2': " + controleUsuarios.buscarUsuario("Fun2"));
         
         //Funções de genero
         GenerosController<Generos> controleGeneros = 
-            new GenerosController();
+                new GenerosController();
     
         controleGeneros.cadastrarGenero(new Generos(1,"Ação"));
         controleGeneros.cadastrarGenero(new Generos(2,"Ficção"));
         controleGeneros.cadastrarGenero(new Generos(3,"Drama"));
         //listar generos
-        System.out.println("Generos: "+ controleGeneros.listarGeneros());
+        System.out.println("Lista Generos: "+ controleGeneros.listarGeneros());
         //busca genero pelo nome
-        System.out.println("Generos: " +  controleGeneros.buscarGenero("Ação"));    
+        System.out.println("Buscar Genero 'Ação': "+ controleGeneros.buscarGenero("Ação"));    
         //remover genero
         controleGeneros.removerGenero("Ação");
         //busca usuario pelo login
-        System.out.println("Generos: " +  controleGeneros.buscarGenero("Ação"));    
+        System.out.println("Buscar Genero 'Ação': "+ controleGeneros.buscarGenero("Ação"));   
         
         
         //Funções de autores

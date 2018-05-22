@@ -13,6 +13,15 @@ public class UsuarioFuncionario
     extends Usuarios{
     private String cargo;
 
+    /**
+     * Construtor do Usuario Funcionario
+     * @param id Código do Usuario ---> PK
+     * @param nome Nome do Usuario
+     * @param login Login do usiario
+     * @param senha senha do usuario
+     * @param cargo cargo do funcionario
+    */
+    
     public UsuarioFuncionario(int id, String nome, String login, String senha, String cargo) {
         super(id, nome, login, senha);
         this.cargo = cargo;
@@ -25,9 +34,9 @@ public class UsuarioFuncionario
     public void setCargo(String cargo) {
         this.cargo = cargo;
     }
-    
-       @Override
+ 
+    @Override
     public String toString() {
-        return "\nNome: "+ nome +", Cargo: "+ cargo +", Login: "+ login +", Senha: "+ senha;
+        return "Nome: "+ nome +", Cargo: "+ cargo +", Login: "+ login +", Senha: "+ senha +"\n";
     }
 }

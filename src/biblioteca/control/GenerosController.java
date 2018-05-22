@@ -14,6 +14,7 @@ import java.util.Set;
  * @author Bianca
  */
 public class GenerosController <C extends Generos>{
+    
     public boolean cadastrarGenero(C genero){
        return BD.getBanco().addGenero(genero);    
     }

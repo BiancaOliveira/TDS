@@ -12,6 +12,12 @@ package biblioteca.model.livros;
 public class Autor implements Comparable<Autor>{
     private int id;
     private String nome;
+    
+    /**
+     * Construtor do Usuario
+     * @param id Código do Autor ---> PK
+     * @param nome Nome do Autor
+    */
 
     public Autor(int id, String nome) {
         this.id = id;
@@ -30,6 +36,12 @@ public class Autor implements Comparable<Autor>{
         this.nome = nome;
     }
 
+     /**
+     * Compara dois Autores considerando o nome deles
+     * @param obj Autor que será comparado
+     * @return true se os Autores tem o mesmo nome e false, caso contrário
+     */
+    
     @Override
     public boolean equals(Object obj) {
         if (obj == null) return false;
@@ -38,22 +50,27 @@ public class Autor implements Comparable<Autor>{
         return u.nome == this.nome; //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * Calcula o hascode do Autor considerando o nome (veja equals)
+     * @return O hashcode do nome do autor
+     */
+    
     @Override
     public int hashCode() {
         int hash = 3;
         hash = hash * 13 * nome.hashCode();
-        return hash; //To change body of generated methods, choose Tools | Templates.
+        return hash; 
     }
     
     @Override
     public int compareTo(Autor o) {
-       if (nome != o.nome) return -1;
+       if (nome != o.nome) return 1;
        else return 0;
     }
 
     @Override
     public String toString() {
-        return "\nAutor: " + nome;
+        return "Autor: "+ nome +"\n";
     }
     
     

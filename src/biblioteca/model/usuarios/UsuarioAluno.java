@@ -11,8 +11,18 @@ package biblioteca.model.usuarios;
  */
 public class UsuarioAluno 
         extends Usuarios{
-        private int numeroRegistro;
-        private String telefone;
+    private int numeroRegistro;
+    private String telefone;
+        
+        /**
+     * Construtor do Usuario
+     * @param id Código do Usuario ---> PK
+     * @param nome Nome do Usuario
+     * @param login Login do usiario
+     * @param senha senha do usuario
+     * @param numeroRegistro numero de registro do usuario aluno
+     * @param Telefone telefone do usuario aluno
+    */
         
     public UsuarioAluno(int id, String nome, String login, String senha, int numeroRegistro, String Telefone) {
         super(id, nome, login, senha);
@@ -37,6 +47,6 @@ public class UsuarioAluno
     }
        @Override
     public String toString() {
-        return "\nNumero de Registro: "+ numeroRegistro +", Nome: "+ nome +", Login: "+ login +", Senha: "+ senha;
+        return "Numero de Registro: "+ numeroRegistro +", Nome: "+ nome +", Login: "+ login +", Senha: "+ senha +"\n";
     }
 }

@@ -29,7 +29,18 @@ public class Livros implements Comparable<Livros>{
 
     public Livros() {
     }
-
+    
+    /**
+     * Construtor do Usuario
+     * @param id Código do Usuario ---> PK
+     * @param titulo Nome do Usuario
+     * @param numeroExemplares Login do usiario
+     * @param descricao senha do usuario
+     * @param autor autor do livro
+     * @param editora editora do livro
+     * @param genero generos do livro
+    */
+    
     public Livros(int id, String titulo, int numeroExemplares, String descricao, Autor autor, Editora editora, Generos genero) {
         this.id = id;
         this.titulo = titulo;
@@ -99,19 +110,30 @@ public class Livros implements Comparable<Livros>{
         this.genero = genero;
     }
     
+    /**
+     * Compara dois Livros considerando o titulo delas
+     * @param obj Livro que será comparado
+     * @return true se os Livros tem o mesmo titulo e false, caso contrário
+     */
+    
     @Override
     public boolean equals(Object obj) {
         if (obj == null) return false;
         if (obj == this || obj.getClass() != this.getClass()) return false;
         Livros u = (Livros) obj;
-        return u.titulo == this.titulo; //To change body of generated methods, choose Tools | Templates.
+        return u.titulo == this.titulo; 
     }
-
+    
+    /**
+     * Calcula o hascode do Livros considerando o titulo (veja equals)
+     * @return O hashcode do titulo do livro
+     */
+    
     @Override
     public int hashCode() {
         int hash = 3;
         hash = hash * 13 * titulo.hashCode();
-        return hash; //To change body of generated methods, choose Tools | Templates.
+        return hash; 
     }
     
     @Override
@@ -122,7 +144,7 @@ public class Livros implements Comparable<Livros>{
 
     @Override
     public String toString() {
-        return "\nLivro: " + titulo;
+        return "Livro: " + titulo + "\n" ;
     }
        
 }

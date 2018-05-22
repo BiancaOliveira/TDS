@@ -15,6 +15,14 @@ public class Usuarios implements Comparable<Usuarios> {
     String login;
     String senha;
     
+    /**
+     * Construtor do Usuario
+     * @param id Código do Usuario ---> PK
+     * @param nome Nome do Usuario
+     * @param login Login do usiario
+     * @param senha senha do usuario
+    */
+    
     public Usuarios (int id, String nome, String login, String senha){
         this.id = id;
         this.nome = nome;
@@ -49,6 +57,13 @@ public class Usuarios implements Comparable<Usuarios> {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+    
+    /**
+     * Compara dois Usuarios considerando o login deles
+     * @param obj Usuarios que será comparado
+     * @return true se os Usuarios tem o mesmo login e false, caso contrário
+     */
+    
     @Override
     public boolean equals(Object obj) {
         if (obj == null) return false;
@@ -57,6 +72,11 @@ public class Usuarios implements Comparable<Usuarios> {
         return u.login == this.login;
     }
     
+    /**
+     * Calcula o hascode do Usuario considerando o Login (veja equals)
+     * @return O hashcode do login do cliente
+     */
+    
     @Override
     public int hashCode() {
         int hash = 3;
@@ -64,16 +84,14 @@ public class Usuarios implements Comparable<Usuarios> {
         return hash;
     }
     
-
+    @Override
+    public int compareTo(Usuarios o) {
+       if (login != o.login) return 1;
+       else return 0;
+    }
     
     @Override
     public String toString() {
-        return "\nNome: "+ nome +" ,Login: "+ login +" ,Senha: "+ senha;
-    }
-
-    @Override
-    public int compareTo(Usuarios o) {
-       if (login != o.login) return -1;
-       else return 0;
+        return "Nome: "+ nome +" ,Login: "+ login +" ,Senha: "+ senha+ "\n";
     }
 }
