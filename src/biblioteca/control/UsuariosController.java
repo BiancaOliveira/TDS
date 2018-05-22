@@ -19,7 +19,8 @@ public class UsuariosController <C extends Usuarios> {
       return BD.getBanco().addUsuario(usuario);
     }
     
-    public boolean removerUsuario(C usuario){
+    public boolean removerUsuario(String login){
+        C usuario = buscarUsuario(login);     
         return BD.getBanco().removerUsuario(usuario);
     }
     

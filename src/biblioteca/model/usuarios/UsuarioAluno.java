@@ -37,6 +37,6 @@ public class UsuarioAluno
     }
        @Override
     public String toString() {
-        return "Numero de Registro: "+ numeroRegistro +", Nome: "+ nome +", Login: "+ login +", Senha: "+ senha;
+        return "\nNumero de Registro: "+ numeroRegistro +", Nome: "+ nome +", Login: "+ login +", Senha: "+ senha;
     }
 }

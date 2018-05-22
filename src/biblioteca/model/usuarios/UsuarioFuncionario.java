@@ -28,6 +28,6 @@ public class UsuarioFuncionario
     
        @Override
     public String toString() {
-        return "Nome: "+ nome +", Cargo: "+ cargo +", Login: "+ login +", Senha: "+ senha;
+        return "\nNome: "+ nome +", Cargo: "+ cargo +", Login: "+ login +", Senha: "+ senha;
     }
 }

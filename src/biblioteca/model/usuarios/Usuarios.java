@@ -68,7 +68,7 @@ public class Usuarios implements Comparable<Usuarios> {
     
     @Override
     public String toString() {
-        return "Nome: "+ nome +" ,Login: "+ login +" ,Senha: "+ senha;
+        return "\nNome: "+ nome +" ,Login: "+ login +" ,Senha: "+ senha;
     }
 
     @Override

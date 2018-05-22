@@ -4,8 +4,15 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Bianca/Documents/NetBeansProjects/Trabalho/src/biblioteca/control/UsuariosController.java</file>
-            <file>file:/C:/Users/Bianca/Documents/NetBeansProjects/Trabalho/src/biblioteca/model/bd/BD.java</file>
+            <file>file:/C:/Users/Bianca/Documents/NetBeansProjects/Trabalho/src/biblioteca/control/GenerosController.java</file>
+            <file>file:/C:/Users/Bianca/Documents/NetBeansProjects/Trabalho/src/biblioteca/model/livros/Livros.java</file>
             <file>file:/C:/Users/Bianca/Documents/NetBeansProjects/Trabalho/src/biblioteca/Main.java</file>
+            <file>file:/C:/Users/Bianca/Documents/NetBeansProjects/Trabalho/src/biblioteca/control/AutorController.java</file>
+            <file>file:/C:/Users/Bianca/Documents/NetBeansProjects/Trabalho/src/biblioteca/control/UsuarioAlunoController.java</file>
+            <file>file:/C:/Users/Bianca/Documents/NetBeansProjects/Trabalho/src/biblioteca/control/UsuarioAdmController.java</file>
+            <file>file:/C:/Users/Bianca/Documents/NetBeansProjects/Trabalho/src/biblioteca/model/livros/Generos.java</file>
+            <file>file:/C:/Users/Bianca/Documents/NetBeansProjects/Trabalho/src/biblioteca/model/livros/Editora.java</file>
+            <file>file:/C:/Users/Bianca/Documents/NetBeansProjects/Trabalho/src/biblioteca/model/livros/Autor.java</file>
             <file>file:/C:/Users/Bianca/Documents/NetBeansProjects/Trabalho/src/biblioteca/control/UsuarioFuncionarioController.java</file>
         </group>
     </open-files>

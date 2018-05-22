@@ -5,11 +5,12 @@
  */
 package biblioteca.model.livros;
 
+
 /**
  *
  * @author Bianca
  */
-public class Generos {
+public class Generos implements Comparable<Generos>{
     private int id;
     private String nome;
 
@@ -45,10 +46,15 @@ public class Generos {
         return hash; //To change body of generated methods, choose Tools | Templates.
     }
     
+    @Override
+    public int compareTo(Generos o) {
+       if (nome != o.nome) return -1;
+       else return 0;
+    }
 
     @Override
     public String toString() {
-        return "Gênero: " + nome;
+        return "\nGênero: " + nome;
     }
     
     

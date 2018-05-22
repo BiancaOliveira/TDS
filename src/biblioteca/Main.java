@@ -5,7 +5,9 @@
  */
 package biblioteca;
 
+import biblioteca.control.GenerosController;
 import biblioteca.control.UsuariosController;
+import biblioteca.model.livros.Generos;
 import biblioteca.model.usuarios.UsuarioAdm;
 import biblioteca.model.usuarios.UsuarioAluno;
 import biblioteca.model.usuarios.UsuarioFuncionario;
@@ -21,19 +23,44 @@ public class Main {
      */
     public static void main(String[] args) {
         
+        
+        //Funções Usuarios
+        
         UsuariosController<Usuarios> controleUsuarios = 
             new UsuariosController();
         
+        //cadastrando usuarios
         controleUsuarios.cadastrarUsuario(new UsuarioAdm(1, "Administrador", "Adm","123456"));
         controleUsuarios.cadastrarUsuario(new UsuarioFuncionario(1, "Funcionario", "Fun","8542","Bibliotecario"));
         controleUsuarios.cadastrarUsuario(new UsuarioFuncionario(2, "Funcionario2", "Fun2","854222","Bibliotecario2"));
         controleUsuarios.cadastrarUsuario(new UsuarioAluno(1, "Aluno", "Aluno","123456",15420,"(45)9999-9999"));
    
-        System.out.println("Usuarios: " + controleUsuarios.listarUsuarios()+ "\n");
+        //listar usuarios
+        System.out.println("Usuarios: " + controleUsuarios.listarUsuarios());
+        //busca usuario pelo login
+        System.out.println("Usuario: " + controleUsuarios.buscarUsuario("Fun2"));
+        //remover usuario
+        controleUsuarios.removerUsuario("Fun2");
+        //busca usuario pelo login
+        System.out.println("Usuario: " + controleUsuarios.buscarUsuario("Fun2"));
         
-        
-        
+        //Funções de genero
+        GenerosController<Generos> controleGeneros = 
+            new GenerosController();
     
+        controleGeneros.cadastrarGenero(new Generos(1,"Ação"));
+        controleGeneros.cadastrarGenero(new Generos(2,"Ficção"));
+        controleGeneros.cadastrarGenero(new Generos(3,"Drama"));
+        //listar generos
+        System.out.println("Generos: "+ controleGeneros.listarGeneros());
+        //busca usuario pelo login
+        System.out.println("Generos: " +  controleGeneros.buscarGenero("Ação"));    
+        //remover genero
+        controleGeneros.removerGenero("Ação");
+        //busca usuario pelo login
+        System.out.println("Generos: " +  controleGeneros.buscarGenero("Ação"));    
+        
+        
 
     
         

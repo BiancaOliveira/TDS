@@ -18,7 +18,8 @@ public class GenerosController <C extends Generos>{
        return BD.getBanco().addGenero(genero);    
     }
     
-    public boolean removerGenero(C genero){
+    public boolean removerGenero(String nome){
+        C genero = buscarGenero(nome);
         return BD.getBanco().removerGenero(genero);
     }
    
