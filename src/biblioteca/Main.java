@@ -5,8 +5,10 @@
  */
 package biblioteca;
 
+import biblioteca.control.AutorController;
 import biblioteca.control.GenerosController;
 import biblioteca.control.UsuariosController;
+import biblioteca.model.livros.Autor;
 import biblioteca.model.livros.Generos;
 import biblioteca.model.usuarios.UsuarioAdm;
 import biblioteca.model.usuarios.UsuarioAluno;
@@ -53,7 +55,7 @@ public class Main {
         controleGeneros.cadastrarGenero(new Generos(3,"Drama"));
         //listar generos
         System.out.println("Generos: "+ controleGeneros.listarGeneros());
-        //busca usuario pelo login
+        //busca genero pelo nome
         System.out.println("Generos: " +  controleGeneros.buscarGenero("Ação"));    
         //remover genero
         controleGeneros.removerGenero("Ação");
@@ -61,7 +63,18 @@ public class Main {
         System.out.println("Generos: " +  controleGeneros.buscarGenero("Ação"));    
         
         
-
+        //Funções de autores
+        AutorController<Autor> controleAutor = new AutorController();
+        
+        controleAutor.cadastrarAutor(new Autor(1, "Autor1"));
+        controleAutor.cadastrarAutor(new Autor(2, "Autor2"));
+        controleAutor.cadastrarAutor(new Autor(3, "Autor3"));
+        //listar autores
+        System.out.println("Autores: "+ controleAutor.listarAutores());
+        //remover autores
+        controleAutor.removerAutor("Autor3");
+        System.out.println("Autores: "+ controleAutor.listarAutores());
+        
     
         
         

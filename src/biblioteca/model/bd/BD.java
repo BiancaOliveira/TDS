@@ -1,6 +1,7 @@
 
 package biblioteca.model.bd;
 
+import biblioteca.model.livros.Autor;
 import biblioteca.model.livros.Generos;
 import biblioteca.model.usuarios.UsuarioAdm;
 import biblioteca.model.usuarios.UsuarioAluno;
@@ -22,6 +23,7 @@ import java.util.TreeSet;
 public class BD {
     private Set<Usuarios> usuarios;
     private Set<Generos> generos;
+    private Set<Autor> autores;
 
     //begin Singleton
     private static BD banco;
@@ -36,6 +38,7 @@ public class BD {
     private BD() {
         usuarios = new TreeSet<>();
         generos = new TreeSet<>();
+        autores = new TreeSet<>();
     }
     //end singleton
     
@@ -95,6 +98,20 @@ public class BD {
     
     public Set<Generos> listarGeneros() {
         return generos;
+    }
+    
+    // Funções dos autores 
+    
+    public boolean addAutor(Autor autor) {
+        return autores.add(autor);
+    }
+    
+    public boolean removerAutor(Autor autor) {
+        return autores.remove(autor);      
+    }
+    
+    public Set<Autor> listarAutores() {
+        return autores;
     }
     
 }
