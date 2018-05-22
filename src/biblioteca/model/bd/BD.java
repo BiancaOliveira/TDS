@@ -2,7 +2,9 @@
 package biblioteca.model.bd;
 
 import biblioteca.model.livros.Autor;
+import biblioteca.model.livros.Editora;
 import biblioteca.model.livros.Generos;
+import biblioteca.model.livros.Livros;
 import biblioteca.model.usuarios.UsuarioAdm;
 import biblioteca.model.usuarios.UsuarioAluno;
 import biblioteca.model.usuarios.UsuarioFuncionario;
@@ -24,6 +26,8 @@ public class BD {
     private Set<Usuarios> usuarios;
     private Set<Generos> generos;
     private Set<Autor> autores;
+    private Set<Livros> livros;
+    private Set<Editora> editoras;
 
     //begin Singleton
     private static BD banco;
@@ -39,6 +43,8 @@ public class BD {
         usuarios = new TreeSet<>();
         generos = new TreeSet<>();
         autores = new TreeSet<>();
+        livros = new TreeSet<>();
+        editoras = new TreeSet<>();
     }
     //end singleton
     
@@ -114,4 +120,31 @@ public class BD {
         return autores;
     }
     
+    // Funções dos livros 
+    
+    public boolean addLivro(Livros livro) {
+        return livros.add(livro);
+    }
+    
+    public boolean removerLivro(Livros livro) {
+        return livros.remove(livro);      
+    }
+    
+    public Set<Livros> listarLivros() {
+        return livros;
+    }
+    
+    // Funções da editora 
+    
+    public boolean addEditora(Editora editora) {
+        return editoras.add(editora);
+    }
+    
+    public boolean removerEditora(Editora editora) {
+        return editoras.remove(editora);      
+    }
+    
+    public Set<Editora> listarEditora() {
+        return editoras;
+    }
 }

@@ -6,10 +6,14 @@
 package biblioteca;
 
 import biblioteca.control.AutorController;
+import biblioteca.control.EditoraController;
 import biblioteca.control.GenerosController;
+import biblioteca.control.LivrosController;
 import biblioteca.control.UsuariosController;
 import biblioteca.model.livros.Autor;
+import biblioteca.model.livros.Editora;
 import biblioteca.model.livros.Generos;
+import biblioteca.model.livros.Livros;
 import biblioteca.model.usuarios.UsuarioAdm;
 import biblioteca.model.usuarios.UsuarioAluno;
 import biblioteca.model.usuarios.UsuarioFuncionario;
@@ -75,7 +79,31 @@ public class Main {
         controleAutor.removerAutor("Autor3");
         System.out.println("Autores: "+ controleAutor.listarAutores());
         
-    
+        //Funções de editoras
+        EditoraController<Editora> controleEditora = new EditoraController();
+        
+        controleEditora.cadastrarEditora(new Editora(1, "Editora 1"));
+        controleEditora.cadastrarEditora(new Editora(2, "Editora 2"));
+        controleEditora.cadastrarEditora(new Editora(3, "Editora 3"));
+        //listar editoras
+        System.out.println("Editoras: "+ controleEditora.listarEditora());
+        //remover autores
+        controleEditora.removerEditora("Editora 3");
+        System.out.println("Editora: "+ controleEditora.listarEditora());
+        
+        //Funções de livros
+        LivrosController<Livros> controleLivros = new LivrosController();
+        
+        controleLivros.cadastrarLivro(new Livros(1, "Livro1", 4, "Livro livro livro", controleAutor.buscarAutor("Autor1"), controleEditora.buscarEditora("Editora 1"), controleGeneros.buscarGenero("Drama")));
+        controleLivros.cadastrarLivro(new Livros(2, "Livro2", 4, "Livro livro livro", controleAutor.buscarAutor("Autor2"), controleEditora.buscarEditora("Editora 2"), controleGeneros.buscarGenero("Drama")));
+        
+        //listar Livros
+        System.out.println("Autores: "+ controleLivros.listarLivros());
+        //remover livros
+        controleLivros.removerLivro("Livro2");
+        
+        System.out.println("Autores: "+ controleLivros.listarLivros());
+       
         
         
         
