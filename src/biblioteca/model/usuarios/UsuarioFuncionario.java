@@ -15,9 +15,10 @@ public class UsuarioFuncionario
 
     /**
      * Construtor do Usuario Funcionario
-     * @param id Código do Usuario ---> PK
+     * @param id Código do Usuario (PK)
      * @param nome Nome do Usuario
      * @param login Login do usiario
+     * @param senha senha do usuario
      * @param senha senha do usuario
      * @param cargo cargo do funcionario
     */

@@ -15,7 +15,7 @@ public class Autor implements Comparable<Autor>{
     
     /**
      * Construtor do Usuario
-     * @param id Código do Autor ---> PK
+     * @param id Código do Autor (PK)
      * @param nome Nome do Autor
     */
 

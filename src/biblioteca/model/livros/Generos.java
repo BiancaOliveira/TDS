@@ -16,7 +16,7 @@ public class Generos implements Comparable<Generos>{
     
     /**
      * Construtor do Generos
-     * @param id Código do Genero ---> PK
+     * @param id Código do Genero (PK)
      * @param nome Nome do Genero
     */
     public Generos(int id, String nome) {

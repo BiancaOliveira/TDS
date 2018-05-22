@@ -32,13 +32,13 @@ public class Livros implements Comparable<Livros>{
     
     /**
      * Construtor do Usuario
-     * @param id Código do Usuario ---> PK
-     * @param titulo Nome do Usuario
-     * @param numeroExemplares Login do usiario
-     * @param descricao senha do usuario
-     * @param autor autor do livro
-     * @param editora editora do livro
-     * @param genero generos do livro
+     * @param id Código do Livros (PK)
+     * @param titulo Titulo do livro 
+     * @param numeroExemplares Numero de Exemplares
+     * @param descricao Descrição do livro
+     * @param autor Autor do livro
+     * @param editora Editora do livro
+     * @param genero Generos do livro
     */
     
     public Livros(int id, String titulo, int numeroExemplares, String descricao, Autor autor, Editora editora, Generos genero) {

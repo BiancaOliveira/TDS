@@ -15,7 +15,7 @@ public class Editora implements Comparable<Editora>{
     
     /**
      * Construtor do Usuario
-     * @param id Código da Editora ---> PK
+     * @param id Código da Editora (PK)
      * @param nome Nome da Editora
     */
     public Editora(int id, String nome) {

@@ -17,7 +17,7 @@ public class Usuarios implements Comparable<Usuarios> {
     
     /**
      * Construtor do Usuario
-     * @param id Código do Usuario ---> PK
+     * @param id Código do Usuario (PK)
      * @param nome Nome do Usuario
      * @param login Login do usiario
      * @param senha senha do usuario
