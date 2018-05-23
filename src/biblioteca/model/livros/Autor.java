@@ -14,7 +14,7 @@ public class Autor implements Comparable<Autor>{
     private String nome;
     
     /**
-     * Construtor do Usuario
+     * Construtor do Autor
      * @param id Código do Autor (PK)
      * @param nome Nome do Autor
     */

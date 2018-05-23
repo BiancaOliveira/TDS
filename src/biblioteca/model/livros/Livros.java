@@ -31,7 +31,7 @@ public class Livros implements Comparable<Livros>{
     }
     
     /**
-     * Construtor do Usuario
+     * Construtor do Livros
      * @param id Código do Livros (PK)
      * @param titulo Titulo do livro 
      * @param numeroExemplares Numero de Exemplares
