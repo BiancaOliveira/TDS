@@ -13,6 +13,11 @@ public class Cargo implements Comparable<Cargo>{
     private int id;
     private String nome;
 
+    /**
+     * Construtor do Usuario
+     * @param id Código do Cargo (PK)
+     * @param nome Nome do Cargo
+    */
     public Cargo(int id, String nome) {
         this.id = id;
         this.nome = nome;
@@ -44,8 +49,8 @@ public class Cargo implements Comparable<Cargo>{
         return u.nome == this.nome; 
     }
     /**
-     * Calcula o hascode do Genero considerando o nome (veja equals)
-     * @return O hashcode do nome do Genero
+     * Calcula o hascode do Cargo considerando o nome (veja equals)
+     * @return O hashcode do nome do Cargo
      */
 
     @Override
