@@ -47,6 +47,7 @@ public class BD {
         autores = new TreeSet<>();
         livros = new TreeSet<>();
         editoras = new TreeSet<>();
+        cargos = new TreeSet<>();
     }
     //end singleton
     
