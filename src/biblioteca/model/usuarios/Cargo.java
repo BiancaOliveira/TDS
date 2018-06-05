@@ -3,23 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package biblioteca.model.livros;
+package biblioteca.model.usuarios;
 
 /**
  *
  * @author Bianca
  */
-public class Autor implements Comparable<Autor>{
+public class Cargo implements Comparable<Cargo>{
     private int id;
     private String nome;
-    
-    /**
-     * Construtor do Autor
-     * @param id Código do Autor (PK)
-     * @param nome Nome do Autor
-    */
 
-    public Autor(int id, String nome) {
+    public Cargo(int id, String nome) {
         this.id = id;
         this.nome = nome;
     }
@@ -32,29 +26,28 @@ public class Autor implements Comparable<Autor>{
         return nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNome(String cargo) {
+        this.nome = cargo;
     }
-
+    
      /**
-     * Compara dois Autores considerando o nome deles
-     * @param obj Autor que será comparado
-     * @return true se os Autores tem o mesmo nome e false, caso contrário
+     * Compara dois Cargos considerando o nome deles
+     * @param obj Cargo que será comparado
+     * @return true se os Cargo tem o mesmo nome e false, caso contrário
      */
     
     @Override
     public boolean equals(Object obj) {
         if (obj == null) return false;
         if (obj == this || obj.getClass() != this.getClass()) return false;
-        Autor u = (Autor) obj;
-        return u.nome == this.nome; //To change body of generated methods, choose Tools | Templates.
+        Cargo u = (Cargo) obj;
+        return u.nome == this.nome; 
     }
-
     /**
-     * Calcula o hascode do Autor considerando o nome (veja equals)
-     * @return O hashcode do nome do autor
+     * Calcula o hascode do Genero considerando o nome (veja equals)
+     * @return O hashcode do nome do Genero
      */
-    
+
     @Override
     public int hashCode() {
         int hash = 3;
@@ -63,15 +56,14 @@ public class Autor implements Comparable<Autor>{
     }
     
     @Override
-    public int compareTo(Autor o) {
+    public int compareTo(Cargo o) {
        if (nome != o.nome) return 1;
        else return 0;
     }
 
     @Override
     public String toString() {
-        return nome +"\n";
+        return "Cargo: " + nome + "\n";
     }
-    
     
 }

@@ -10,8 +10,8 @@ package biblioteca.model.usuarios;
  * @author Bianca
  */
 public class UsuarioFuncionario 
-    extends Usuarios{
-    private String cargo;
+    extends Usuario{
+    private Cargo cargo;
 
     /**
      * Construtor do Usuario Funcionario
@@ -23,18 +23,19 @@ public class UsuarioFuncionario
      * @param cargo cargo do funcionario
     */
     
-    public UsuarioFuncionario(int id, String nome, String login, String senha, String cargo) {
+    public UsuarioFuncionario(int id, String nome, String login, String senha, Cargo cargo) {
         super(id, nome, login, senha);
         this.cargo = cargo;
     }
 
-    public String getCargo() {
+    public Cargo getCargo() {
         return cargo;
     }
 
-    public void setCargo(String cargo) {
+    public void setCargo(Cargo cargo) {
         this.cargo = cargo;
     }
+    
  
     @Override
     public String toString() {

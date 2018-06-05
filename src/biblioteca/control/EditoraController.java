@@ -23,12 +23,12 @@ public class EditoraController <C extends Editora>{
         return BD.getBanco().removerEditora(editora);
     }
    
-    public  Set<Editora> listarEditora(){
-        return BD.getBanco().listarEditora();
+    public  Set<Editora> listarEditoras(){
+        return BD.getBanco().listarEditoras();
     }
     
     public C buscarEditora(String nome) {
-        for (Editora editora : listarEditora()) {
+        for (Editora editora : listarEditoras()) {
             if (editora.getNome() == nome)
                 return (C) editora;
         }

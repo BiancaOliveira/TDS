@@ -10,12 +10,12 @@ package biblioteca.model.usuarios;
  * @author Bianca
  */
 public class UsuarioAluno 
-        extends Usuarios{
+        extends Usuario{
     private int numeroRegistro;
     private String telefone;
         
         /**
-     * Construtor do Usuario
+     * Construtor do Usuario Aluno
      * @param id Código do Usuario (PK)
      * @param nome Nome do Usuario
      * @param login Login do usiario

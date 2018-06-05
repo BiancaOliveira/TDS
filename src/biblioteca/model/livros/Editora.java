@@ -14,7 +14,7 @@ public class Editora implements Comparable<Editora>{
     private String nome;
     
     /**
-     * Construtor do Usuario
+     * Construtor do Editora
      * @param id Código da Editora (PK)
      * @param nome Nome da Editora
     */
@@ -69,7 +69,7 @@ public class Editora implements Comparable<Editora>{
 
     @Override
     public String toString() {
-        return "Editora: " + nome +"\n";
+        return nome +"\n";
     }
     
 }

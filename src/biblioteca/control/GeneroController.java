@@ -6,14 +6,14 @@
 package biblioteca.control;
 
 import biblioteca.model.bd.BD;
-import biblioteca.model.livros.Generos;
+import biblioteca.model.livros.Genero;
 import java.util.Set;
 
 /**
  *
  * @author Bianca
  */
-public class GenerosController <C extends Generos>{
+public class GeneroController <C extends Genero>{
     
     public boolean cadastrarGenero(C genero){
        return BD.getBanco().addGenero(genero);    
@@ -24,12 +24,12 @@ public class GenerosController <C extends Generos>{
         return BD.getBanco().removerGenero(genero);
     }
    
-    public  Set<Generos> listarGeneros(){
+    public  Set<Genero> listarGeneros(){
         return BD.getBanco().listarGeneros();
     }
     
     public C buscarGenero(String nome) {
-        for (Generos genero : listarGeneros()) {
+        for (Genero genero : listarGeneros()) {
             if (genero.getNome() == nome)
                 return (C) genero;
         }

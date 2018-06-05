@@ -3,12 +3,13 @@ package biblioteca.model.bd;
 
 import biblioteca.model.livros.Autor;
 import biblioteca.model.livros.Editora;
-import biblioteca.model.livros.Generos;
-import biblioteca.model.livros.Livros;
+import biblioteca.model.livros.Genero;
+import biblioteca.model.livros.Livro;
+import biblioteca.model.usuarios.Cargo;
 import biblioteca.model.usuarios.UsuarioAdm;
 import biblioteca.model.usuarios.UsuarioAluno;
 import biblioteca.model.usuarios.UsuarioFuncionario;
-import biblioteca.model.usuarios.Usuarios;
+import biblioteca.model.usuarios.Usuario;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -23,11 +24,12 @@ import java.util.TreeSet;
  * @author Bianca
  */
 public class BD {
-    private Set<Usuarios> usuarios;
-    private Set<Generos> generos;
+    private Set<Usuario> usuarios;
+    private Set<Genero> generos;
     private Set<Autor> autores;
-    private Set<Livros> livros;
+    private Set<Livro> livros;
     private Set<Editora> editoras;
+    private Set<Cargo> cargos;
 
     //begin Singleton
     private static BD banco;
@@ -48,17 +50,17 @@ public class BD {
     }
     //end singleton
     
-    // Funçõe dos Usuarios
+    // Funçõe dos Usuario
     
-    public boolean addUsuario(Usuarios usuario) {
+    public boolean addUsuario(Usuario usuario) {
         return usuarios.add(usuario);
     }
     
-    public boolean removerUsuario(Usuarios usuario) {
+    public boolean removerUsuario(Usuario usuario) {
         return usuarios.remove(usuario);      
     }
     
-    public Set<Usuarios> listarUsuarios() {
+    public Set<Usuario> listarUsuarios() {
         return usuarios;
     }
     
@@ -94,15 +96,15 @@ public class BD {
     
    // Funções do generos 
     
-    public boolean addGenero(Generos genero) {
+    public boolean addGenero(Genero genero) {
         return generos.add(genero);
     }
     
-    public boolean removerGenero(Generos genero) {
+    public boolean removerGenero(Genero genero) {
         return generos.remove(genero);      
     }
     
-    public Set<Generos> listarGeneros() {
+    public Set<Genero> listarGeneros() {
         return generos;
     }
     
@@ -122,15 +124,15 @@ public class BD {
     
     // Funções dos livros 
     
-    public boolean addLivro(Livros livro) {
+    public boolean addLivro(Livro livro) {
         return livros.add(livro);
     }
     
-    public boolean removerLivro(Livros livro) {
+    public boolean removerLivro(Livro livro) {
         return livros.remove(livro);      
     }
     
-    public Set<Livros> listarLivros() {
+    public Set<Livro> listarLivros() {
         return livros;
     }
     
@@ -144,7 +146,21 @@ public class BD {
         return editoras.remove(editora);      
     }
     
-    public Set<Editora> listarEditora() {
+    public Set<Editora> listarEditoras() {
         return editoras;
+    }
+    
+    // Funções da editora 
+    
+    public boolean addCargo(Cargo cargo) {
+        return cargos.add(cargo);
+    }
+    
+    public boolean removerCargo(Cargo cargo) {
+        return cargos.remove(cargo);      
+    }
+    
+    public Set<Cargo> listarCargos() {
+        return cargos;
     }
 }

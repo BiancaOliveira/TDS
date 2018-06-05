@@ -14,7 +14,7 @@ import java.util.Set;
  * @author Bianca
  */
 public class UsuarioAdmController 
-    extends UsuariosController <UsuarioAdm>{
+    extends UsuarioController <UsuarioAdm>{
     
     public Set<UsuarioAdm> listarUsuariosAdms() {
         return BD.getBanco().listarUsuariosAdms();

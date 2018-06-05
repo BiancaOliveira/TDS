@@ -10,7 +10,7 @@ package biblioteca.model.usuarios;
  * @author Bianca
  */
 public class UsuarioAdm
-    extends Usuarios{
+    extends Usuario{
 
     public UsuarioAdm(int id, String nome, String login, String senha) {
         super(id, nome, login, senha);

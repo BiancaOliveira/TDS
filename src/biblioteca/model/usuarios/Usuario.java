@@ -9,7 +9,7 @@ package biblioteca.model.usuarios;
  *
  * @author Bianca
  */
-public class Usuarios implements Comparable<Usuarios> {
+public class Usuario implements Comparable<Usuario> {
     private int id;
     String nome;
     String login;
@@ -23,7 +23,7 @@ public class Usuarios implements Comparable<Usuarios> {
      * @param senha senha do usuario
     */
     
-    public Usuarios (int id, String nome, String login, String senha){
+    public Usuario (int id, String nome, String login, String senha){
         this.id = id;
         this.nome = nome;
         this.login = login;
@@ -59,16 +59,16 @@ public class Usuarios implements Comparable<Usuarios> {
     }
     
     /**
-     * Compara dois Usuarios considerando o login deles
-     * @param obj Usuarios que será comparado
-     * @return true se os Usuarios tem o mesmo login e false, caso contrário
+     * Compara dois Usuario considerando o login deles
+     * @param obj Usuario que será comparado
+     * @return true se os Usuario tem o mesmo login e false, caso contrário
      */
     
     @Override
     public boolean equals(Object obj) {
         if (obj == null) return false;
         if (obj == this || obj.getClass() != this.getClass()) return false;
-        Usuarios u = (Usuarios) obj;
+        Usuario u = (Usuario) obj;
         return u.login == this.login;
     }
     
@@ -85,7 +85,7 @@ public class Usuarios implements Comparable<Usuarios> {
     }
     
     @Override
-    public int compareTo(Usuarios o) {
+    public int compareTo(Usuario o) {
        if (login != o.login) return 1;
        else return 0;
     }
