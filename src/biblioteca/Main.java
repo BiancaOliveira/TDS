@@ -54,7 +54,7 @@ public class Main {
                 new UsuarioController();
         
         //cadastrando usuarios
-        controleUsuarios.cadastrarUsuario(new UsuarioAdm(1, "Administrador", "Adm","123456"));
+        controleUsuarios.cadastrarUsuario(new UsuarioAdm(1, "Administrador", "Adm","123456",controleCargos.buscarCargo("Adiministrador")));
         controleUsuarios.cadastrarUsuario(new UsuarioFuncionario(1, "Funcionario", "Fun","8542",controleCargos.buscarCargo("Bibliotecario")));
         controleUsuarios.cadastrarUsuario(new UsuarioFuncionario(2, "Funcionario2", "Fun2","854222",controleCargos.buscarCargo("Bibliotecario")));
         controleUsuarios.cadastrarUsuario(new UsuarioAluno(1, "Aluno", "Aluno","123456",15420,"(45)9999-9999"));

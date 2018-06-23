@@ -11,7 +11,7 @@ package biblioteca.model.livros;
  * @author Bianca
  */
 public class Genero implements Comparable<Genero>{
-    private int id;
+    private int idGenero;
     private String nome;
     
     /**
@@ -20,12 +20,12 @@ public class Genero implements Comparable<Genero>{
      * @param nome Nome do Genero
     */
     public Genero(int id, String nome) {
-        this.id = id;
+        this.idGenero = id;
         this.nome = nome;
     }
 
     public int getId() {
-        return id;
+        return idGenero;
     }
 
     public String getNome() {

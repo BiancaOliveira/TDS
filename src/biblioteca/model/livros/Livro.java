@@ -13,7 +13,7 @@ import java.util.List;
  * @author Bianca
  */
 public class Livro implements Comparable<Livro>{
-    private int id;
+    private int idLivro;
     private String titulo;
     private int numeroExemplares;
     private String descricao;
@@ -24,7 +24,7 @@ public class Livro implements Comparable<Livro>{
         
 
     public int getId() {
-        return id;
+        return idLivro;
     }
 
     public Livro() {
@@ -42,7 +42,7 @@ public class Livro implements Comparable<Livro>{
     */
     
     public Livro(int id, String titulo, int numeroExemplares, String descricao, Autor autor, Editora editora, Genero genero) {
-        this.id = id;
+        this.idLivro = id;
         this.titulo = titulo;
         this.numeroExemplares = numeroExemplares;
         this.descricao = descricao;
