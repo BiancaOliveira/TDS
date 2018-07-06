@@ -9,7 +9,7 @@ package biblioteca.model.usuarios;
  *
  * @author Bianca
  */
-public class Usuario implements Comparable<Usuario> {
+public abstract class Usuario implements Comparable<Usuario> {
     private int idUsuario;
     String nome;
     String login;

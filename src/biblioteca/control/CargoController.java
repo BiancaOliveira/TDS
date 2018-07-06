@@ -5,7 +5,9 @@
  */
 package biblioteca.control;
 
+import biblioteca.exception.BancoException;
 import biblioteca.model.bd.BD;
+import biblioteca.model.dao.DAOFactory;
 import biblioteca.model.usuarios.Cargo;
 import java.util.Set;
 
@@ -15,8 +17,8 @@ import java.util.Set;
  */
 public class CargoController <C extends Cargo> {
     
-    public boolean cadastrarCargo(C cargo){
-       return BD.getBanco().addCargo(cargo);    
+    public boolean cadastrarCargo(C cargo) throws BancoException{
+        return DAOFactory.getDefaultDAOFactory().getCargoDAO().salvar(cargo);   
     }
     
     public boolean removerCargo(String nome){
