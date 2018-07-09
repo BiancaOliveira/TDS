@@ -11,9 +11,11 @@ package biblioteca.model.usuarios;
  */
 public class UsuarioAdm
     extends Usuario{
+    private Cargo cargo;
 
-    public UsuarioAdm(int id, String nome, String login, String senha) {
+    public UsuarioAdm(int id, String nome, String login, String senha, Cargo c) {
         super(id, nome, login, senha);
+        this.cargo = c;
     }
     
 }

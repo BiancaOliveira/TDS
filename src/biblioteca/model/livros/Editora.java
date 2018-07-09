@@ -10,7 +10,7 @@ package biblioteca.model.livros;
  * @author Bianca
  */
 public class Editora implements Comparable<Editora>{
-    private int id;
+    private int idEditora;
     private String nome;
     
     /**
@@ -19,12 +19,12 @@ public class Editora implements Comparable<Editora>{
      * @param nome Nome da Editora
     */
     public Editora(int id, String nome) {
-        this.id = id;
+        this.idEditora = id;
         this.nome = nome;
     }
 
     public int getId() {
-        return id;
+        return idEditora;
     }
 
     public String getNome() {

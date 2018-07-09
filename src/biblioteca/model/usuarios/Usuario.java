@@ -9,8 +9,8 @@ package biblioteca.model.usuarios;
  *
  * @author Bianca
  */
-public class Usuario implements Comparable<Usuario> {
-    private int id;
+public abstract class Usuario implements Comparable<Usuario> {
+    private int idUsuario;
     String nome;
     String login;
     String senha;
@@ -24,14 +24,14 @@ public class Usuario implements Comparable<Usuario> {
     */
     
     public Usuario (int id, String nome, String login, String senha){
-        this.id = id;
+        this.idUsuario = id;
         this.nome = nome;
         this.login = login;
         this.senha = senha;           
     }
 
     public int getId() {
-        return id;
+        return idUsuario;
     }
 
     public String getNome() {

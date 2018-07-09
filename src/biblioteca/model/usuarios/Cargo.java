@@ -10,7 +10,7 @@ package biblioteca.model.usuarios;
  * @author Bianca
  */
 public class Cargo implements Comparable<Cargo>{
-    private int id;
+    private int idCargo;
     private String nome;
 
     /**
@@ -19,12 +19,12 @@ public class Cargo implements Comparable<Cargo>{
      * @param nome Nome do Cargo
     */
     public Cargo(int id, String nome) {
-        this.id = id;
+        this.idCargo = id;
         this.nome = nome;
     }
 
     public int getId() {
-        return id;
+        return idCargo;
     }
 
     public String getNome() {
