@@ -157,58 +157,58 @@ public class Main extends Application{
 //        //buscar livro pelo titulo
 //        System.out.println("Buscar livro 'Livro1': "+ controleLivros.buscarLivro("Livro2"));
         
-        System.out.println("---------- Funçoes do Autor ------------\n");
-        //Funções de autores
-        AutorController<Autor> controleAutor = 
-                new AutorController();
-        
-        //cadastrando autores
-        controleAutor.cadastrarAutor(new Autor(1, "Autor1"));
-        controleAutor.cadastrarAutor(new Autor(2, "Autor2"));
-        controleAutor.cadastrarAutor(new Autor(3, "Autor3"));
-        //listar autores
-        System.out.println("Listar autores: "+ controleAutor.listarAutores());
-        //busca autor pelo nome
-        System.out.println("Buscar autor 'Autor3': "+ controleAutor.buscarAutor("Autor3"));   
-        //remover autor
-        controleAutor.removerAutor("Autor3");
-        //busca autor pelo nome
-        System.out.println("Buscar autor 'Autor3': "+ controleAutor.buscarAutor("Autor3")); 
-        
-       System.out.println("---------- Funçoes da Editora ------------\n");
-        //Funções de editora
-        EditoraController<Editora> controleEditora = 
-                new EditoraController();
-        
-        //cadastrando Editoras
-        controleEditora.cadastrarEditora(new Editora(1, "Editora 1"));
-        controleEditora.cadastrarEditora(new Editora(2, "Editora 2"));
-        controleEditora.cadastrarEditora(new Editora(3, "Editora 3"));
-        //listar editoras
-        System.out.println("Listar editoras: "+ controleEditora.listarEditoras());
-        //busca editora pelo nome
-            System.out.println("Buscar editora 'Editora 3': "+ controleEditora.buscarEditora("Editora 3")); 
-        //remover Editora
-        controleEditora.removerEditora("Editora 3");
-        //busca editora pelo nome
-        System.out.println("Buscar editora 'Editora 3': "+ controleEditora.buscarEditora("Editora 3")); 
-        
-        System.out.println("---------- Funçoes do Livro ------------\n");
-        //Funções de livro
-        LivroController<Livro> controleLivros = 
-                new LivroController();
-        
-        //cadastrando Livros
-        controleLivros.cadastrarLivro(new Livro(1, "Livro1", 4, "Livro livro livro", controleAutor.buscarAutor("Autor1"), controleEditora.buscarEditora("Editora 1"), controleGeneros.buscarGenero("Drama")));
-        controleLivros.cadastrarLivro(new Livro(2, "Livro2", 4, "Livro livro livro", controleAutor.buscarAutor("Autor2"), controleEditora.buscarEditora("Editora 2"), controleGeneros.buscarGenero("Drama")));
-        //listar Livro
-        System.out.println("Listar livros: "+ controleLivros.listarLivros());
-        //buscar livro pelo titulo
-        System.out.println("Buscar livro 'Livro1': "+ controleLivros.buscarLivro("Livro2")); 
-        //remover livros
-        controleLivros.removerLivro("Livro2");
-        //buscar livro pelo titulo
-        System.out.println("Buscar livro 'Livro1': "+ controleLivros.buscarLivro("Livro2"));      
+//        System.out.println("---------- Funçoes do Autor ------------\n");
+//        //Funções de autores
+//        AutorController<Autor> controleAutor =
+//                new AutorController();
+//
+//        //cadastrando autores
+//        controleAutor.cadastrarAutor(new Autor(1, "Autor1"));
+//        controleAutor.cadastrarAutor(new Autor(2, "Autor2"));
+//        controleAutor.cadastrarAutor(new Autor(3, "Autor3"));
+//        //listar autores
+//        System.out.println("Listar autores: "+ controleAutor.listarAutores());
+//        //busca autor pelo nome
+//        System.out.println("Buscar autor 'Autor3': "+ controleAutor.buscarAutor("Autor3"));
+//        //remover autor
+//        controleAutor.removerAutor("Autor3");
+//        //busca autor pelo nome
+//        System.out.println("Buscar autor 'Autor3': "+ controleAutor.buscarAutor("Autor3"));
+//
+//       System.out.println("---------- Funçoes da Editora ------------\n");
+//        //Funções de editora
+//        EditoraController<Editora> controleEditora =
+//                new EditoraController();
+//
+//        //cadastrando Editoras
+//        controleEditora.cadastrarEditora(new Editora(1, "Editora 1"));
+//        controleEditora.cadastrarEditora(new Editora(2, "Editora 2"));
+//        controleEditora.cadastrarEditora(new Editora(3, "Editora 3"));
+//        //listar editoras
+//        System.out.println("Listar editoras: "+ controleEditora.listarEditoras());
+//        //busca editora pelo nome
+//            System.out.println("Buscar editora 'Editora 3': "+ controleEditora.buscarEditora("Editora 3"));
+//        //remover Editora
+//        controleEditora.removerEditora("Editora 3");
+//        //busca editora pelo nome
+//        System.out.println("Buscar editora 'Editora 3': "+ controleEditora.buscarEditora("Editora 3"));
+//
+//        System.out.println("---------- Funçoes do Livro ------------\n");
+//        //Funções de livro
+//        LivroController<Livro> controleLivros =
+//                new LivroController();
+//
+//        //cadastrando Livros
+//        controleLivros.cadastrarLivro(new Livro(1, "Livro1", 4, "Livro livro livro", controleAutor.buscarAutor("Autor1"), controleEditora.buscarEditora("Editora 1"), controleGeneros.buscarGenero("Drama")));
+//        controleLivros.cadastrarLivro(new Livro(2, "Livro2", 4, "Livro livro livro", controleAutor.buscarAutor("Autor2"), controleEditora.buscarEditora("Editora 2"), controleGeneros.buscarGenero("Drama")));
+//        //listar Livro
+//        System.out.println("Listar livros: "+ controleLivros.listarLivros());
+//        //buscar livro pelo titulo
+//        System.out.println("Buscar livro 'Livro1': "+ controleLivros.buscarLivro("Livro2"));
+//        //remover livros
+//        controleLivros.removerLivro("Livro2");
+//        //buscar livro pelo titulo
+//        System.out.println("Buscar livro 'Livro1': "+ controleLivros.buscarLivro("Livro2"));
         
     }
 }
