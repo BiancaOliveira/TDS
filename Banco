@@ -1,0 +1,159 @@
+CREATE TABLE "Usuario" (
+	"idUsuario" serial NOT NULL,
+	"nomeUsuario" varchar NOT NULL,
+	"login" varchar NOT NULL,
+	"senha" varchar NOT NULL,
+	CONSTRAINT Usuario_pk PRIMARY KEY ("idUsuario")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE "Aluno" (
+	"id_usuario" integer NOT NULL,
+	"numeroRegistro" integer NOT NULL,
+	"telefone" varchar NOT NULL
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE "Funcionario" (
+	"id_usuario" integer NOT NULL,
+	"id_cargo" integer NOT NULL
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE "Administrador" (
+	"id_usuario" integer NOT NULL,
+	"id_cargo" integer NOT NULL
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE "Editora" (
+	"idEditora" serial NOT NULL,
+	"nomeEditora" varchar NOT NULL,
+	CONSTRAINT Editora_pk PRIMARY KEY ("idEditora")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE "Autor" (
+	"idAutor" serial NOT NULL,
+	"nomeAutor" varchar NOT NULL,
+	CONSTRAINT Autor_pk PRIMARY KEY ("idAutor")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE "Livros" (
+	"idLivros" serial NOT NULL,
+	"titulo" varchar NOT NULL,
+	"id_editora" integer NOT NULL,
+	"autor" integer NOT NULL,
+	"numeroExemplares" integer NOT NULL,
+	"id_genero" integer NOT NULL,
+	"descricao" TEXT NOT NULL,
+	CONSTRAINT Livros_pk PRIMARY KEY ("idLivros")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE "Multas" (
+	"idMultas" serial NOT NULL,
+	"taxa" FLOAT NOT NULL,
+	"valorTotal" FLOAT NOT NULL,
+	"id_usuario" integer NOT NULL,
+	"status" BOOLEAN NOT NULL,
+	"id_emprestimos" integer NOT NULL,
+	CONSTRAINT Multas_pk PRIMARY KEY ("idMultas")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE "Emprestimos" (
+	"idEmprestimos" serial NOT NULL,
+	"dataEmprestimo" DATE NOT NULL,
+	"dataDevolucao" DATE NOT NULL,
+	"id_livros" integer NOT NULL,
+	"id_usuario" integer NOT NULL,
+	"status" BOOLEAN NOT NULL,
+	CONSTRAINT Emprestimos_pk PRIMARY KEY ("idEmprestimos")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE "Genero" (
+	"idGeneros" serial NOT NULL,
+	"nomeGenero" varchar NOT NULL,
+	CONSTRAINT Genero_pk PRIMARY KEY ("idGeneros")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE "Cargo" (
+	"idCargo" serial NOT NULL,
+	"cargo" varchar NOT NULL,
+	CONSTRAINT Cargo_pk PRIMARY KEY ("idCargo")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE "Livros_Autor" (
+	"idLivros_Autor" serial NOT NULL,
+	"idLivros" integer NOT NULL,
+	"idAutor" integer NOT NULL,
+	CONSTRAINT Livros_Autor_pk PRIMARY KEY ("idLivros_Autor")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+
+ALTER TABLE "Aluno" ADD CONSTRAINT "Aluno_fk0" FOREIGN KEY ("id_usuario") REFERENCES "Usuario"("idUsuario");
+
+ALTER TABLE "Funcionario" ADD CONSTRAINT "Funcionario_fk0" FOREIGN KEY ("id_usuario") REFERENCES "Usuario"("idUsuario");
+ALTER TABLE "Funcionario" ADD CONSTRAINT "Funcionario_fk1" FOREIGN KEY ("id_cargo") REFERENCES "Cargo"("idCargo");
+
+ALTER TABLE "Administrador" ADD CONSTRAINT "Administrador_fk0" FOREIGN KEY ("id_usuario") REFERENCES "Usuario"("idUsuario");
+ALTER TABLE "Administrador" ADD CONSTRAINT "Administrador_fk1" FOREIGN KEY ("id_cargo") REFERENCES "Cargo"("idCargo");
+
+
+
+ALTER TABLE "Livros" ADD CONSTRAINT "Livros_fk0" FOREIGN KEY ("id_editora") REFERENCES "Editora"("idEditora");
+ALTER TABLE "Livros" ADD CONSTRAINT "Livros_fk1" FOREIGN KEY ("autor") REFERENCES "Autor"("idAutor");
+ALTER TABLE "Livros" ADD CONSTRAINT "Livros_fk2" FOREIGN KEY ("id_genero") REFERENCES "Genero"("idGeneros");
+
+ALTER TABLE "Multas" ADD CONSTRAINT "Multas_fk0" FOREIGN KEY ("id_usuario") REFERENCES "Usuario"("idUsuario");
+ALTER TABLE "Multas" ADD CONSTRAINT "Multas_fk1" FOREIGN KEY ("id_emprestimos") REFERENCES "Emprestimos"("idEmprestimos");
+
+ALTER TABLE "Emprestimos" ADD CONSTRAINT "Emprestimos_fk0" FOREIGN KEY ("id_livros") REFERENCES "Livros"("idLivros");
+ALTER TABLE "Emprestimos" ADD CONSTRAINT "Emprestimos_fk1" FOREIGN KEY ("id_usuario") REFERENCES "Usuario"("idUsuario");
+
+
+
+ALTER TABLE "Livros_Autor" ADD CONSTRAINT "Livros_Autor_fk0" FOREIGN KEY ("idLivros") REFERENCES "Livros"("idLivros");
+ALTER TABLE "Livros_Autor" ADD CONSTRAINT "Livros_Autor_fk1" FOREIGN KEY ("idAutor") REFERENCES "Autor"("idAutor");
