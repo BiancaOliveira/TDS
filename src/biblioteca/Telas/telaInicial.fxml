@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="principal" minHeight="600.0" minWidth="1000.0" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: e8ddc7;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="biblioteca.control.telaInicialController">
+   <children>
+      <AnchorPane fx:id="direita" layoutX="248.0" prefHeight="600.0" prefWidth="752.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane fx:id="esquerda" layoutX="-7.0" layoutY="-8.0" prefHeight="608.0" prefWidth="250.0" style="-fx-background-color: #590f0f;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+   </children>
+</AnchorPane>
