@@ -17,11 +17,11 @@ import javax.swing.JOptionPane;
 public abstract class PostgreDAO {
     private static Connection conn;
     private static final String URL 
-            = "jdbc:postgresql://localhost:5432/";
+            = "jdbc:postgresql://localhost:5432/tds";
     private static final String USUARIO = "postgres";
     private static final String SENHA = "batata";
     
-    public static Connection conectaBD() throws BancoException {
+    public static Connection getConnection() throws BancoException {
         if (conn == null) {
             try {
                 conn = DriverManager.getConnection(URL, USUARIO, SENHA);
