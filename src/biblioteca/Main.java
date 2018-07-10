@@ -27,7 +27,8 @@ public class Main extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        Parent p = FXMLLoader.load(getClass().getResource("Telas/telaInicial.fxml"));
+        Parent p = FXMLLoader.load(getClass().getResource("Telas/cargo.fxml"));
+        //Parent p = FXMLLoader.load(getClass().getResource("Telas/Login.fxml"));
         Scene scene = new Scene(p);
         primaryStage.setScene(scene);
         //primaryStage.setResizable(false);
@@ -47,7 +48,7 @@ public class Main extends Application{
     static Connection con = null;
     PreparedStatement PST = null;
     ResultSet rs = null;
-    private boolean teste;
+    private static boolean teste;
     public static void main(String[] args) throws BancoException, ClassNotFoundException, SQLException  {
         con = PostgreDAO.getConnection();
 
