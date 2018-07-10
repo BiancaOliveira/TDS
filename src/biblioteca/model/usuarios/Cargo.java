@@ -23,10 +23,19 @@ public class Cargo implements Comparable<Cargo>{
         this.nome = nome;
     }
 
-    public int getId() {
+    public Cargo() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public int getIdCargo() {
         return idCargo;
     }
 
+    public void setIdCargo(int idCargo) {
+        this.idCargo = idCargo;
+    }
+    
+  
     public String getNome() {
         return nome;
     }

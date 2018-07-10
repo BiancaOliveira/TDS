@@ -16,18 +16,20 @@ import javax.swing.JOptionPane;
  */
 public abstract class PostgreDAO {
     private static Connection conn;
+    private static String Driver = "org.postgresql.Driver";
     private static final String URL 
             = "jdbc:postgresql://localhost:5432/tds";
     private static final String USUARIO = "postgres";
     private static final String SENHA = "batata";
     
-    public static Connection getConnection() throws BancoException {
+    public static Connection getConnection() throws BancoException, ClassNotFoundException {
         if (conn == null) {
             try {
+                Class.forName(Driver);
                 conn = DriverManager.getConnection(URL, USUARIO, SENHA);
-                JOptionPane.showMessageDialog(null, "conectado com sucesso");
+                System.out.println("conectado com sucesso");
             } catch (SQLException ex) {
-                throw new BancoException(ex);
+                throw new BancoException("Erro na conexão", ex);
             }
         }
         return conn;            
