@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="610.0" prefWidth="815.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="biblioteca.control.livrosTelaController">
+   <children>
+      <TabPane prefHeight="621.0" prefWidth="815.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Cadastro">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TextField layoutX="119.0" layoutY="37.0" prefHeight="25.0" prefWidth="581.0" />
+                        <Label layoutX="47.0" layoutY="36.0" prefHeight="17.0" prefWidth="51.0" text="Título:">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="47.0" layoutY="80.0" prefHeight="27.0" prefWidth="63.0" text="Editora:">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <ComboBox layoutX="118.0" layoutY="81.0" prefHeight="25.0" prefWidth="580.0" />
+                        <Label layoutX="47.0" layoutY="120.0" prefHeight="27.0" prefWidth="63.0" text="Autor:">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <ComboBox layoutX="118.0" layoutY="121.0" prefHeight="25.0" prefWidth="246.0" />
+                        <Label layoutX="386.0" layoutY="120.0" prefHeight="27.0" prefWidth="88.0" text="Co-autor:">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <ComboBox layoutX="474.0" layoutY="121.0" prefHeight="25.0" prefWidth="225.0" />
+                        <Label layoutX="47.0" layoutY="163.0" prefHeight="27.0" prefWidth="63.0" text="Gênero:">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <ComboBox layoutX="118.0" layoutY="164.0" prefHeight="25.0" prefWidth="230.0" />
+                        <Label layoutX="364.0" layoutY="163.0" prefHeight="27.0" prefWidth="132.0" text="Nº exemplares:">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="496.0" layoutY="164.0" prefHeight="25.0" prefWidth="205.0" />
+                        <Label layoutX="47.0" layoutY="202.0" prefHeight="27.0" prefWidth="92.0" text="Descrição:">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <TextArea layoutX="141.0" layoutY="209.0" prefHeight="200.0" prefWidth="560.0" />
+                        <Button layoutX="625.0" layoutY="435.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="76.0" text="Cadastrar" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Consulta">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="185.0" layoutY="110.0" prefHeight="17.0" prefWidth="153.0" text="pau no meu cu" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

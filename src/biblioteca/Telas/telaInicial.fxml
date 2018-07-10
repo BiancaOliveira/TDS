@@ -1,10 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="principal" minHeight="600.0" minWidth="1000.0" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: e8ddc7;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="biblioteca.control.telaInicialController">
+<AnchorPane fx:id="principal" minHeight="600.0" minWidth="1000.0" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: e8ddc7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="biblioteca.control.telaInicialController">
    <children>
-      <AnchorPane fx:id="direita" layoutX="248.0" prefHeight="600.0" prefWidth="752.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <AnchorPane fx:id="esquerda" layoutX="-7.0" layoutY="-8.0" prefHeight="608.0" prefWidth="250.0" style="-fx-background-color: #590f0f;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <BorderPane layoutX="-6.0" layoutY="-5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="610.0" prefWidth="1016.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <left>
+            <VBox prefHeight="600.0" prefWidth="185.0" style="-fx-background-color: #590f0f;" BorderPane.alignment="CENTER">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="185.0" style="-fx-background-color: transparent; -fx-text-fill: e8ddc7;" text="Livros">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="185.0" style="-fx-background-color: transparent; -fx-text-fill: e8ddc7;" text="Autores">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="185.0" style="-fx-background-color: transparent; -fx-text-fill: e8ddc7;" text="Gêneros">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="185.0" style="-fx-background-color: transparent; -fx-text-fill: e8ddc7;" text="Usuários">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+         </left>
+      </BorderPane>
    </children>
 </AnchorPane>

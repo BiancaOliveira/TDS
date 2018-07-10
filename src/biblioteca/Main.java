@@ -26,7 +26,8 @@ public class Main extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        Parent p = FXMLLoader.load(getClass().getResource("Telas/telaInicial.fxml"));
+        Parent p = FXMLLoader.load(getClass().getResource("Telas/cargo.fxml"));
+        //Parent p = FXMLLoader.load(getClass().getResource("Telas/Login.fxml"));
         Scene scene = new Scene(p);
         primaryStage.setScene(scene);
         //primaryStage.setResizable(false);
