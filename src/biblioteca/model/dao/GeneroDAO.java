@@ -7,7 +7,7 @@ package biblioteca.model.dao;
 
 import biblioteca.exception.BancoException;
 import biblioteca.model.dao.postgre.PostgreDAO;
-import biblioteca.model.usuarios.Cargo;
+import biblioteca.model.livros.Genero;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,21 +20,17 @@ import javax.swing.JOptionPane;
  *
  * @author Bianca
  */
-public class CargoDAO {
-//    static Connection con = null;
-
-//    ResultSet rs = null;
-//    
+public class GeneroDAO {
     
     public static int codigo() throws BancoException, ClassNotFoundException, SQLException{
-        String sql = "SELECT * FROM \"Cargo\"";
+        String sql = "SELECT * FROM \"Genero\"";
         
         int id = 0;
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
         try{
             ResultSet res = stmt.executeQuery();
             while(res.next()){
-                id = res.getInt("idCargo") + 1;
+                id = res.getInt("idGeneros") + 1;
             }         
         }catch(SQLException ex){
           Logger.getLogger("Erro");
@@ -42,16 +38,16 @@ public class CargoDAO {
         return id;
     }
 
-    public  static void inserir(Cargo ob) throws BancoException, ClassNotFoundException, SQLException{
+    public  static void inserir(Genero genero) throws BancoException, ClassNotFoundException, SQLException{
 //        con = PostgreDAO.getConnection();
         
         
-        if(buscar(ob.getNome()) != null){
+        if(buscar(genero.getNome()) != null){
             JOptionPane.showMessageDialog(null,"Cadastro existente");
         }else{
-            ob.setIdCargo(codigo());
-            String sql = "INSERT INTO \"Cargo\" (\"idCargo\",cargo)"
-                    + "VALUES(" + ob.getIdCargo() + ",'" + ob.getNome() + "')";
+            genero.setIdGenero(codigo());
+            String sql = "INSERT INTO \"Genero\" (\"idGeneros\", genero)"
+                    + "VALUES(" + genero.getIdGenero() + ",'" + genero.getNome() + "')";
             PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
             try{
                 if (stmt.executeUpdate() == 1){
@@ -59,15 +55,15 @@ public class CargoDAO {
                 }
 
             }catch(SQLException ex){
-//                Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);
+                Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);
                 JOptionPane.showMessageDialog(null,"Erro ao cadastrar");
             }
         }
     }
 
-    public static void excluir(Cargo ob) throws BancoException, ClassNotFoundException, SQLException{
-        String sql = " Delete  FROM \"Cargo\""
-                + "WHERE cargo ='" + ob.getNome() + "'";
+    public static void excluir(Genero genero) throws BancoException, ClassNotFoundException, SQLException{
+        String sql = " Delete  FROM \"Genero\""
+                + "WHERE genero ='" + genero.getNome() + "'";
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
             try{
                 if (stmt.executeUpdate() > 0){
@@ -80,14 +76,14 @@ public class CargoDAO {
                 JOptionPane.showMessageDialog(null,"Erro ao remover");
             }
     }
-    public  static void alterar(Cargo ob) throws BancoException, ClassNotFoundException, SQLException{
+    public  static void alterar(Genero genero) throws BancoException, ClassNotFoundException, SQLException{
 //        con = PostgreDAO.getConnection();  
-        if(buscar(ob.getNome()) != null){
+        if(buscar(genero.getNome()) != null){
             JOptionPane.showMessageDialog(null,"Cadastro existente");
         }else{
-            ob.setIdCargo(codigo());
-            String sql = "UPDATE INTO \"Cargo\" SET cargo'" + ob.getNome() + "'"
-                    + " WHERE \"idCargo\"=" + ob.getIdCargo();
+            genero.setIdGenero(codigo());
+            String sql = "UPDATE INTO \"Genero\" SET genero'" + genero.getNome() + "'"
+                    + " WHERE \"idGeneros\"=" + genero.getIdGenero();
             PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
             try{
                 if (stmt.executeUpdate() == 1){
@@ -101,18 +97,18 @@ public class CargoDAO {
         }
     }
     
-    public static List<Cargo> listar() throws BancoException, ClassNotFoundException, SQLException{
-        String sql = "SELECT * FROM \"Cargo\"";
+    public static List<Genero> listar() throws BancoException, ClassNotFoundException, SQLException{
+        String sql = "SELECT * FROM \"Genero\"";
         
         
-        List<Cargo> retorno = new ArrayList<Cargo>();
+        List<Genero> retorno = new ArrayList<Genero>();
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
         try{
             ResultSet res = stmt.executeQuery();
             while(res.next()){
-                int id = res.getInt("idCargo");
-                String nome = res.getString("cargo");
-                Cargo item = new Cargo(id,nome);
+                int id = res.getInt("idGeneros");
+                String cargo = res.getString("genero");
+                Genero item = new Genero(id,cargo);
 //                item.setIdCargo(res.getInt("idCargo"));
 //                item.setNome(res.getString("nome"));
                 retorno.add(item);
@@ -129,20 +125,20 @@ public class CargoDAO {
         return retorno;
     }
     
-    private static Cargo getInstance(ResultSet res)
+    private static Genero getInstance(ResultSet res)
         throws SQLException {
-        int id = res.getInt("idCargo");
-        String nome = res.getString("cargo");
-        Cargo item = new Cargo(id, nome);
+        int id = res.getInt("idGeneros");
+        String nome = res.getString("genero");
+        Genero item = new Genero(id, nome);
            
         return item;
     }
     
-    public static Cargo buscar(String nome) throws BancoException, ClassNotFoundException, SQLException {
-        String sql = "SELECT * FROM \"Cargo\""
-                    + " WHERE cargo='"+ nome + "'";   
+    public static Genero buscar(String genero) throws BancoException, ClassNotFoundException, SQLException {
+        String sql = "SELECT * FROM \"Genero\""
+                    + " WHERE genero='"+ genero + "'";   
         
-        Cargo item = null;
+        Genero item = null;
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
         try{
             ResultSet res = stmt.executeQuery();
@@ -158,5 +154,4 @@ public class CargoDAO {
         }
         return item;
     }
-    
 }

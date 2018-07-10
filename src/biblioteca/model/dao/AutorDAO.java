@@ -7,12 +7,11 @@ package biblioteca.model.dao;
 
 import biblioteca.exception.BancoException;
 import biblioteca.model.dao.postgre.PostgreDAO;
-import biblioteca.model.usuarios.Cargo;
+import biblioteca.model.livros.Autor;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
@@ -20,21 +19,17 @@ import javax.swing.JOptionPane;
  *
  * @author Bianca
  */
-public class CargoDAO {
-//    static Connection con = null;
-
-//    ResultSet rs = null;
-//    
-    
+public class AutorDAO {
+        
     public static int codigo() throws BancoException, ClassNotFoundException, SQLException{
-        String sql = "SELECT * FROM \"Cargo\"";
+        String sql = "SELECT * FROM \"Autor\"";
         
         int id = 0;
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
         try{
             ResultSet res = stmt.executeQuery();
             while(res.next()){
-                id = res.getInt("idCargo") + 1;
+                id = res.getInt("idAutor") + 1;
             }         
         }catch(SQLException ex){
           Logger.getLogger("Erro");
@@ -42,16 +37,16 @@ public class CargoDAO {
         return id;
     }
 
-    public  static void inserir(Cargo ob) throws BancoException, ClassNotFoundException, SQLException{
+    public  static void inserir(Autor ob) throws BancoException, ClassNotFoundException, SQLException{
 //        con = PostgreDAO.getConnection();
         
         
         if(buscar(ob.getNome()) != null){
             JOptionPane.showMessageDialog(null,"Cadastro existente");
         }else{
-            ob.setIdCargo(codigo());
-            String sql = "INSERT INTO \"Cargo\" (\"idCargo\",cargo)"
-                    + "VALUES(" + ob.getIdCargo() + ",'" + ob.getNome() + "')";
+            ob.setIdAutor(codigo());
+            String sql = "INSERT INTO \"Autor\" (\"idAutor\",autor)"
+                    + "VALUES(" + ob.getIdAutor() + ",'" + ob.getNome() + "')";
             PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
             try{
                 if (stmt.executeUpdate() == 1){
@@ -65,9 +60,9 @@ public class CargoDAO {
         }
     }
 
-    public static void excluir(Cargo ob) throws BancoException, ClassNotFoundException, SQLException{
-        String sql = " Delete  FROM \"Cargo\""
-                + "WHERE cargo ='" + ob.getNome() + "'";
+    public static void excluir(Autor ob) throws BancoException, ClassNotFoundException, SQLException{
+        String sql = " Delete  FROM \"Autor\""
+                + "WHERE autor ='" + ob.getNome() + "'";
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
             try{
                 if (stmt.executeUpdate() > 0){
@@ -80,14 +75,14 @@ public class CargoDAO {
                 JOptionPane.showMessageDialog(null,"Erro ao remover");
             }
     }
-    public  static void alterar(Cargo ob) throws BancoException, ClassNotFoundException, SQLException{
+    public  static void alterar(Autor ob) throws BancoException, ClassNotFoundException, SQLException{
 //        con = PostgreDAO.getConnection();  
         if(buscar(ob.getNome()) != null){
             JOptionPane.showMessageDialog(null,"Cadastro existente");
         }else{
-            ob.setIdCargo(codigo());
-            String sql = "UPDATE INTO \"Cargo\" SET cargo'" + ob.getNome() + "'"
-                    + " WHERE \"idCargo\"=" + ob.getIdCargo();
+            ob.setIdAutor(codigo());
+            String sql = "UPDATE INTO \"Autor\" SET autor'" + ob.getNome() + "'"
+                    + " WHERE \"idAutor\"=" + ob.getIdAutor();
             PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
             try{
                 if (stmt.executeUpdate() == 1){
@@ -101,18 +96,18 @@ public class CargoDAO {
         }
     }
     
-    public static List<Cargo> listar() throws BancoException, ClassNotFoundException, SQLException{
-        String sql = "SELECT * FROM \"Cargo\"";
+    public static List<Autor> listar() throws BancoException, ClassNotFoundException, SQLException{
+        String sql = "SELECT * FROM \"Autor\"";
         
         
-        List<Cargo> retorno = new ArrayList<Cargo>();
+        List<Autor> retorno = new ArrayList<Autor>();
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
         try{
             ResultSet res = stmt.executeQuery();
             while(res.next()){
-                int id = res.getInt("idCargo");
-                String nome = res.getString("cargo");
-                Cargo item = new Cargo(id,nome);
+                int id = res.getInt("idAutor");
+                String nome = res.getString("autor");
+                Autor item = new Autor(id,nome);
 //                item.setIdCargo(res.getInt("idCargo"));
 //                item.setNome(res.getString("nome"));
                 retorno.add(item);
@@ -129,20 +124,20 @@ public class CargoDAO {
         return retorno;
     }
     
-    private static Cargo getInstance(ResultSet res)
+    private static Autor getInstance(ResultSet res)
         throws SQLException {
-        int id = res.getInt("idCargo");
-        String nome = res.getString("cargo");
-        Cargo item = new Cargo(id, nome);
+        int id = res.getInt("idAutor");
+        String nome = res.getString("autor");
+        Autor item = new Autor(id, nome);
            
         return item;
     }
     
-    public static Cargo buscar(String nome) throws BancoException, ClassNotFoundException, SQLException {
-        String sql = "SELECT * FROM \"Cargo\""
-                    + " WHERE cargo='"+ nome + "'";   
+    public static Autor buscar(String nome) throws BancoException, ClassNotFoundException, SQLException {
+        String sql = "SELECT * FROM \"Autor\""
+                    + " WHERE autor='"+ nome + "'";   
         
-        Cargo item = null;
+        Autor item = null;
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
         try{
             ResultSet res = stmt.executeQuery();
@@ -158,5 +153,4 @@ public class CargoDAO {
         }
         return item;
     }
-    
 }

@@ -71,13 +71,14 @@ public class Cargo implements Comparable<Cargo>{
     
     @Override
     public int compareTo(Cargo o) {
-       if (nome != o.nome) return 1;
-       else return 0;
+       if (idCargo < o.idCargo) return -1;
+        else if (idCargo > o.idCargo) return 1;
+        else return 0;
     }
 
     @Override
     public String toString() {
-        return "Cargo: " + nome + "\n";
+        return "Codigo: " + idCargo + ", Cargo: " + nome + "\n";
     }
     
 }

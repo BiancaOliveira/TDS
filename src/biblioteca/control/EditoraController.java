@@ -5,33 +5,34 @@
  */
 package biblioteca.control;
 
+import biblioteca.exception.BancoException;
 import biblioteca.model.bd.BD;
+import biblioteca.model.dao.EditoraDAO;
 import biblioteca.model.livros.Editora;
+import java.sql.SQLException;
+import java.util.List;
 import java.util.Set;
 
 /**
  *
  * @author gabriela
  */
-public class EditoraController <C extends Editora>{
-    public boolean cadastrarEditora(C editora){
-       return BD.getBanco().addEditora(editora);    
+public class EditoraController{
+
+    public void cadastrar(int id, String nome) throws BancoException, ClassNotFoundException, SQLException{
+       EditoraDAO.inserir(new Editora(id,nome));
     }
     
-    public boolean removerEditora(String nome){
-        C editora = buscarEditora(nome);
-        return BD.getBanco().removerEditora(editora);
+    public void remover(Editora ob) throws BancoException, ClassNotFoundException, SQLException{
+        EditoraDAO.excluir(ob);
     }
-   
-    public  Set<Editora> listarEditoras(){
-        return BD.getBanco().listarEditoras();
+
+    public List<Editora> listar() throws BancoException, ClassNotFoundException, SQLException{
+      return  EditoraDAO.listar();
+      
     }
     
-    public C buscarEditora(String nome) {
-        for (Editora editora : listarEditoras()) {
-            if (editora.getNome() == nome)
-                return (C) editora;
-        }
-        return null;
+    public Editora buscar(String nome) throws BancoException, ClassNotFoundException, SQLException {
+        return  EditoraDAO.buscar(nome);
     } 
 }

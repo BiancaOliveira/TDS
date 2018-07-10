@@ -5,7 +5,10 @@
  */
 package biblioteca;
 
+import biblioteca.control.AutorController;
 import biblioteca.control.CargoController;
+import biblioteca.control.EditoraController;
+import biblioteca.control.GeneroController;
 import biblioteca.exception.BancoException;
 import biblioteca.model.dao.postgre.PostgreDAO;
 import biblioteca.model.usuarios.Cargo;
@@ -46,38 +49,71 @@ public class Main extends Application{
      */
     
     static Connection con = null;
-    PreparedStatement PST = null;
+    PreparedStatement pst = null;
     ResultSet rs = null;
-    private static boolean teste;
+    private static boolean retorno = false;
+    
     public static void main(String[] args) throws BancoException, ClassNotFoundException, SQLException  {
         con = PostgreDAO.getConnection();
 
         System.out.println("\n---------- Funçoes do cargo ------------\n");
          //Funções Cargo
-        CargoController<Cargo> controleCargos = 
+        CargoController controleCargos = 
                 new CargoController();
-    //        
-        Cargo cargo = new Cargo(1,"Administrador");
-        //cadastrando Cargos
-        teste = controleCargos.cadastrarCargo(cargo);
 
-        if(teste == true){
-            System.out.println("Cadastro realizado com sucesso");
-
-        }else{
-           System.out.println("Erro ao cadastrar");
-
-        }
+          controleCargos.cadastrarCargo(88,"Administrador");
 
         
-//        controleCargos.cadastrarCargo(new Cargo(2, "Bibliotecario"));
-//        //listar Cargos
-//        System.out.println("Lista de cargos: " + controleCargos.listarCargos());
-//        //busca cargo pelo login
-//        System.out.println("Buscar cargo 'Bibliotecario': " + controleCargos.buscarCargo("Bibliotecario"));
-//        //remover cargo
-//        controleCargos.removerCargo("Bibliotecario");
-//        //busca cargo pelo login
-//        System.out.println("Buscar cargo 'Bibliotecario': " + controleCargos.buscarCargo("Bibliotecario"));
+        //listar Cargos
+        System.out.println("Lista de cargos: " + controleCargos.listarCargos());
+        //busca cargo pelo login
+        System.out.println("Buscar cargo 'Bibliotecario': " + controleCargos.buscarCargo("Administrador"));
+//      //remover cargo
+        controleCargos.removerCargo( controleCargos.buscarCargo("Administrador"));
+        
+        System.out.println("\n---------- Funçoes do Genero ------------\n");
+         //Funções Cargo
+        GeneroController controleGenero = 
+                new GeneroController();
+
+          controleGenero.cadastrar(0,"terror");
+
+        
+        //listar Cargos
+        System.out.println("Lista de generos: " + controleGenero.listar());
+        //busca cargo pelo login
+        System.out.println("Buscar : " + controleGenero.buscar("terror"));
+//      //remover cargo
+        controleGenero.remover( controleGenero.buscar("terror"));
+        
+        System.out.println("\n---------- Funçoes do Autor ------------\n");
+         //Funções Cargo
+        AutorController controleAutor = 
+                new AutorController();
+
+          controleAutor.cadastrar(0,"bart");
+
+        
+        //listar Cargos
+        System.out.println("Lista de generos: " + controleAutor.listar());
+        //busca cargo pelo login
+        System.out.println("Buscar : " + controleAutor.buscar("bart"));
+//      //remover cargo
+        controleAutor.remover( controleAutor.buscar("bart"));
+        
+        System.out.println("\n---------- Funçoes do Editora ------------\n");
+         //Funções Cargo
+        EditoraController controleEditora = 
+                new EditoraController();
+
+          controleEditora.cadastrar(0,"teste");
+
+        
+        //listar Cargos
+        System.out.println("Lista : " + controleEditora.listar());
+        //busca cargo pelo login
+        System.out.println("Buscar : " + controleEditora.buscar("teste"));
+//      //remover cargo
+        controleEditora.remover( controleEditora.buscar("teste"));
     }
 }

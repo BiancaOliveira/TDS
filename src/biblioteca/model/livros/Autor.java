@@ -24,9 +24,14 @@ public class Autor implements Comparable<Autor>{
         this.nome = nome;
     }
 
-    public int getId() {
+    public int getIdAutor() {
         return idAutor;
     }
+
+    public void setIdAutor(int idAutor) {
+        this.idAutor = idAutor;
+    }
+
 
     public String getNome() {
         return nome;
@@ -64,13 +69,14 @@ public class Autor implements Comparable<Autor>{
     
     @Override
     public int compareTo(Autor o) {
-       if (nome != o.nome) return 1;
-       else return 0;
+        if (idAutor < o.idAutor) return -1;
+        else if (idAutor > o.idAutor) return 1;
+        else return 0;
     }
 
     @Override
     public String toString() {
-        return nome +"\n";
+        return "Codigo: " + idAutor + ", Cargo: " + nome + "\n";    
     }
     
     

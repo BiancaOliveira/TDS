@@ -4,36 +4,35 @@
  * and open the template in the editor.
  */
 package biblioteca.control;
-
+import biblioteca.exception.BancoException;
 import biblioteca.model.bd.BD;
+import biblioteca.model.dao.GeneroDAO;
 import biblioteca.model.livros.Genero;
+import java.sql.SQLException;
+import java.util.List;
 import java.util.Set;
 
 /**
  *
  * @author Bianca
  */
-public class GeneroController <C extends Genero>{
+public class GeneroController{
     
-    public boolean cadastrarGenero(C genero){
-       return BD.getBanco().addGenero(genero);    
+    public void cadastrar(int id, String nome) throws BancoException, ClassNotFoundException, SQLException{
+       GeneroDAO.inserir(new Genero(id,nome));
     }
     
-    public boolean removerGenero(String nome){
-        C genero = buscarGenero(nome);
-        return BD.getBanco().removerGenero(genero);
+    public void remover(Genero genero) throws BancoException, ClassNotFoundException, SQLException{
+        GeneroDAO.excluir(genero);
     }
-   
-    public  Set<Genero> listarGeneros(){
-        return BD.getBanco().listarGeneros();
+
+    public List<Genero> listar() throws BancoException, ClassNotFoundException, SQLException{
+      return  GeneroDAO.listar();
+      
     }
     
-    public C buscarGenero(String nome) {
-        for (Genero genero : listarGeneros()) {
-            if (genero.getNome() == nome)
-                return (C) genero;
-        }
-        return null;
+    public Genero buscar(String nome) throws BancoException, ClassNotFoundException, SQLException {
+        return  GeneroDAO.buscar(nome);
     } 
     
 }

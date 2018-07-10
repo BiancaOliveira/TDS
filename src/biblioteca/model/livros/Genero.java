@@ -24,9 +24,15 @@ public class Genero implements Comparable<Genero>{
         this.nome = nome;
     }
 
-    public int getId() {
+    public int getIdGenero() {
         return idGenero;
     }
+
+    public void setIdGenero(int idGenero) {
+        this.idGenero = idGenero;
+    }
+
+
 
     public String getNome() {
         return nome;
@@ -63,13 +69,14 @@ public class Genero implements Comparable<Genero>{
     
     @Override
     public int compareTo(Genero o) {
-       if (nome != o.nome) return 1;
-       else return 0;
+       if (idGenero < o.idGenero) return -1;
+        else if (idGenero > o.idGenero) return 1;
+        else return 0;
     }
 
     @Override
     public String toString() {
-        return  nome+ "\n";
+        return "Codigo: " + idGenero + ", Cargo: " + nome + "\n";    
     }
     
     

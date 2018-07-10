@@ -6,20 +6,24 @@
 package biblioteca.control;
 
 import biblioteca.exception.BancoException;
-import biblioteca.model.bd.BD;
 import biblioteca.model.dao.CargoDAO;
 import biblioteca.model.usuarios.Cargo;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Set;
 
 /**
  *
  * @author Bianca
  */
-public class CargoController <C extends Cargo>{
+public class CargoController{
     
-    public boolean cadastrarCargo(C cargo) throws BancoException, ClassNotFoundException, SQLException{
-        return CargoDAO.inserir(cargo);   
+    public void cadastrarCargo(int id, String nome) throws BancoException, ClassNotFoundException, SQLException{
+       CargoDAO.inserir(new Cargo(id,nome));
+    }
+    
+    public void removerCargo(Cargo ob) throws BancoException, ClassNotFoundException, SQLException{
+        CargoDAO.excluir(ob);
     }
 //    
 //    public boolean removerCargo(String nome){
@@ -27,16 +31,13 @@ public class CargoController <C extends Cargo>{
 //        return BD.getBanco().removerCargo(cargo);
 //    }
 //   
-//    public  Set<Cargo> listarCargos(){
-//        return BD.getBanco().listarCargos();
-//    }
-//    
-//    public C buscarCargo(String nome) {
-//        for (Cargo cargo : listarCargos()) {
-//            if (cargo.getNome() == nome)
-//                return (C) cargo;
-//        }
-//        return null;
-//    } 
-//    
+    public List<Cargo> listarCargos() throws BancoException, ClassNotFoundException, SQLException{
+      return  CargoDAO.listar();
+      
+    }
+    
+    public Cargo buscarCargo(String nome) throws BancoException, ClassNotFoundException, SQLException {
+        return  CargoDAO.buscar(nome);
+    } 
+    
 }

@@ -5,33 +5,32 @@
  */
 package biblioteca.control;
 
+import biblioteca.exception.BancoException;
 import biblioteca.model.bd.BD;
+import biblioteca.model.dao.AutorDAO;
 import biblioteca.model.livros.Autor;
+import java.sql.SQLException;
+import java.util.List;
 import java.util.Set;
 
 /**
  *
  * @author Bianca
  */
-public class AutorController <C extends Autor>{
-    public boolean cadastrarAutor(C autor){
-       return BD.getBanco().addAutor(autor);    
+public class AutorController {
+     public void cadastrar(int id, String nome) throws BancoException, ClassNotFoundException, SQLException{
+       AutorDAO.inserir(new Autor(id,nome));
     }
     
-    public boolean removerAutor(String nome){
-        C autor = buscarAutor(nome);
-        return BD.getBanco().removerAutor(autor);
+    public void remover(Autor ob) throws BancoException, ClassNotFoundException, SQLException{
+        AutorDAO.excluir(ob);
     }
-   
-    public  Set<Autor> listarAutores(){
-        return BD.getBanco().listarAutores();
+
+    public List<Autor> listar() throws BancoException, ClassNotFoundException, SQLException{
+      return  AutorDAO.listar();
     }
     
-    public C buscarAutor(String nome) {
-        for (Autor autor : listarAutores()) {
-            if (autor.getNome() == nome)
-                return (C) autor;
-        }
-        return null;
-    } 
+    public Autor buscar(String nome) throws BancoException, ClassNotFoundException, SQLException {
+        return  AutorDAO.buscar(nome);
+    }
 }

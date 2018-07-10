@@ -27,7 +27,7 @@ public abstract class PostgreDAO {
             try {
                 Class.forName(Driver);
                 conn = DriverManager.getConnection(URL, USUARIO, SENHA);
-                System.out.println("conectado com sucesso");
+//                System.out.println("conectado com sucesso");
             } catch (SQLException ex) {
                 throw new BancoException("Erro na conexão", ex);
             }

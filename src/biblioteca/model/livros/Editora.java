@@ -23,9 +23,15 @@ public class Editora implements Comparable<Editora>{
         this.nome = nome;
     }
 
-    public int getId() {
+    public int getIdEditora() {
         return idEditora;
     }
+
+    public void setIdEditora(int idEditora) {
+        this.idEditora = idEditora;
+    }
+
+   
 
     public String getNome() {
         return nome;
@@ -63,13 +69,14 @@ public class Editora implements Comparable<Editora>{
     
     @Override
     public int compareTo(Editora o) {
-       if (nome != o.nome) return 1;
-       else return 0;
+       if (idEditora < o.idEditora) return -1;
+        else if (idEditora > o.idEditora) return 1;
+        else return 0;
     }
 
     @Override
     public String toString() {
-        return nome +"\n";
+        return "Codigo: " + idEditora + ", Cargo: " + nome + "\n";  
     }
     
 }
