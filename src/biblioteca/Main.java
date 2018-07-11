@@ -10,7 +10,9 @@ import biblioteca.control.CargoController;
 import biblioteca.control.EditoraController;
 import biblioteca.control.GeneroController;
 import biblioteca.control.UsuarioAdmController;
+import biblioteca.control.UsuarioAlunoController;
 import biblioteca.control.UsuarioController;
+import biblioteca.control.UsuarioFuncionarioController;
 import biblioteca.exception.BancoException;
 import biblioteca.model.dao.postgre.PostgreDAO;
 import biblioteca.model.usuarios.Cargo;
@@ -126,13 +128,13 @@ public class Main extends Application{
         UsuarioController controleUsuario= 
                 new UsuarioController();
 
-          controleUsuario.cadastrar(0,"Quero","me","matar");
+          controleUsuario.cadastrar(0,"Muito Quero chorar","mi","matar");
 
         
         //listar Cargos
         System.out.println("Lista : " + controleUsuario.listar());
         //busca cargo pelo login
-        System.out.println("Buscar : " + controleUsuario.buscar("me"));
+        System.out.println("Buscar : " + controleUsuario.buscar("Quero"));
 //      //remover cargo
 //        controleUsuario.remover(controleUsuario.buscar("me"));
 
@@ -141,12 +143,37 @@ public class Main extends Application{
                 new UsuarioAdmController();
 
           controleAdm.cadastrar(0,"Quero","muito","matar","Administrador");
-          controleAdm.cadastrar(0,"sei","la","gente","Administrador");
+          controleAdm.cadastrar(0,"Quero","la","gente","Administrador");
         
         //listar Cargos
         System.out.println("Lista de generos: " + controleAdm.listar());
         //busca cargo pelo login
-        System.out.println("Buscar : " + controleAdm.buscar("la"));
-        controleAdm.remover(controleAdm.buscar("la"));
+        System.out.println("Buscar : " + controleAdm.buscar("Quero"));
+//        controleAdm.remover(controleAdm.buscar("la"));
+
+    System.out.println("\n---------- Funçoes do Funcionario ------------\n");
+        UsuarioFuncionarioController controleFun = 
+                new UsuarioFuncionarioController();
+
+          controleFun.cadastrar(0,"dadad","da","dada","Administrador");
+          controleFun.cadastrar(0,"teste","te","ters","Administrador");
+        
+        //listar Cargos
+        System.out.println("Lista de generos: " + controleFun.listar());
+        //busca cargo pelo login
+        System.out.println("Buscar : " + controleFun.buscar("teste"));
+//        controleFun.remover(controleFun.buscar("te"));
+    System.out.println("\n---------- Funçoes do Aluno ------------\n");
+        UsuarioAlunoController controleAl = 
+                new UsuarioAlunoController();
+
+          controleAl.cadastrar(0,"faz de fas","fas","dada",4558,"9999999");
+          controleAl.cadastrar(0,"faz de","afsa","dada",4558,"(45)9999999");        
+        //listar Cargos
+        System.out.println("Lista de generos: " + controleAl.listar());
+        //busca cargo pelo login
+        System.out.println("Buscar : " + controleAl.buscar("faz"));
+//        controleAl.remover(controleAl.buscar("fas"));
     }
+
 }

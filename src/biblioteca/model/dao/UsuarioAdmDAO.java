@@ -28,6 +28,12 @@ import javax.swing.JOptionPane;
  */
 public class UsuarioAdmDAO {
     
+    /**
+     * Busca o idUsuario na tabela Usuario
+     * @return id pk do Usuario que vai ser utilizado para salvar na tabela Usuario
+     * @throws BancoException, ClassNotFoundException, SQLException
+     */
+    
     public static int codigo() throws BancoException, ClassNotFoundException, SQLException{
         String sql = "SELECT * FROM \"Usuario\"";
         
@@ -43,6 +49,12 @@ public class UsuarioAdmDAO {
         }
         return id;
     }
+    
+     /**
+     * Inclui o UsuarioAdm na tabela Adiministrador e o Usuario na tabela Usuario
+     * @param ob
+     * @throws BancoException, ClassNotFoundException, SQLException
+     */
     
     public  static void inserir(UsuarioAdm ob) throws BancoException, ClassNotFoundException, SQLException{
 //        con = PostgreDAO.getConnection();
@@ -72,9 +84,15 @@ public class UsuarioAdmDAO {
         }
     }
     
+    /**
+     * Exclui o UsuarioAdm na tabela Adiministrador e o Usuario na tabela Usuario
+     * @param ob
+     * @throws BancoException, ClassNotFoundException, SQLException
+     */
+    
     public static void excluir(UsuarioAdm ob) throws BancoException, ClassNotFoundException, SQLException{
         String sql = " DELETE  FROM \"Administrador\""
-                + "WHERE \"idUsuario\" =" + ob.getIdUsuario() +";"
+                + "WHERE \"id_usuario\" =" + ob.getIdUsuario() +";"
                 + " DELETE  FROM \"Usuario\""
                 + "WHERE \"idUsuario\" =" + ob.getIdUsuario();
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
@@ -84,12 +102,17 @@ public class UsuarioAdmDAO {
                 }
 
             }catch(SQLException ex){
-//                Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);
+//                Logger.getLogger(UsuarioAdmDAO.class.getName()).log(Level.SEVERE,null,ex);
                 
                 JOptionPane.showMessageDialog(null,"Erro ao remover");
             }
     }
-    
+    /**
+     * Busca o idCargo na tabela Cargo
+     * @param nome
+     * @return idCargo
+     * @throws BancoException, ClassNotFoundException, SQLException
+     */
     public static int buscarIdCargo(String nome) throws BancoException, ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM \"Cargo\""
                     + " WHERE cargo='"+ nome + "'";   
@@ -111,29 +134,36 @@ public class UsuarioAdmDAO {
         return idCargo;
     }
     
+    /**
+     * Altera o UsuarioAdm na tabela Adiministrador e o Usuario na tabela Usuario
+     * @param ob
+     * @throws BancoException, ClassNotFoundException, SQLException
+     */
+    
     public  static void alterar(UsuarioAdm ob) throws BancoException, ClassNotFoundException, SQLException{
 //        con = PostgreDAO.getConnection();  
-        String sql = "UPDATE INTO \"Usuario\" SET usuario'" + ob.getNome() 
-                + "', senha = " + ob.getSenha() + 
-                " WHERE \"idUsuario\"=" + ob.getIdUsuario();
+        String sql = " DELETE  FROM \"Administrador\""
+                + "WHERE \"id_usuario\" =" + ob.getIdUsuario() +";"
+                + " DELETE  FROM \"Usuario\""
+                + "WHERE \"idUsuario\" =" + ob.getIdUsuario();
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
+            try{
+                if (stmt.executeUpdate() > 0){
+                    JOptionPane.showMessageDialog(null,"Removido com sucesso");
+                }
 
-        int idCargo = buscarIdCargo(ob.cargo);
-      
-        sql = "UPDATE INTO \"Administrador\" SET id_cargo= " + idCargo + ""
-                + " WHERE id_Usuario =" + ob.getIdUsuario();
-        
-       PostgreDAO.getConnection().prepareStatement(sql);
-        try{
-            if (stmt.executeUpdate() == 1){
-                JOptionPane.showMessageDialog(null,"Alterado com sucesso");
+            }catch(SQLException ex){
+//                Logger.getLogger(UsuarioAdmDAO.class.getName()).log(Level.SEVERE,null,ex);
+                
+                JOptionPane.showMessageDialog(null,"Erro ao remover");
             }
-
-        }catch(SQLException ex){
-//                Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);
-            JOptionPane.showMessageDialog(null,"Erro ao Alterar");
-        }
     }
+    
+    /**
+     * Lista o UsuarioAdm na tabela Adiministrador atravez do Usuario na tabela Usuario e do cargo na tabela Cargo
+     * @return lista de objetos
+     * @throws BancoException, ClassNotFoundException, SQLException
+     */
     
     public static List<UsuarioAdm> listarAdm() throws BancoException, ClassNotFoundException, SQLException{
         String sql = "SELECT * FROM \"Administrador\"";
@@ -144,7 +174,15 @@ public class UsuarioAdmDAO {
         try{
             ResultSet res = stmt.executeQuery();
             while(res.next()){
-                UsuarioAdm item = getInstance(res);
+                
+                Cargo cargo = CargoDAO.buscarID(res.getInt("id_cargo"));
+                Usuario usu = UsuarioDAO.buscarID(res.getInt("id_usuario"));
+                int idUsuario = usu.getIdUsuario();
+                String nome = usu.getNome();
+                String login = usu.getLogin();
+                String senha = "**********";
+                String nomeCargo = cargo.getNome();
+                UsuarioAdm item = new UsuarioAdm(idUsuario,nome,login,senha,nomeCargo);
                 retorno.add(item);
             }
                 
@@ -159,33 +197,48 @@ public class UsuarioAdmDAO {
         return retorno;
     }
     
-     private static UsuarioAdm getInstance(ResultSet res)
+    /**
+     * Constrói um objeto UsuarioAdm a partir de um idLogin
+     * @param idLogin id do Usuario na tabela Usuario
+     * @return UsuarioAdm 
+     * @throws SQLException, BancoException, ClassNotFoundException 
+     */
+     private static UsuarioAdm getInstance(int idLogin)
         throws SQLException, BancoException, ClassNotFoundException {
-        
-//        int idCargo = res.getInt("id_cargo");
-        int idUsuario = res.getInt("idUsuario");
-        String nome = res.getString("usuario");
-        String login = res.getString("login");
-        String senha = "**********";
-        String sql = "SELECT * FROM \"Adiministrador\""
-                    + " WHERE id_usuario='"+ idUsuario + "'";
-        
+        String sql = "SELECT * FROM \"Administrador\""
+                    + " WHERE id_usuario='"+ idLogin + "';";   
+        UsuarioAdm item = null;
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
-        ResultSet y = stmt.executeQuery();
-        int idCargo = y.getInt("idCargo");
-        
-        sql = "SELECT * FROM \"Cargo\""
-                    + " WHERE =\"idCargo\" ="+ idCargo ;
-        
-        stmt = PostgreDAO.getConnection().prepareStatement(sql);
-        ResultSet x = stmt.executeQuery();
-        
-        String cargo = x.getString("cargo");
-        UsuarioAdm item = new UsuarioAdm(idUsuario,nome,login,senha,cargo);
-           
+        try{
+            ResultSet res = stmt.executeQuery();
+            if (res.next()) {
+                Cargo cargo = CargoDAO.buscarID(res.getInt("id_cargo"));
+                Usuario usu = UsuarioDAO.buscarID(res.getInt("id_usuario"));
+                int idUsuario = idLogin;
+                String nome = usu.getNome();
+                String login = usu.getLogin();
+                String senha = "**********";
+                String nomeCargo = cargo.getNome();
+                item = new UsuarioAdm(idUsuario,nome,login,senha,nomeCargo);
+            }
+
+        }catch(SQLException ex){
+            if(item == null){
+                JOptionPane.showMessageDialog(null,"Item não encontrado");
+            }else{
+                Logger.getLogger(UsuarioAdmDAO.class.getName()).log(Level.SEVERE,null,ex);
+                JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
+            }   
+        }
         return item;
     }
-    
+   
+    /**
+     * Busca um UsuarioAdm na tabela Adiministrador atravez do Usuario na tabela Usuario e do cargo na tabela Cargo
+     * @param nome nome do login do usuario
+     * @return um objetos
+     * @throws BancoException, ClassNotFoundException, SQLException
+     */
     public static UsuarioAdm buscar(String nome) throws BancoException, ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM \"Usuario\""
                     + " WHERE login='"+ nome + "'";   
@@ -195,7 +248,9 @@ public class UsuarioAdmDAO {
         try{
             ResultSet res = stmt.executeQuery();
             if (res.next()) {
-                item = getInstance(res);
+                int id = res.getInt("idUsuario");
+//                System.out.println(id);
+                item = getInstance(id);
             }
         }catch(SQLException ex){
             if(item == null){
@@ -208,9 +263,16 @@ public class UsuarioAdmDAO {
         return item;
     }
     
-    public static List<UsuarioAdm> buscarVariosAdm(String nome) throws BancoException, ClassNotFoundException, SQLException {
+     /**
+     * Busca varios UsuarioAdm na tabela Adiministrador atravez do Usuario na tabela Usuario e do cargo na tabela Cargo
+     * @param nome nome do usuario
+     * @return lista de objetos
+     * @throws BancoException, ClassNotFoundException, SQLException
+     */
+    
+    public static List<UsuarioAdm> buscarVarios(String nome) throws BancoException, ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM \"Usuario\""
-                    + " WHERE usuario='"+ nome + "'";   
+                    + " WHERE usuario LIKE '%"+ nome + "%'";   
         
         UsuarioAdm item = null;
         List<UsuarioAdm> retorno = new ArrayList<UsuarioAdm>();
@@ -219,7 +281,8 @@ public class UsuarioAdmDAO {
         try{
             ResultSet res = stmt.executeQuery();
             while (res.next()) {
-                item = getInstance(res);
+                int id = res.getInt("idUsuario");
+                item = getInstance(id);
                 retorno.add(item);
             }
         }catch(SQLException ex){

@@ -13,8 +13,8 @@ public class UsuarioAdm
     extends Usuario{
     public String cargo;
 
-    public UsuarioAdm(int id, String nome, String login, String senha, String cargo) {
-        super(id, nome, login, senha);
+    public UsuarioAdm(int idUsuario, String nome, String login, String senha, String cargo) {
+        super(idUsuario, nome, login, senha);
         this.cargo = cargo;
     }
 
@@ -27,7 +27,8 @@ public class UsuarioAdm
     }
    @Override
     public String toString() {
-        return "Nome: "+ nome +" ,Login: "+ login +" ,Senha: "+ senha+ ",Cargo:"+ cargo +"\n";
+        return "Codigo: " + idUsuario +", Nome: "+ nome +" ,Login: "+ login +" ,Senha: "+ senha+ ",Cargo:"+ cargo +"\n";
     }
+    
     
 }

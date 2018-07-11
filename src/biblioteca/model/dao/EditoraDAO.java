@@ -23,7 +23,11 @@ import javax.swing.JOptionPane;
  * @author Bianca
  */
 public class EditoraDAO {
-    
+    /**
+     * Busca o idEditora na tabela Editora
+     * @return id pk da Editora que vai ser utilizado para salvar na tabela Editora
+     * @throws BancoException, ClassNotFoundException, SQLException
+     */
     public static int codigo() throws BancoException, ClassNotFoundException, SQLException{
         String sql = "SELECT * FROM \"Autor\"";
         
@@ -39,7 +43,11 @@ public class EditoraDAO {
         }
         return id;
     }
-
+    /**
+     * Inclui o Editora na tabela Editora 
+     * @param ob
+     * @throws BancoException, ClassNotFoundException, SQLException
+     */
     public  static void inserir(Editora ob) throws BancoException, ClassNotFoundException, SQLException{
 //        con = PostgreDAO.getConnection();
         
@@ -62,7 +70,11 @@ public class EditoraDAO {
             }
         }
     }
-
+    /**
+     * Exclui o Editora na tabela Editora 
+     * @param ob
+     * @throws BancoException, ClassNotFoundException, SQLException
+     */
     public static void excluir(Editora ob) throws BancoException, ClassNotFoundException, SQLException{
         String sql = " Delete  FROM \"Editora\""
                 + "WHERE editora ='" + ob.getNome() + "'";
@@ -78,6 +90,11 @@ public class EditoraDAO {
                 JOptionPane.showMessageDialog(null,"Erro ao remover");
             }
     }
+    /**
+     * Altera o Editora na tabela Editora 
+     * @param ob
+     * @throws BancoException, ClassNotFoundException, SQLException
+     */
     public  static void alterar(Editora ob) throws BancoException, ClassNotFoundException, SQLException{
 //        con = PostgreDAO.getConnection();  
        if(buscar(ob.getNome()) != null){
@@ -97,7 +114,11 @@ public class EditoraDAO {
             }
        }
     }
-    
+    /**
+     * Lista os Editora na tabela Editora 
+     * @return lista de objetos
+     * @throws BancoException, ClassNotFoundException, SQLException
+     */
     public static List<Editora> listar() throws BancoException, ClassNotFoundException, SQLException{
         String sql = "SELECT * FROM \"Editora\"";
         
@@ -125,7 +146,12 @@ public class EditoraDAO {
         Collections.sort(retorno);
         return retorno;
     }
-    
+    /**
+     * Constrói um objeto Editora a partir de um ResultSet
+     * @param rs Result set contendo a linha que será usada
+     * @return objeto 
+     * @throws SQLException, BancoException, ClassNotFoundException 
+     */
     private static Editora getInstance(ResultSet res)
         throws SQLException {
         int id = res.getInt("idEditora");
@@ -134,7 +160,12 @@ public class EditoraDAO {
            
         return item;
     }
-    
+    /**
+     * Busca um Editora na tabela Editora 
+     * @param nome nome da editora
+     * @return um objetos
+     * @throws BancoException, ClassNotFoundException, SQLException
+     */
     public static Editora buscar(String nome) throws BancoException, ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM \"Editora\""
                     + " WHERE editora='"+ nome + "'";   
@@ -155,10 +186,14 @@ public class EditoraDAO {
         }
         return item;
     }
-    
+    /**
+     * Busca Editora na tabela Editora 
+     * @return lista de objetos
+     * @throws BancoException, ClassNotFoundException, SQLException
+     */
     public static List<Editora> buscarVarios(String nome) throws BancoException, ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM \"Editora\""
-                    + " WHERE editora LIKE '"+ nome + "%'";   
+                    + " WHERE editora LIKE '%"+ nome + "%'";   
         
         Editora item = null;
         List<Editora> retorno = new ArrayList<Editora>();

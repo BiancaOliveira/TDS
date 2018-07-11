@@ -21,10 +21,11 @@ import javax.swing.JOptionPane;
  * @author Bianca
  */
 public class CargoDAO {
-//    static Connection con = null;
-
-//    ResultSet rs = null;
-//    
+    /**
+     * Busca o idCargo na tabela Cargo
+     * @return id pk do Cargo que vai ser utilizado para salvar na tabela Cargo
+     * @throws BancoException, ClassNotFoundException, SQLException
+     */
     
     public static int codigo() throws BancoException, ClassNotFoundException, SQLException{
         String sql = "SELECT * FROM \"Cargo\"";
@@ -41,7 +42,11 @@ public class CargoDAO {
         }
         return id;
     }
-
+    /**
+     * Inclui o Cargo na tabela Cargo 
+     * @param ob
+     * @throws BancoException, ClassNotFoundException, SQLException
+     */
     public  static void inserir(Cargo ob) throws BancoException, ClassNotFoundException, SQLException{
 //        con = PostgreDAO.getConnection();
         
@@ -64,7 +69,11 @@ public class CargoDAO {
             }
         }
     }
-
+    /**
+     * Exclui o Cargo na tabela Cargo 
+     * @param ob
+     * @throws BancoException, ClassNotFoundException, SQLException
+     */
     public static void excluir(Cargo ob) throws BancoException, ClassNotFoundException, SQLException{
         String sql = " Delete  FROM \"Cargo\""
                 + "WHERE cargo ='" + ob.getNome() + "'";
@@ -80,6 +89,11 @@ public class CargoDAO {
                 JOptionPane.showMessageDialog(null,"Erro ao remover");
             }
     }
+    /**
+     * Altera o Cargo na tabela Cargo 
+     * @param ob
+     * @throws BancoException, ClassNotFoundException, SQLException
+     */
     public  static void alterar(Cargo ob) throws BancoException, ClassNotFoundException, SQLException{
 //        con = PostgreDAO.getConnection();  
     
@@ -99,7 +113,11 @@ public class CargoDAO {
             }
         }
     }
-    
+    /**
+     * Lista os Cargo na tabela Cargo 
+     * @return lista de objetos
+     * @throws BancoException, ClassNotFoundException, SQLException
+     */
     public static List<Cargo> listar() throws BancoException, ClassNotFoundException, SQLException{
         String sql = "SELECT * FROM \"Cargo\"";
         
@@ -127,7 +145,12 @@ public class CargoDAO {
         Collections.sort(retorno);
         return retorno;
     }
-    
+    /**
+     * Constrói um objeto Cargo a partir de um ResultSet
+     * @param rs Result set contendo a linha que será usada
+     * @return objeto 
+     * @throws SQLException, BancoException, ClassNotFoundException 
+     */
     private static Cargo getInstance(ResultSet res)
         throws SQLException {
         int id = res.getInt("idCargo");
@@ -136,7 +159,12 @@ public class CargoDAO {
            
         return item;
     }
-    
+    /**
+     * Busca um Cargo na tabela Cargo 
+     * @param nome nome do cargo
+     * @return um objetos
+     * @throws BancoException, ClassNotFoundException, SQLException
+     */
     public static Cargo buscar(String nome) throws BancoException, ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM \"Cargo\""
                     + " WHERE cargo='"+ nome + "'";   
@@ -157,10 +185,43 @@ public class CargoDAO {
         }
         return item;
     }
+    /**
+     * Busca um Cargo na tabela Cargo 
+     * @param id id do cargo
+     * @return um objetos
+     * @throws BancoException, ClassNotFoundException, SQLException
+     */
+    public static Cargo buscarID(int id) throws BancoException, ClassNotFoundException, SQLException {
+        String sql = "SELECT * FROM \"Cargo\""
+                    + " WHERE \"idCargo\"='"+ id + "'";   
+        
+        Cargo item = null;
+        PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
+        try{
+            ResultSet res = stmt.executeQuery();
+            if (res.next()) {
+                item = getInstance(res);
+            }
+        }catch(SQLException ex){
+            if(item == null){
+                JOptionPane.showMessageDialog(null,"Item não encontrado");
+            }else{
+                JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
+            }   
+        }
+        return item;
+    }
+    
+    /**
+     * Busca  Cargo na tabela Cargo 
+     * @param nome nome do cargo
+     * @return lista um objetos
+     * @throws BancoException, ClassNotFoundException, SQLException
+     */
     
     public static List<Cargo> buscarVarios(String nome) throws BancoException, ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM \"Cargo\""
-                    + " WHERE cargo LIKE '"+ nome + "%'";   
+                    + " WHERE cargo LIKE '%"+ nome + "%'";   
         
         Cargo item = null;
         List<Cargo> retorno = new ArrayList<Cargo>();

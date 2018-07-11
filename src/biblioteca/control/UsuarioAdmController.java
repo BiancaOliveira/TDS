@@ -26,7 +26,7 @@ public class UsuarioAdmController {
        UsuarioAdmDAO.inserir(new UsuarioAdm(id,nome,login,senha, cargo));
     }
     public void remover(UsuarioAdm ob) throws BancoException, ClassNotFoundException, SQLException{
-        UsuarioDAO.excluir(ob);
+        UsuarioAdmDAO.excluir(ob);
     }
 
     public List<UsuarioAdm> listar() throws BancoException, ClassNotFoundException, SQLException{
@@ -34,8 +34,8 @@ public class UsuarioAdmController {
       
     }
     
-    public UsuarioAdm buscar(String login) throws BancoException, ClassNotFoundException, SQLException {
-        return  UsuarioAdmDAO.buscar(login);
+    public List<UsuarioAdm> buscar(String nome) throws BancoException, ClassNotFoundException, SQLException {
+        return  UsuarioAdmDAO.buscarVarios(nome);
     }
     
 }

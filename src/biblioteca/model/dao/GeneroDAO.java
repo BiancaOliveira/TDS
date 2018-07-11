@@ -21,7 +21,11 @@ import javax.swing.JOptionPane;
  * @author Bianca
  */
 public class GeneroDAO {
-    
+    /**
+     * Busca o idGenero na tabela Genero
+     * @return id pk do Genero que vai ser utilizado para salvar na tabela Genero
+     * @throws BancoException, ClassNotFoundException, SQLException
+     */
     public static int codigo() throws BancoException, ClassNotFoundException, SQLException{
         String sql = "SELECT * FROM \"Genero\"";
         
@@ -37,7 +41,11 @@ public class GeneroDAO {
         }
         return id;
     }
-
+    /**
+     * Inclui o Genero na tabela Genero 
+     * @param ob
+     * @throws BancoException, ClassNotFoundException, SQLException
+     */
     public  static void inserir(Genero genero) throws BancoException, ClassNotFoundException, SQLException{
 //        con = PostgreDAO.getConnection();
         
@@ -60,7 +68,11 @@ public class GeneroDAO {
             }
         }
     }
-
+    /**
+     * Exclui o Genero na tabela Genero 
+     * @param ob
+     * @throws BancoException, ClassNotFoundException, SQLException
+     */
     public static void excluir(Genero genero) throws BancoException, ClassNotFoundException, SQLException{
         String sql = " Delete  FROM \"Genero\""
                 + "WHERE genero ='" + genero.getNome() + "'";
@@ -76,6 +88,11 @@ public class GeneroDAO {
                 JOptionPane.showMessageDialog(null,"Erro ao remover");
             }
     }
+    /**
+     * Altera o Genero na tabela Genero 
+     * @param ob
+     * @throws BancoException, ClassNotFoundException, SQLException
+     */
     public  static void alterar(Genero ob) throws BancoException, ClassNotFoundException, SQLException{
 //        con = PostgreDAO.getConnection();  
         if(buscar(ob.getNome()) != null){
@@ -95,7 +112,11 @@ public class GeneroDAO {
             }
         }
     }
-    
+    /**
+     * Lista os Genero na tabela Genero 
+     * @return lista de objetos
+     * @throws BancoException, ClassNotFoundException, SQLException
+     */
     public static List<Genero> listar() throws BancoException, ClassNotFoundException, SQLException{
         String sql = "SELECT * FROM \"Genero\"";
         
@@ -123,7 +144,12 @@ public class GeneroDAO {
         Collections.sort(retorno);
         return retorno;
     }
-    
+    /**
+     * Constrói um objeto Genero a partir de um ResultSet
+     * @param rs Result set contendo a linha que será usada
+     * @return objeto 
+     * @throws SQLException, BancoException, ClassNotFoundException 
+     */
     private static Genero getInstance(ResultSet res)
         throws SQLException {
         int id = res.getInt("idGeneros");
@@ -132,7 +158,12 @@ public class GeneroDAO {
            
         return item;
     }
-    
+    /**
+     * Busca um Genero na tabela Genero 
+     * @param nome nome do genero
+     * @return um objetos
+     * @throws BancoException, ClassNotFoundException, SQLException
+     */
     public static Genero buscar(String genero) throws BancoException, ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM \"Genero\""
                     + " WHERE genero LIKE '"+ genero + "%'";   
@@ -153,10 +184,14 @@ public class GeneroDAO {
         }
         return item;
     }
-    
+     /**
+     * Busca  Genero na tabela Genero 
+     * @return lista de objetos
+     * @throws BancoException, ClassNotFoundException, SQLException
+     */
     public static List<Genero> buscarVarios(String nome) throws BancoException, ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM \"Genero\""
-                    + " WHERE genero='"+ nome + "'";   
+                    + " WHERE genero='%"+ nome + "'";   
         
         Genero item = null;
         List<Genero> retorno = new ArrayList<Genero>();

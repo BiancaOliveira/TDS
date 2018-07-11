@@ -10,7 +10,7 @@ package biblioteca.model.usuarios;
  * @author Bianca
  */
 public  class Usuario implements Comparable<Usuario> {
-    private int idUsuario;
+    int idUsuario;
     String nome;
     String login;
     String senha;
@@ -99,6 +99,6 @@ public  class Usuario implements Comparable<Usuario> {
     
     @Override
     public String toString() {
-        return "Nome: "+ nome +" ,Login: "+ login +" ,Senha: "+ senha+ "\n";
+        return "Codigo: "+ idUsuario +", Nome: "+ nome +" ,Login: "+ login +" ,Senha: "+ senha+ "\n";
     }
 }

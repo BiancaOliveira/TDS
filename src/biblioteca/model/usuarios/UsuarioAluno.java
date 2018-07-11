@@ -11,8 +11,8 @@ package biblioteca.model.usuarios;
  */
 public class UsuarioAluno 
         extends Usuario{
-    private int numeroRegistro;
-    private String telefone;
+    public int numeroRegistro;
+    public String telefone;
         
         /**
      * Construtor do Usuario Aluno
@@ -24,10 +24,10 @@ public class UsuarioAluno
      * @param Telefone telefone do usuario aluno
     */
         
-    public UsuarioAluno(int id, String nome, String login, String senha, int numeroRegistro, String Telefone) {
-        super(id, nome, login, senha);
+    public UsuarioAluno(int idUsuario, String nome, String login, String senha, int numeroRegistro, String Telefone) {
+        super(idUsuario, nome, login, senha);
         this.numeroRegistro = numeroRegistro;
-        this.telefone = telefone;
+        this.telefone = Telefone;
     }
 
     public int getNumeroRegistro() {
@@ -47,6 +47,8 @@ public class UsuarioAluno
     }
        @Override
     public String toString() {
-        return "Numero de Registro: "+ numeroRegistro +", Nome: "+ nome +", Login: "+ login +", Senha: "+ senha +"\n";
+        return "Codigo: "+ idUsuario +", Nome: "+ nome +","
+                + " Login: "+ login +", Senha: "+ senha +","
+                + " NumeroRegistro"+ numeroRegistro +", Telefone: "+ telefone+"\n";
     }
 }

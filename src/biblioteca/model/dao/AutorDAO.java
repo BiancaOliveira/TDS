@@ -21,7 +21,11 @@ import javax.swing.JOptionPane;
  * @author Bianca
  */
 public class AutorDAO {
-        
+    /**
+     * Busca o idAutor na tabela Autor
+     * @return id pk do Auto que vai ser utilizado para salvar na tabela Autor
+     * @throws BancoException, ClassNotFoundException, SQLException
+     */   
     public static int codigo() throws BancoException, ClassNotFoundException, SQLException{
         String sql = "SELECT * FROM \"Autor\"";
         
@@ -38,6 +42,11 @@ public class AutorDAO {
         return id;
     }
 
+    /**
+     * Inclui o Autor na tabela Autor 
+     * @param ob
+     * @throws BancoException, ClassNotFoundException, SQLException
+     */
     public  static void inserir(Autor ob) throws BancoException, ClassNotFoundException, SQLException{
 //        con = PostgreDAO.getConnection();
         
@@ -60,7 +69,11 @@ public class AutorDAO {
             }
         }
     }
-
+    /**
+     * Exclui o Autor na tabela Autor 
+     * @param ob
+     * @throws BancoException, ClassNotFoundException, SQLException
+     */
     public static void excluir(Autor ob) throws BancoException, ClassNotFoundException, SQLException{
         String sql = " Delete  FROM \"Autor\""
                 + "WHERE autor ='" + ob.getNome() + "'";
@@ -76,6 +89,11 @@ public class AutorDAO {
                 JOptionPane.showMessageDialog(null,"Erro ao remover");
             }
     }
+    /**
+     * Altera o Autor na tabela Autor 
+     * @param ob
+     * @throws BancoException, ClassNotFoundException, SQLException
+     */
     public  static void alterar(Autor ob) throws BancoException, ClassNotFoundException, SQLException{
 //        con = PostgreDAO.getConnection();  
         
@@ -96,7 +114,11 @@ public class AutorDAO {
             }
         }
     }
-    
+    /**
+     * Lista o Autor na tabela Autor 
+     * @retun lista de objetos
+     * @throws BancoException, ClassNotFoundException, SQLException
+     */
     public static List<Autor> listar() throws BancoException, ClassNotFoundException, SQLException{
         String sql = "SELECT * FROM \"Autor\"";
         
@@ -125,6 +147,13 @@ public class AutorDAO {
         return retorno;
     }
     
+    /**
+     * Constrói um objeto Autor a partir de um ResultSet
+     * @param rs Result set contendo a linha que será usada
+     * @return objeto 
+     * @throws SQLException, BancoException, ClassNotFoundException 
+     */
+    
     private static Autor getInstance(ResultSet res)
         throws SQLException {
         int id = res.getInt("idAutor");
@@ -133,6 +162,12 @@ public class AutorDAO {
            
         return item;
     }
+    
+    /**
+     * busca um Autor na tabela Autor 
+     * @retun um objetos
+     * @throws BancoException, ClassNotFoundException, SQLException
+     */
     
     public static Autor buscar(String nome) throws BancoException, ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM \"Autor\""
@@ -155,9 +190,15 @@ public class AutorDAO {
         return item;
     }
     
+    /**
+     * busca Autor na tabela Autor 
+     * @retun lista de objetos
+     * @throws BancoException, ClassNotFoundException, SQLException
+     */
+    
     public static List<Autor> buscarVarios(String nome) throws BancoException, ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM \"Autor\""
-                    + " WHERE autor LIKE '"+ nome + "%'";   
+                    + " WHERE autor LIKE '%"+ nome + "%'";   
         
         Autor item = null;
         List<Autor> retorno = new ArrayList<Autor>();
