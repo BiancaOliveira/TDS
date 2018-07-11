@@ -29,8 +29,9 @@ public class LivroDAO {
     /**
      * Busca o idLivro na tabela Livro
      * @return id pk do Livro que vai ser utilizado para salvar na tabela Livro
-     * @throws BancoException, ClassNotFoundException, SQLException
-     */
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql     */
     public static int codigo() throws BancoException, ClassNotFoundException, SQLException{
         String sql = "SELECT * FROM \"Livros\"";
         
@@ -50,10 +51,11 @@ public class LivroDAO {
     
     /**
      * Busca o idEditora na tabela Editora
-     * @param nome
+     * @param nome nome da editora
      * @return idEditora
-     * @throws BancoException, ClassNotFoundException, SQLException
-     */
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql     */
     public static int buscarIdEditora(String nome) throws BancoException, ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM \"Editora\""
                     + " WHERE editora='"+ nome + "'";   
@@ -76,9 +78,11 @@ public class LivroDAO {
     }
     /**
      * Busca o idAutor na tabela Autor
-     * @param nome
+     * @param nome nome da autor
      * @return idAutor
-     * @throws BancoException, ClassNotFoundException, SQLException
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
      */
     public static int buscarIdAutor(String nome) throws BancoException, ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM \"Autor\""
@@ -102,9 +106,11 @@ public class LivroDAO {
     }
     /**
      * Busca o idGenero na tabela Genero
-     * @param nome
+     * @param nome nome da genero
      * @return idGenero
-     * @throws BancoException, ClassNotFoundException, SQLException
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
      */
     public static int buscarIdGenero(String nome) throws BancoException, ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM \"Genero\""
@@ -128,15 +134,17 @@ public class LivroDAO {
     }
     /**
      * Inclui o Livro na tabela Livro 
-     * @param ob
-     * @throws BancoException, ClassNotFoundException, SQLException
+     * @param ob objeto
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
      */
     public  static void inserir(Livro ob) throws BancoException, ClassNotFoundException, SQLException{
 //        con = PostgreDAO.getConnection();
         
         
         if(buscar(ob.getTitulo()) != null){
-            JOptionPane.showMessageDialog(null,"Este login ja existe");
+            JOptionPane.showMessageDialog(null,"Cadastro existente");
         }else{
             ob.setIdLivro(codigo());
             
@@ -166,8 +174,10 @@ public class LivroDAO {
     }
      /**
      * Exclui o Livro na tabela Livro 
-     * @param ob
-     * @throws BancoException, ClassNotFoundException, SQLException
+     * @param ob objeto
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
      */
     public static void excluir(Livro ob) throws BancoException, ClassNotFoundException, SQLException{
         String sql = " Delete  FROM \"Livros\""
@@ -186,8 +196,10 @@ public class LivroDAO {
     }
      /**
      * Altera o Livro na tabela Livro 
-     * @param ob
-     * @throws BancoException, ClassNotFoundException, SQLException
+     * @param ob objeto
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
      */
     public  static void alterar(Livro ob) throws BancoException, ClassNotFoundException, SQLException{
 //        con = PostgreDAO.getConnection();  
@@ -218,7 +230,9 @@ public class LivroDAO {
      /**
      * Lista os Usuario na tabela Usuario 
      * @return lista de objetos
-     * @throws BancoException, ClassNotFoundException, SQLException
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
      */
     public static List<Livro> listar() throws BancoException, ClassNotFoundException, SQLException{
         String sql = "SELECT * FROM \"Livros\"";
@@ -260,7 +274,9 @@ public class LivroDAO {
      * Constrói um objeto Livro a partir de um ResultSet
      * @param rs Result set contendo a linha que será usada
      * @return objeto 
-     * @throws SQLException, BancoException, ClassNotFoundException 
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
      */
     private static Livro getInstance(ResultSet res)
         throws SQLException, BancoException, ClassNotFoundException {
@@ -284,7 +300,9 @@ public class LivroDAO {
      * Busca um Livro na tabela Livro 
      * @param nome login do usuario
      * @return um objetos
-     * @throws BancoException, ClassNotFoundException, SQLException
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
      */
     public static Livro buscar(String nome) throws BancoException, ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM \"Livros\""
@@ -309,10 +327,12 @@ public class LivroDAO {
     }
     
     /**
-     * Busca um Usuario na tabela Usuario 
-     * @param id id do cargo
+     * Busca um Livro na tabela Livro 
+     * @param id id do Livro
      * @return um objetos
-     * @throws BancoException, ClassNotFoundException, SQLException
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
      */
     public static Livro buscarID(int id) throws BancoException, ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM \"Livros\""
@@ -336,8 +356,11 @@ public class LivroDAO {
     }
     /**
      * Busca  por titulo Usuario na tabela Usuario 
+     * @param nome nome do livro
      * @return lista de objetos
-     * @throws BancoException, ClassNotFoundException, SQLException
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
      */
     public static List<Livro> buscarVariosTitulo(String nome) throws BancoException, ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM \"Livros\""

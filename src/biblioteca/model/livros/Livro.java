@@ -35,6 +35,7 @@ public class Livro implements Comparable<Livro>{
      * @param autor Autor do livro
      * @param editora Editora do livro
      * @param genero Genero do livro
+     * @param coautor Couautor do livro
     */
     
     public Livro(int id, String titulo, int numeroExemplares, String descricao, String autor, String editora, String genero, String coautor) {

@@ -24,7 +24,9 @@ public class CargoDAO {
     /**
      * Busca o idCargo na tabela Cargo
      * @return id pk do Cargo que vai ser utilizado para salvar na tabela Cargo
-     * @throws BancoException, ClassNotFoundException, SQLException
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
      */
     
     public static int codigo() throws BancoException, ClassNotFoundException, SQLException{
@@ -44,8 +46,10 @@ public class CargoDAO {
     }
     /**
      * Inclui o Cargo na tabela Cargo 
-     * @param ob
-     * @throws BancoException, ClassNotFoundException, SQLException
+     * @param ob objeto
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
      */
     public  static void inserir(Cargo ob) throws BancoException, ClassNotFoundException, SQLException{
 //        con = PostgreDAO.getConnection();
@@ -71,8 +75,10 @@ public class CargoDAO {
     }
     /**
      * Exclui o Cargo na tabela Cargo 
-     * @param ob
-     * @throws BancoException, ClassNotFoundException, SQLException
+     * @param ob objeto
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
      */
     public static void excluir(Cargo ob) throws BancoException, ClassNotFoundException, SQLException{
         String sql = " Delete  FROM \"Cargo\""
@@ -91,8 +97,10 @@ public class CargoDAO {
     }
     /**
      * Altera o Cargo na tabela Cargo 
-     * @param ob
-     * @throws BancoException, ClassNotFoundException, SQLException
+     * @param ob objeto
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
      */
     public  static void alterar(Cargo ob) throws BancoException, ClassNotFoundException, SQLException{
 //        con = PostgreDAO.getConnection();  
@@ -116,7 +124,9 @@ public class CargoDAO {
     /**
      * Lista os Cargo na tabela Cargo 
      * @return lista de objetos
-     * @throws BancoException, ClassNotFoundException, SQLException
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
      */
     public static List<Cargo> listar() throws BancoException, ClassNotFoundException, SQLException{
         String sql = "SELECT * FROM \"Cargo\"";
@@ -149,7 +159,7 @@ public class CargoDAO {
      * Constrói um objeto Cargo a partir de um ResultSet
      * @param rs Result set contendo a linha que será usada
      * @return objeto 
-     * @throws SQLException
+     * @throws java.sql.SQLException    Exeções Sql
      */
     private static Cargo getInstance(ResultSet res)
         throws SQLException {
@@ -162,9 +172,12 @@ public class CargoDAO {
     /**
      * Busca um Cargo na tabela Cargo 
      * @param nome nome do cargo
-     * @return um objetos
-     * @throws BancoException, ClassNotFoundException, SQLException
+     * @return  objeto
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
      */
+    
     public static Cargo buscar(String nome) throws BancoException, ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM \"Cargo\""
                     + " WHERE cargo='"+ nome + "'";   
@@ -189,7 +202,9 @@ public class CargoDAO {
      * Busca um Cargo na tabela Cargo 
      * @param id id do cargo
      * @return um objetos
-     * @throws BancoException, ClassNotFoundException, SQLException
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
      */
     public static Cargo buscarID(int id) throws BancoException, ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM \"Cargo\""
@@ -216,7 +231,9 @@ public class CargoDAO {
      * Busca  Cargo na tabela Cargo 
      * @param nome nome do cargo
      * @return lista um objetos
-     * @throws BancoException, ClassNotFoundException, SQLException
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
      */
     
     public static List<Cargo> buscarVarios(String nome) throws BancoException, ClassNotFoundException, SQLException {

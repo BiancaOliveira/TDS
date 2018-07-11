@@ -24,7 +24,9 @@ public class GeneroDAO {
     /**
      * Busca o idGenero na tabela Genero
      * @return id pk do Genero que vai ser utilizado para salvar na tabela Genero
-     * @throws BancoException, ClassNotFoundException, SQLException
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
      */
     public static int codigo() throws BancoException, ClassNotFoundException, SQLException{
         String sql = "SELECT * FROM \"Genero\"";
@@ -43,19 +45,21 @@ public class GeneroDAO {
     }
     /**
      * Inclui o Genero na tabela Genero 
-     * @param ob
-     * @throws BancoException, ClassNotFoundException, SQLException
+     * @param ob objeto
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
      */
-    public  static void inserir(Genero genero) throws BancoException, ClassNotFoundException, SQLException{
+    public  static void inserir(Genero ob) throws BancoException, ClassNotFoundException, SQLException{
 //        con = PostgreDAO.getConnection();
         
         
-        if(buscar(genero.getNome()) != null){
+        if(buscar(ob.getNome()) != null){
             JOptionPane.showMessageDialog(null,"Cadastro existente");
         }else{
-            genero.setIdGenero(codigo());
+            ob.setIdGenero(codigo());
             String sql = "INSERT INTO \"Genero\" (\"idGeneros\", genero)"
-                    + "VALUES(" + genero.getIdGenero() + ",'" + genero.getNome() + "')";
+                    + "VALUES(" + ob.getIdGenero() + ",'" + ob.getNome() + "')";
             PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
             try{
                 if (stmt.executeUpdate() == 1){
@@ -70,12 +74,14 @@ public class GeneroDAO {
     }
     /**
      * Exclui o Genero na tabela Genero 
-     * @param ob
-     * @throws BancoException, ClassNotFoundException, SQLException
+     * @param ob objeto
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
      */
-    public static void excluir(Genero genero) throws BancoException, ClassNotFoundException, SQLException{
+    public static void excluir(Genero ob) throws BancoException, ClassNotFoundException, SQLException{
         String sql = " Delete  FROM \"Genero\""
-                + "WHERE genero ='" + genero.getNome() + "'";
+                + "WHERE genero ='" + ob.getNome() + "'";
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
             try{
                 if (stmt.executeUpdate() > 0){
@@ -90,8 +96,10 @@ public class GeneroDAO {
     }
     /**
      * Altera o Genero na tabela Genero 
-     * @param ob
-     * @throws BancoException, ClassNotFoundException, SQLException
+     * @param ob objeto
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
      */
     public  static void alterar(Genero ob) throws BancoException, ClassNotFoundException, SQLException{
 //        con = PostgreDAO.getConnection();  
@@ -115,7 +123,9 @@ public class GeneroDAO {
     /**
      * Lista os Genero na tabela Genero 
      * @return lista de objetos
-     * @throws BancoException, ClassNotFoundException, SQLException
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
      */
     public static List<Genero> listar() throws BancoException, ClassNotFoundException, SQLException{
         String sql = "SELECT * FROM \"Genero\"";
@@ -148,7 +158,8 @@ public class GeneroDAO {
      * Constrói um objeto Genero a partir de um ResultSet
      * @param rs Result set contendo a linha que será usada
      * @return objeto 
-     * @throws SQLException
+     * @throws java.sql.SQLException    Exeções Sql
+
      */
     private static Genero getInstance(ResultSet res)
         throws SQLException {
@@ -162,11 +173,14 @@ public class GeneroDAO {
      * Busca um Genero na tabela Genero 
      * @param nome nome do genero
      * @return um objetos
-     * @throws BancoException, ClassNotFoundException, SQLException
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
+
      */
-    public static Genero buscar(String genero) throws BancoException, ClassNotFoundException, SQLException {
+    public static Genero buscar(String nome) throws BancoException, ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM \"Genero\""
-                    + " WHERE genero LIKE '"+ genero + "%'";   
+                    + " WHERE genero LIKE '"+ nome + "%'";   
         
         Genero item = null;
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
@@ -188,7 +202,9 @@ public class GeneroDAO {
      * Busca um Genero na tabela Genero 
      * @param id id do Genero
      * @return um objetos
-     * @throws BancoException, ClassNotFoundException, SQLException
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
      */
     public static Genero buscarID(int id) throws BancoException, ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM \"Genero\""
@@ -212,8 +228,11 @@ public class GeneroDAO {
     }
      /**
      * Busca  Genero na tabela Genero 
+     * @param nome nome do genero
      * @return lista de objetos
-     * @throws BancoException, ClassNotFoundException, SQLException
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
      */
     public static List<Genero> buscarVarios(String nome) throws BancoException, ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM \"Genero\""

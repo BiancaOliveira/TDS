@@ -29,8 +29,9 @@ public class UsuarioFuncionarioDAO {
     /**
      * Busca o idUsuario na tabela Usuario
      * @return id pk do Usuario que vai ser utilizado para salvar na tabela Usuario
-     * @throws BancoException, ClassNotFoundException, SQLException
-     */
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql     */
     
      public static int codigo() throws BancoException, ClassNotFoundException, SQLException{
         String sql = "SELECT * FROM \"Usuario\"";
@@ -50,15 +51,17 @@ public class UsuarioFuncionarioDAO {
     
      /**
      * Inclui o UsuarioFuncionario na tabela Funcionario e o Usuario na tabela Usuario
-     * @param ob
-     * @throws BancoException, ClassNotFoundException, SQLException
+     * @param ob objeto
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql   
      */
     
     public  static void inserir(UsuarioFuncionario ob) throws BancoException, ClassNotFoundException, SQLException{
 //        con = PostgreDAO.getConnection();
         
         if(buscar(ob.getLogin()) != null){
-            JOptionPane.showMessageDialog(null,"Este login ja existe");
+            JOptionPane.showMessageDialog(null,"Este usuario já esta sendo utilizado");
         }else{
             ob.setIdUsuario(codigo());
             int idCargo = buscarIdCargo(ob.cargo);
@@ -76,7 +79,7 @@ public class UsuarioFuncionarioDAO {
                 }
 
             }catch(SQLException ex){
-                Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);
+//                Logger.getLogger(UsuarioFuncionarioDAO.class.getName()).log(Level.SEVERE,null,ex);
                 JOptionPane.showMessageDialog(null,"Erro ao cadastrar");
             }
         }
@@ -84,8 +87,10 @@ public class UsuarioFuncionarioDAO {
     
     /**
      * Exclui o UsuarioFuncionario na tabela Funcionario e o Usuario na tabela Usuario
-     * @param ob
-     * @throws BancoException, ClassNotFoundException, SQLException
+     * @param  ob objeto
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql   
      */
     
     public static void excluir(UsuarioFuncionario ob) throws BancoException, ClassNotFoundException, SQLException{
@@ -100,16 +105,17 @@ public class UsuarioFuncionarioDAO {
                 }
 
             }catch(SQLException ex){
-//                Logger.getLogger(UsuarioAdmDAO.class.getName()).log(Level.SEVERE,null,ex);
-                
+//                Logger.getLogger(UsuarioFuncionarioDAO.class.getName()).log(Level.SEVERE,null,ex);
                 JOptionPane.showMessageDialog(null,"Erro ao remover");
             }
     }
     /**
      * Busca o idCargo na tabela Cargo
-     * @param nome
+     * @param nome nome do Cargo
      * @return idCargo
-     * @throws BancoException, ClassNotFoundException, SQLException
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql   
      */
     public static int buscarIdCargo(String nome) throws BancoException, ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM \"Cargo\""
@@ -123,6 +129,7 @@ public class UsuarioFuncionarioDAO {
                  idCargo = res.getInt("idCargo");
             }
         }catch(SQLException ex){
+//            Logger.getLogger(UsuarioFuncionarioDAO.class.getName()).log(Level.SEVERE,null,ex);
             if(idCargo == 0){
                 JOptionPane.showMessageDialog(null,"Item não encontrado");
             }else{
@@ -134,8 +141,10 @@ public class UsuarioFuncionarioDAO {
     
     /**
      * Altera o UsuarioFuncionario na tabela Funcionario e o Usuario na tabela Usuario
-     * @param ob
-     * @throws BancoException, ClassNotFoundException, SQLException
+     * @param ob objeto
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql   
      */
     
     public  static void alterar(UsuarioFuncionario ob) throws BancoException, ClassNotFoundException, SQLException{
@@ -154,7 +163,7 @@ public class UsuarioFuncionarioDAO {
             }
 
         }catch(SQLException ex){
-//                Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);
+//            Logger.getLogger(UsuarioFuncionarioDAO.class.getName()).log(Level.SEVERE,null,ex);
             JOptionPane.showMessageDialog(null,"Erro ao Alterar");
         }
     }
@@ -162,7 +171,9 @@ public class UsuarioFuncionarioDAO {
     /**
      * Lista o UsuarioFuncionario na tabela Funcionario atravez do Usuario na tabela Usuario e do cargo na tabela Cargo
      * @return lista de objetos
-     * @throws BancoException, ClassNotFoundException, SQLException
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql   
      */
     
     public static List<UsuarioFuncionario> listar() throws BancoException, ClassNotFoundException, SQLException{
@@ -187,7 +198,8 @@ public class UsuarioFuncionarioDAO {
             }
                 
         }catch(SQLException ex){
-             if(retorno == null){
+//            Logger.getLogger(UsuarioFuncionarioDAO.class.getName()).log(Level.SEVERE,null,ex);
+            if(retorno == null){
                 JOptionPane.showMessageDialog(null,"Nenhum item encontrado");
             }else{
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
@@ -201,7 +213,9 @@ public class UsuarioFuncionarioDAO {
      * Constrói um objeto UsuarioFuncionario a partir de um idLogin
      * @param idLogin id do Usuario na tabela Usuario
      * @return UsuarioFuncionario 
-     * @throws SQLException, BancoException, ClassNotFoundException 
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql   
      */
      private static UsuarioFuncionario getInstance(int idLogin)
         throws SQLException, BancoException, ClassNotFoundException {
@@ -226,7 +240,7 @@ public class UsuarioFuncionarioDAO {
             if(item == null){
                 JOptionPane.showMessageDialog(null,"Item não encontrado");
             }else{
-                Logger.getLogger(UsuarioAdmDAO.class.getName()).log(Level.SEVERE,null,ex);
+//                Logger.getLogger(UsuarioFuncionarioDAO.class.getName()).log(Level.SEVERE,null,ex);
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
             }   
         }
@@ -237,7 +251,9 @@ public class UsuarioFuncionarioDAO {
      * Busca um UsuarioFuncionario na tabela Adiministrador atravez do Usuario na tabela Usuario e do cargo na tabela Cargo
      * @param nome nome do login do usuario
      * @return um objetos
-     * @throws BancoException, ClassNotFoundException, SQLException
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql   
      */
     public static UsuarioFuncionario buscar(String nome) throws BancoException, ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM \"Usuario\""
@@ -256,7 +272,36 @@ public class UsuarioFuncionarioDAO {
             if(item == null){
                 JOptionPane.showMessageDialog(null,"Item não encontrado");
             }else{
-                Logger.getLogger(UsuarioAdmDAO.class.getName()).log(Level.SEVERE,null,ex);
+//                Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE,null,ex);
+                JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
+            }   
+        }
+        return item;
+    }
+    /**
+     * Busca um UsuarioaFuncionario na tabela Funcionario 
+     * @param id id do usuario
+     * @return um objetos
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
+     */
+    public static UsuarioFuncionario buscarID(int id) throws BancoException, ClassNotFoundException, SQLException {
+        String sql = "SELECT * FROM \"Usuario\""
+                    + " WHERE \"idUsuario\"="+ id ;   
+        
+        UsuarioFuncionario item = null;
+        PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
+        try{
+            ResultSet res = stmt.executeQuery();
+            if (res.next()) {
+                int idUsuario = res.getInt("idUsuario");
+//                System.out.println(id);
+                item = getInstance(idUsuario);            }
+        }catch(SQLException ex){
+            if(item == null){
+                JOptionPane.showMessageDialog(null,"Item não encontrado");
+            }else{
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
             }   
         }
@@ -267,7 +312,9 @@ public class UsuarioFuncionarioDAO {
      * Busca varios UsuarioFuncionario na tabela Funcionario atravez do Usuario na tabela Usuario e do cargo na tabela Cargo
      * @param nome nome do usuario
      * @return lista de objetos
-     * @throws BancoException, ClassNotFoundException, SQLException
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql   
      */
     
     public static List<UsuarioFuncionario> buscarVarios(String nome) throws BancoException, ClassNotFoundException, SQLException {
@@ -283,8 +330,9 @@ public class UsuarioFuncionarioDAO {
             while (res.next()) {
                 int id = res.getInt("idUsuario");
                 item = getInstance(id);
-                retorno.add(item);
-            }
+                if(item != null){
+                    retorno.add(item);
+                }            }
         }catch(SQLException ex){
             if(item == null){
                 JOptionPane.showMessageDialog(null,"Item não encontrado");

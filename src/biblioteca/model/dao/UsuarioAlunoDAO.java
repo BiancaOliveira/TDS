@@ -27,7 +27,9 @@ public class UsuarioAlunoDAO {
     /**
      * Busca o idUsuario na tabela Usuario
      * @return id pk do Usuario que vai ser utilizado para salvar na tabela Usuario
-     * @throws BancoException, ClassNotFoundException, SQLException
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
      */
     
      public static int codigo() throws BancoException, ClassNotFoundException, SQLException{
@@ -48,8 +50,10 @@ public class UsuarioAlunoDAO {
     
      /**
      * Inclui o UsuarioAluno na tabela Aluno e o Usuario na tabela Usuario
-     * @param ob
-     * @throws BancoException, ClassNotFoundException, SQLException
+     * @param ob objeto
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
      */
      
     
@@ -58,7 +62,7 @@ public class UsuarioAlunoDAO {
 //        System.out.println(ob.getTelefone());
 //        System.out.println(ob.getLogin());
         if(buscar(ob.getLogin()) != null){
-            JOptionPane.showMessageDialog(null,"Este login ja existe");
+            JOptionPane.showMessageDialog(null,"Este usuario já esta sendo utilizado");
         }else{
             ob.setIdUsuario(codigo());
             String sql = "INSERT INTO \"Usuario\" (\"idUsuario\",usuario,login,senha)"
@@ -76,7 +80,7 @@ public class UsuarioAlunoDAO {
                 }
 
             }catch(SQLException ex){
-                Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);
+//                Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);
                 JOptionPane.showMessageDialog(null,"Erro ao cadastrar");
             }
         }
@@ -84,8 +88,10 @@ public class UsuarioAlunoDAO {
     
     /**
      * Exclui o UsuarioAluno na tabela Aluno e o Usuario na tabela Usuario
-     * @param ob
-     * @throws BancoException, ClassNotFoundException, SQLException
+     * @param ob objeto
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
      */
     
     public static void excluir(UsuarioAluno ob) throws BancoException, ClassNotFoundException, SQLException{
@@ -108,8 +114,10 @@ public class UsuarioAlunoDAO {
     
     /**
      * Altera o UsuarioAluno na tabela Aluno e o Usuario na tabela Usuario
-     * @param ob
-     * @throws BancoException, ClassNotFoundException, SQLException
+     * @param ob objeto
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
      */
     
     public  static void alterar(UsuarioAluno ob) throws BancoException, ClassNotFoundException, SQLException{
@@ -135,7 +143,9 @@ public class UsuarioAlunoDAO {
     /**
      * Lista o UsuarioFuncionario na tabela Funcionario atravez do Usuario na tabela Usuario 
      * @return lista de objetos
-     * @throws BancoException, ClassNotFoundException, SQLException
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
      */
     
     public static List<UsuarioAluno> listar() throws BancoException, ClassNotFoundException, SQLException{
@@ -173,7 +183,9 @@ public class UsuarioAlunoDAO {
      * Constrói um objeto UsuarioAluno a partir de um idLogin
      * @param idLogin id do Usuario na tabela Usuario
      * @return UsuarioFuncionario 
-     * @throws SQLException, BancoException, ClassNotFoundException 
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
      */
      private static UsuarioAluno getInstance(int idLogin)
         throws SQLException, BancoException, ClassNotFoundException {
@@ -198,7 +210,7 @@ public class UsuarioAlunoDAO {
             if(item == null){
                 JOptionPane.showMessageDialog(null,"Item não encontrado");
             }else{
-                Logger.getLogger(UsuarioAdmDAO.class.getName()).log(Level.SEVERE,null,ex);
+//                Logger.getLogger(UsuarioAdmDAO.class.getName()).log(Level.SEVERE,null,ex);
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
             }   
         }
@@ -206,10 +218,12 @@ public class UsuarioAlunoDAO {
     }
    
     /**
-     * Busca um UsuarioAluno na tabela Aluno atravez do Usuario na tabela Usuario
-     * @param nome nome do login do usuario
+     * Busca um UsuarioAluno na tabela Aluno atravez do Usuario(login) na tabela Usuario
+     * @param nome nome do login(user) do usuario
      * @return um objetos
-     * @throws BancoException, ClassNotFoundException, SQLException
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
      */
     public static UsuarioAluno buscar(String nome) throws BancoException, ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM \"Usuario\""
@@ -228,18 +242,51 @@ public class UsuarioAlunoDAO {
             if(item == null){
                 JOptionPane.showMessageDialog(null,"Item não encontrado");
             }else{
-                Logger.getLogger(UsuarioAlunoDAO.class.getName()).log(Level.SEVERE,null,ex);
+//                Logger.getLogger(UsuarioAlunoDAO.class.getName()).log(Level.SEVERE,null,ex);
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
             }   
         }
         return item;
     }
     
+    /**
+      * Busca um UsuarioAluno na tabela Aluno atravez do Usuario(login) na tabela Usuario
+     * @param id id do usuario
+     * @return um objetos
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
+     */
+    public static UsuarioAluno buscarID(int id) throws BancoException, ClassNotFoundException, SQLException {
+        String sql = "SELECT * FROM \"Usuario\""
+                    + " WHERE \"idUsuario\"="+ id ;   
+        
+        UsuarioAluno item = null;
+        PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
+        try{
+            ResultSet res = stmt.executeQuery();
+            if (res.next()) {
+                int idUsuario = res.getInt("idUsuario");
+//                System.out.println(id);
+                item = getInstance(idUsuario);            }
+        }catch(SQLException ex){
+            if(item == null){
+                JOptionPane.showMessageDialog(null,"Item não encontrado");
+            }else{
+                JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
+            }   
+        }
+        return item;
+    }
+    
+    
      /**
      * Busca varios UsuarioAluno na tabela Aluno atravez do Usuario na tabela Usuario 
      * @param nome nome do usuario
      * @return lista de objetos
-     * @throws BancoException, ClassNotFoundException, SQLException
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
      */
     
     public static List<UsuarioAluno> buscarVarios(String nome) throws BancoException, ClassNotFoundException, SQLException {
@@ -255,7 +302,9 @@ public class UsuarioAlunoDAO {
             while (res.next()) {
                 int id = res.getInt("idUsuario");
                 item = getInstance(id);
-                retorno.add(item);
+                if(item != null){
+                    retorno.add(item);
+                }
             }
         }catch(SQLException ex){
             if(item == null){

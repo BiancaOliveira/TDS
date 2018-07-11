@@ -10,14 +10,20 @@ import biblioteca.control.CargoController;
 import biblioteca.control.EditoraController;
 import biblioteca.control.GeneroController;
 import biblioteca.control.LivroController;
+import biblioteca.control.LoginController;
 import biblioteca.control.UsuarioAdmController;
 import biblioteca.control.UsuarioAlunoController;
 import biblioteca.control.UsuarioController;
 import biblioteca.control.UsuarioFuncionarioController;
 import biblioteca.exception.BancoException;
+import biblioteca.model.dao.UsuarioAdmDAO;
+import biblioteca.model.dao.UsuarioAlunoDAO;
+import biblioteca.model.dao.UsuarioFuncionarioDAO;
 import biblioteca.model.dao.postgre.PostgreDAO;
 import biblioteca.model.usuarios.Cargo;
 import biblioteca.model.usuarios.UsuarioAdm;
+import biblioteca.model.usuarios.UsuarioAluno;
+import biblioteca.model.usuarios.UsuarioFuncionario;
 import java.sql.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -143,7 +149,7 @@ public class Main extends Application{
         UsuarioAdmController controleAdm = 
                 new UsuarioAdmController();
 
-          controleAdm.cadastrar(0,"Quero","muito","matar","Administrador");
+          controleAdm.cadastrar(0,"Quero","muito","morrer","Administrador");
           controleAdm.cadastrar(0,"Quero","la","gente","Administrador");
         
         //listar Cargos
@@ -180,6 +186,8 @@ public class Main extends Application{
      System.out.println("\n---------- Funçoes do livro ------------\n");
         LivroController controleLiv= 
                 new LivroController();
+        
+        
 
           controleLiv.cadastrar(0,"terte",23,"dsadsa", "bart" ,"teste","terror","bart");
           controleLiv.cadastrar(0,"sadsa terte dfdaf",23,"dsadsa", "bart" ,"teste","terror","bart");
@@ -190,10 +198,27 @@ public class Main extends Application{
         System.out.println("Buscar : " + controleLiv.buscar("terte"));
 //        controleLiv.remover(controleLiv.buscar("terte"));
 
-//    System.out.println("\n---------- Funçoes do Aluno ------------\n");
-//        UsuarioAlunoController controleAl = 
-//                new UsuarioAlunoController();
-//
+
+        
+    System.out.println("\n---------- Funçoes do login ------------\n");
+        LoginController controleLogin = 
+                new LoginController();
+        
+        boolean teste = controleLogin.login("muito", "matar");//ve se o usuario e senha tao ok
+        System.out.println(teste);
+        int teste1 = controleLogin.tipoLogin("muito");
+        System.out.println(teste1);//      retorna o tipo de usiario 1 = adm, 2 = aluno, 3 = fun
+        //cria um objto do tipo usuario certo
+        if(teste1 == 1){
+            UsuarioAdm adm = UsuarioAdmDAO.buscar("muito");
+            //        se precisard de um certo campo é só fazer assim
+            int id = adm.getIdUsuario();
+        }else if(teste1 == 2){
+            UsuarioAluno alu = UsuarioAlunoDAO.buscar("muito");
+        }else if(teste1 == 3){
+            UsuarioFuncionario fun = UsuarioFuncionarioDAO.buscar("muito");
+        }
+
 //          controleAl.cadastrar(0,"faz de fas","fas","dada",4558,"9999999");
 //          controleAl.cadastrar(0,"faz de","afsa","dada",4558,"(45)9999999");        
 //        //listar Cargos
@@ -201,6 +226,6 @@ public class Main extends Application{
 //        //busca cargo pelo login
 //        System.out.println("Buscar : " + controleAl.buscar("faz"));
 ////        controleAl.remover(controleAl.buscar("fas"));
+//    }
     }
-
 }

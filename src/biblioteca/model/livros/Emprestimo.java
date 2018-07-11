@@ -15,15 +15,19 @@ import javax.swing.text.DateFormatter;
  *
  * @author Bianca
  */
-public class Emprestimo {
-    private  int idEmprestimo;
-    private LocalDate dataEmprestimo;
-    private LocalDate dataDevolucao;
-    private boolean status;
+public class Emprestimo implements Comparable<Emprestimo>{
+    public  int idEmprestimo;
+    public Date dataEmprestimo;
+    public Date dataDevolucao;
+    public String usuario;
+    public String livro;
+    public boolean status;
 
-    public Emprestimo(int idEmprestimo, LocalDate dataEmprestimo, LocalDate  dataDevolucao, boolean status) {
+    public Emprestimo(int idEmprestimo, Date dataEmprestimo, Date  dataDevolucao, String livro, String usuario,boolean status) {
         this.idEmprestimo = idEmprestimo;
         this.status = status;
+        this.livro = livro;
+        this.usuario = usuario;
         this.dataEmprestimo = dataEmprestimo;
         this.dataDevolucao = dataDevolucao;
     }
@@ -42,7 +46,7 @@ public class Emprestimo {
         return dataFormato.format(dataEmprestimo);
     }
 
-    public void setDataEmprestimo(LocalDate dataEmprestimo) {
+    public void setDataEmprestimo(Date dataEmprestimo) {
         this.dataEmprestimo = dataEmprestimo;
     }
 
@@ -50,7 +54,7 @@ public class Emprestimo {
         return dataFormato.format(dataDevolucao);
     }
 
-    public void setDataDevolucao(LocalDate dataDevolucao) {
+    public void setDataDevolucao(Date dataDevolucao) {
         this.dataDevolucao = dataDevolucao;
     }
 
@@ -71,5 +75,45 @@ public class Emprestimo {
             this.status = false;
         }
         return status;
+    }
+    
+    
+    /**
+     * Compara dois Emprestimos considerando o nome deles
+     * @param obj Emprestimos que será comparado
+     * @return true se os Genero tem o mesmo nome e false, caso contrário
+     */
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) return false;
+        if (obj == this || obj.getClass() != this.getClass()) return false;
+        Emprestimo u = (Emprestimo) obj;
+        return u.idEmprestimo == this.idEmprestimo; 
+    }
+    /**
+     * Calcula o hascode do Genero considerando o nome (veja equals)
+     * @return O hashcode do nome do Genero
+     */
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = hash * 13 * idEmprestimo;
+        return hash; 
+    }
+    
+    @Override
+    public int compareTo(Emprestimo o) {
+       if (idEmprestimo < o.idEmprestimo) return -1;
+        else if (idEmprestimo > o.idEmprestimo) return 1;
+        else return 0;
+    }
+
+    @Override
+    public String toString() {
+        return "Codigo: " + idEmprestimo + ", dataEmprestimo: " + dataEmprestimo 
+                + "dataDevolucao: " + dataDevolucao + ", Livro: " + livro 
+                +"Usuario: " + usuario + ", status: " + status + "\n";    
     }
 }

@@ -16,7 +16,7 @@ public class UsuarioAluno
         
         /**
      * Construtor do Usuario Aluno
-     * @param id Código do Usuario (PK)
+     * @param idUsuario Código do Usuario (PK)
      * @param nome Nome do Usuario
      * @param login Login do usiario
      * @param senha senha do usuario

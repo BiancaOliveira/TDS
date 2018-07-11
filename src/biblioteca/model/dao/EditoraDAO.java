@@ -26,7 +26,9 @@ public class EditoraDAO {
     /**
      * Busca o idEditora na tabela Editora
      * @return id pk da Editora que vai ser utilizado para salvar na tabela Editora
-     * @throws BancoException, ClassNotFoundException, SQLException
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
      */
     public static int codigo() throws BancoException, ClassNotFoundException, SQLException{
         String sql = "SELECT * FROM \"Autor\"";
@@ -45,8 +47,10 @@ public class EditoraDAO {
     }
     /**
      * Inclui o Editora na tabela Editora 
-     * @param ob
-     * @throws BancoException, ClassNotFoundException, SQLException
+     * @param ob objeto
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
      */
     public  static void inserir(Editora ob) throws BancoException, ClassNotFoundException, SQLException{
 //        con = PostgreDAO.getConnection();
@@ -72,8 +76,10 @@ public class EditoraDAO {
     }
     /**
      * Exclui o Editora na tabela Editora 
-     * @param ob
-     * @throws BancoException, ClassNotFoundException, SQLException
+     * @param ob objeto
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
      */
     public static void excluir(Editora ob) throws BancoException, ClassNotFoundException, SQLException{
         String sql = " Delete  FROM \"Editora\""
@@ -92,8 +98,10 @@ public class EditoraDAO {
     }
     /**
      * Altera o Editora na tabela Editora 
-     * @param ob
-     * @throws BancoException, ClassNotFoundException, SQLException
+     * @param ob objeto
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
      */
     public  static void alterar(Editora ob) throws BancoException, ClassNotFoundException, SQLException{
 //        con = PostgreDAO.getConnection();  
@@ -117,7 +125,9 @@ public class EditoraDAO {
     /**
      * Lista os Editora na tabela Editora 
      * @return lista de objetos
-     * @throws BancoException, ClassNotFoundException, SQLException
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
      */
     public static List<Editora> listar() throws BancoException, ClassNotFoundException, SQLException{
         String sql = "SELECT * FROM \"Editora\"";
@@ -163,8 +173,10 @@ public class EditoraDAO {
     /**
      * Busca um Editora na tabela Editora 
      * @param nome nome da editora
-     * @return um objetos
-     * @throws BancoException, ClassNotFoundException, SQLException
+     * @return um objeto
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
      */
     public static Editora buscar(String nome) throws BancoException, ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM \"Editora\""
@@ -190,7 +202,9 @@ public class EditoraDAO {
      * Busca um Editora na tabela Editora 
      * @param id id do Editora
      * @return um objetos
-     * @throws BancoException, ClassNotFoundException, SQLException
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
      */
     public static Editora buscarID(int id) throws BancoException, ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM \"Editora\""
@@ -214,8 +228,11 @@ public class EditoraDAO {
     }
     /**
      * Busca Editora na tabela Editora 
+     * @param nome nome da editora(parte do nome)
      * @return lista de objetos
-     * @throws BancoException, ClassNotFoundException, SQLException
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
      */
     public static List<Editora> buscarVarios(String nome) throws BancoException, ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM \"Editora\""
