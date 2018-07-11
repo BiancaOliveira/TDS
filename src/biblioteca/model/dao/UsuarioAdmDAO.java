@@ -141,22 +141,24 @@ public class UsuarioAdmDAO {
      */
     
     public  static void alterar(UsuarioAdm ob) throws BancoException, ClassNotFoundException, SQLException{
-//        con = PostgreDAO.getConnection();  
-        String sql = " DELETE  FROM \"Administrador\""
-                + "WHERE \"id_usuario\" =" + ob.getIdUsuario() +";"
-                + " DELETE  FROM \"Usuario\""
-                + "WHERE \"idUsuario\" =" + ob.getIdUsuario();
-        PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
-            try{
-                if (stmt.executeUpdate() > 0){
-                    JOptionPane.showMessageDialog(null,"Removido com sucesso");
-                }
 
-            }catch(SQLException ex){
-//                Logger.getLogger(UsuarioAdmDAO.class.getName()).log(Level.SEVERE,null,ex);
-                
-                JOptionPane.showMessageDialog(null,"Erro ao remover");
+        int idCargo = buscarIdCargo(ob.cargo);
+        String sql = "UPDATE INTO \"Usuario\" SET usuario'" + ob.getNome() 
+                + "', senha = " + ob.getSenha() 
+                + " WHERE \"idUsuario\"=" + ob.getIdUsuario() + ";"
+                +"UPDATE INTO \"Administrador\" SET id_cargo= " + idCargo + ""
+                + " WHERE id_Usuario =" + ob.getIdUsuario();
+        PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
+
+        try{
+            if (stmt.executeUpdate() == 1){
+                JOptionPane.showMessageDialog(null,"Alterado com sucesso");
             }
+
+        }catch(SQLException ex){
+//                Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);
+            JOptionPane.showMessageDialog(null,"Erro ao Alterar");
+        }
     }
     
     /**
@@ -206,7 +208,7 @@ public class UsuarioAdmDAO {
      private static UsuarioAdm getInstance(int idLogin)
         throws SQLException, BancoException, ClassNotFoundException {
         String sql = "SELECT * FROM \"Administrador\""
-                    + " WHERE id_usuario='"+ idLogin + "';";   
+                    + " WHERE id_usuario="+ idLogin ;   
         UsuarioAdm item = null;
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
         try{
@@ -214,7 +216,7 @@ public class UsuarioAdmDAO {
             if (res.next()) {
                 Cargo cargo = CargoDAO.buscarID(res.getInt("id_cargo"));
                 Usuario usu = UsuarioDAO.buscarID(res.getInt("id_usuario"));
-                int idUsuario = idLogin;
+                int idUsuario = usu.getIdUsuario();
                 String nome = usu.getNome();
                 String login = usu.getLogin();
                 String senha = "**********";

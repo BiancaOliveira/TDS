@@ -150,7 +150,7 @@ public class EditoraDAO {
      * Constrói um objeto Editora a partir de um ResultSet
      * @param rs Result set contendo a linha que será usada
      * @return objeto 
-     * @throws SQLException, BancoException, ClassNotFoundException 
+     * @throws SQLException
      */
     private static Editora getInstance(ResultSet res)
         throws SQLException {
@@ -169,6 +169,32 @@ public class EditoraDAO {
     public static Editora buscar(String nome) throws BancoException, ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM \"Editora\""
                     + " WHERE editora='"+ nome + "'";   
+        
+        Editora item = null;
+        PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
+        try{
+            ResultSet res = stmt.executeQuery();
+            if (res.next()) {
+                item = getInstance(res);
+            }
+        }catch(SQLException ex){
+            if(item == null){
+                JOptionPane.showMessageDialog(null,"Item não encontrado");
+            }else{
+                JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
+            }   
+        }
+        return item;
+    }
+    /**
+     * Busca um Editora na tabela Editora 
+     * @param id id do Editora
+     * @return um objetos
+     * @throws BancoException, ClassNotFoundException, SQLException
+     */
+    public static Editora buscarID(int id) throws BancoException, ClassNotFoundException, SQLException {
+        String sql = "SELECT * FROM \"Editora\""
+                    + " WHERE \"idEditora\"="+ id ;   
         
         Editora item = null;
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);

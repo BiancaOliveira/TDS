@@ -206,7 +206,7 @@ public class UsuarioFuncionarioDAO {
      private static UsuarioFuncionario getInstance(int idLogin)
         throws SQLException, BancoException, ClassNotFoundException {
         String sql = "SELECT * FROM \"Funcionario\""
-                    + " WHERE id_usuario='"+ idLogin + "';";   
+                    + " WHERE id_usuario="+ idLogin ;   
         UsuarioFuncionario item = null;
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
         try{

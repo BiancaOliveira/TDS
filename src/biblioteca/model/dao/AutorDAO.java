@@ -151,7 +151,7 @@ public class AutorDAO {
      * Constrói um objeto Autor a partir de um ResultSet
      * @param rs Result set contendo a linha que será usada
      * @return objeto 
-     * @throws SQLException, BancoException, ClassNotFoundException 
+     * @throws SQLException
      */
     
     private static Autor getInstance(ResultSet res)
@@ -172,6 +172,32 @@ public class AutorDAO {
     public static Autor buscar(String nome) throws BancoException, ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM \"Autor\""
                     + " WHERE autor='"+ nome + "'";   
+        
+        Autor item = null;
+        PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
+        try{
+            ResultSet res = stmt.executeQuery();
+            if (res.next()) {
+                item = getInstance(res);
+            }
+        }catch(SQLException ex){
+            if(item == null){
+                JOptionPane.showMessageDialog(null,"Item não encontrado");
+            }else{
+                JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
+            }   
+        }
+        return item;
+    }
+    /**
+     * Busca um Autor na tabela Autor 
+     * @param id id do Autor
+     * @return um objetos
+     * @throws BancoException, ClassNotFoundException, SQLException
+     */
+    public static Autor buscarID(int id) throws BancoException, ClassNotFoundException, SQLException {
+        String sql = "SELECT * FROM \"Autor\""
+                    + " WHERE \"idAutor\"="+ id ;   
         
         Autor item = null;
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);

@@ -149,7 +149,7 @@ public class CargoDAO {
      * Constrói um objeto Cargo a partir de um ResultSet
      * @param rs Result set contendo a linha que será usada
      * @return objeto 
-     * @throws SQLException, BancoException, ClassNotFoundException 
+     * @throws SQLException
      */
     private static Cargo getInstance(ResultSet res)
         throws SQLException {
@@ -193,7 +193,7 @@ public class CargoDAO {
      */
     public static Cargo buscarID(int id) throws BancoException, ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM \"Cargo\""
-                    + " WHERE \"idCargo\"='"+ id + "'";   
+                    + " WHERE \"idCargo\"="+ id ;   
         
         Cargo item = null;
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);

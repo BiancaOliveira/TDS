@@ -13,19 +13,15 @@ import java.util.List;
  * @author Bianca
  */
 public class Livro implements Comparable<Livro>{
-    private int idLivro;
-    private String titulo;
-    private int numeroExemplares;
-    private String descricao;
-    private Autor autor;
-    private List<Autor> coautores;
-    private Editora editora;
-    private Genero genero;
-        
-
-    public int getId() {
-        return idLivro;
-    }
+    public int idLivro;
+    public String titulo;
+    public int numeroExemplares;
+    public String descricao;
+    public String autor;
+    public String coautores;
+    public String editora;
+    public String genero;
+      
 
     public Livro() {
     }
@@ -41,7 +37,7 @@ public class Livro implements Comparable<Livro>{
      * @param genero Genero do livro
     */
     
-    public Livro(int id, String titulo, int numeroExemplares, String descricao, Autor autor, Editora editora, Genero genero) {
+    public Livro(int id, String titulo, int numeroExemplares, String descricao, String autor, String editora, String genero, String coautor) {
         this.idLivro = id;
         this.titulo = titulo;
         this.numeroExemplares = numeroExemplares;
@@ -49,10 +45,16 @@ public class Livro implements Comparable<Livro>{
         this.autor = autor;
         this.editora = editora;
         this.genero = genero;
-        this.coautores= new ArrayList<>();
+        this.coautores=  coautor;
     }
-    
-    
+
+    public int getIdLivro() {
+        return idLivro;
+    }
+
+    public void setIdLivro(int idLivro) {
+        this.idLivro = idLivro;
+    }
 
     public String getTitulo() {
         return titulo;
@@ -78,37 +80,39 @@ public class Livro implements Comparable<Livro>{
         this.descricao = descricao;
     }
 
-    public Autor getAutor() {
+    public String getAutor() {
         return autor;
     }
 
-    public void setAutor(Autor autor) {
+    public void setAutor(String autor) {
         this.autor = autor;
     }
 
-    public List<Autor> getCoautores() {
+    public String getCoautores() {
         return coautores;
     }
 
-    public void setCoautores(List<Autor> coautores) {
+    public void setCoautores(String coautores) {
         this.coautores = coautores;
     }
 
-    public Editora getEditora() {
+    public String getEditora() {
         return editora;
     }
 
-    public void setEditora(Editora editora) {
+    public void setEditora(String editora) {
         this.editora = editora;
     }
 
-    public Genero getGenero() {
+    public String getGenero() {
         return genero;
     }
 
-    public void setGenero(Genero genero) {
+    public void setGenero(String genero) {
         this.genero = genero;
     }
+    
+    
     
     /**
      * Compara dois Livro considerando o titulo delas
@@ -138,13 +142,15 @@ public class Livro implements Comparable<Livro>{
     
     @Override
     public int compareTo(Livro o) {
-       if (titulo != o.titulo) return -1;
-       else return 0;
+       if (idLivro < o.idLivro) return -1;
+        else if (idLivro > o.idLivro) return 1;
+        else return 0;
     }
 
     @Override
     public String toString() {
-        return "Livro: " + titulo + "\n" ;
+        return "Codigo"+ idLivro +", Livro: " + titulo +"Descrição: "+ descricao + "numeroExemplare"+ numeroExemplares +","
+                + " Autor: " + autor + "Editora"+ editora +", Genero: " + genero + ", Coautor: " + coautores + "\n" ;
     }
        
 }

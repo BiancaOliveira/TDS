@@ -9,6 +9,7 @@ import biblioteca.control.AutorController;
 import biblioteca.control.CargoController;
 import biblioteca.control.EditoraController;
 import biblioteca.control.GeneroController;
+import biblioteca.control.LivroController;
 import biblioteca.control.UsuarioAdmController;
 import biblioteca.control.UsuarioAlunoController;
 import biblioteca.control.UsuarioController;
@@ -174,6 +175,32 @@ public class Main extends Application{
         //busca cargo pelo login
         System.out.println("Buscar : " + controleAl.buscar("faz"));
 //        controleAl.remover(controleAl.buscar("fas"));
+    
+    
+     System.out.println("\n---------- Funçoes do livro ------------\n");
+        LivroController controleLiv= 
+                new LivroController();
+
+          controleLiv.cadastrar(0,"terte",23,"dsadsa", "bart" ,"teste","terror","bart");
+          controleLiv.cadastrar(0,"sadsa terte dfdaf",23,"dsadsa", "bart" ,"teste","terror","bart");
+//        
+        //listar Cargos
+        System.out.println("Lista de generos: " + controleLiv.listar());
+        //busca cargo pelo login
+        System.out.println("Buscar : " + controleLiv.buscar("terte"));
+//        controleLiv.remover(controleLiv.buscar("terte"));
+
+//    System.out.println("\n---------- Funçoes do Aluno ------------\n");
+//        UsuarioAlunoController controleAl = 
+//                new UsuarioAlunoController();
+//
+//          controleAl.cadastrar(0,"faz de fas","fas","dada",4558,"9999999");
+//          controleAl.cadastrar(0,"faz de","afsa","dada",4558,"(45)9999999");        
+//        //listar Cargos
+//        System.out.println("Lista de generos: " + controleAl.listar());
+//        //busca cargo pelo login
+//        System.out.println("Buscar : " + controleAl.buscar("faz"));
+////        controleAl.remover(controleAl.buscar("fas"));
     }
 
 }

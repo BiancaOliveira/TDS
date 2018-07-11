@@ -148,7 +148,7 @@ public class GeneroDAO {
      * Constrói um objeto Genero a partir de um ResultSet
      * @param rs Result set contendo a linha que será usada
      * @return objeto 
-     * @throws SQLException, BancoException, ClassNotFoundException 
+     * @throws SQLException
      */
     private static Genero getInstance(ResultSet res)
         throws SQLException {
@@ -184,6 +184,32 @@ public class GeneroDAO {
         }
         return item;
     }
+    /**
+     * Busca um Genero na tabela Genero 
+     * @param id id do Genero
+     * @return um objetos
+     * @throws BancoException, ClassNotFoundException, SQLException
+     */
+    public static Genero buscarID(int id) throws BancoException, ClassNotFoundException, SQLException {
+        String sql = "SELECT * FROM \"Genero\""
+                    + " WHERE \"idGeneros\"="+ id ;   
+        
+        Genero item = null;
+        PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
+        try{
+            ResultSet res = stmt.executeQuery();
+            if (res.next()) {
+                item = getInstance(res);
+            }
+        }catch(SQLException ex){
+            if(item == null){
+                JOptionPane.showMessageDialog(null,"Item não encontrado");
+            }else{
+                JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
+            }   
+        }
+        return item;
+    }
      /**
      * Busca  Genero na tabela Genero 
      * @return lista de objetos
@@ -191,7 +217,7 @@ public class GeneroDAO {
      */
     public static List<Genero> buscarVarios(String nome) throws BancoException, ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM \"Genero\""
-                    + " WHERE genero='%"+ nome + "'";   
+                    + " WHERE genero LIKE '%"+ nome + "%'";   
         
         Genero item = null;
         List<Genero> retorno = new ArrayList<Genero>();

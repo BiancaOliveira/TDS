@@ -148,7 +148,7 @@ public class UsuarioDAO {
      * Constrói um objeto Usuario a partir de um ResultSet
      * @param rs Result set contendo a linha que será usada
      * @return objeto 
-     * @throws SQLException, BancoException, ClassNotFoundException 
+     * @throws SQLException
      */
     private static Usuario getInstance(ResultSet res)
         throws SQLException {
@@ -195,7 +195,7 @@ public class UsuarioDAO {
      */
     public static Usuario buscarID(int id) throws BancoException, ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM \"Usuario\""
-                    + " WHERE \"idUsuario\"='"+ id + "'";   
+                    + " WHERE \"idUsuario\"="+ id ;   
         
         Usuario item = null;
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);

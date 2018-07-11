@@ -5,33 +5,33 @@
  */
 package biblioteca.control;
 
-import biblioteca.model.bd.BD;
+import biblioteca.exception.BancoException;
+import biblioteca.model.dao.LivroDAO;
 import biblioteca.model.livros.Livro;
+import java.sql.SQLException;
+import java.util.List;
 import java.util.Set;
 
 /**
  *
  * @author gabriela
  */
-public class LivroController <C extends Livro>{
-    public boolean cadastrarLivro(C livro){
-       return BD.getBanco().addLivro(livro);    
+public class LivroController {
+     public void cadastrar(int id, String titulo, int numeroExemplares, String descricao, String autor, String editora, String genero, String coautor)
+            throws  SQLException, BancoException, ClassNotFoundException{
+       LivroDAO.inserir(new Livro(id,titulo,numeroExemplares,descricao,autor,editora,genero,coautor));
     }
     
-    public boolean removerLivro(String titulo){
-        C livros = buscarLivro(titulo);
-        return BD.getBanco().removerLivro(livros);
+    public void remover(Livro ob) throws BancoException, ClassNotFoundException, SQLException{
+        LivroDAO.excluir(ob);
     }
-   
-    public  Set<Livro> listarLivros(){
-        return BD.getBanco().listarLivros();
+
+    public List<Livro> listar() throws BancoException, ClassNotFoundException, SQLException{
+      return  LivroDAO.listar();
+      
     }
     
-    public C buscarLivro(String titulo) {
-        for (Livro livro : listarLivros()) {
-            if (livro.getTitulo() == titulo)
-                return (C) livro;
-        }
-        return null;
+    public List<Livro> buscar(String nome) throws BancoException, ClassNotFoundException, SQLException {
+        return  LivroDAO.buscarVariosTitulo(nome);
     }
 }
