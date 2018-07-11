@@ -13,18 +13,29 @@ import biblioteca.model.usuarios.Cargo;
 import biblioteca.model.usuarios.Usuario;
 import biblioteca.model.usuarios.UsuarioAdm;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Set;
 
 /**
  *
  * @author Bianca
  */
-public class UsuarioAdmController 
-    extends UsuarioController{
+public class UsuarioAdmController {
     
     public void cadastrar(int id, String nome, String login, String senha, String cargo) throws BancoException, ClassNotFoundException, SQLException{
        UsuarioAdmDAO.inserir(new UsuarioAdm(id,nome,login,senha, cargo));
     }
+    public void remover(UsuarioAdm ob) throws BancoException, ClassNotFoundException, SQLException{
+        UsuarioDAO.excluir(ob);
+    }
+
+    public List<UsuarioAdm> listar() throws BancoException, ClassNotFoundException, SQLException{
+      return  UsuarioAdmDAO.listarAdm();
+      
+    }
     
+    public UsuarioAdm buscar(String login) throws BancoException, ClassNotFoundException, SQLException {
+        return  UsuarioAdmDAO.buscar(login);
+    }
     
 }

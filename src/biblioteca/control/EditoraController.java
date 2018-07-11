@@ -32,7 +32,7 @@ public class EditoraController{
       
     }
     
-    public Editora buscar(String nome) throws BancoException, ClassNotFoundException, SQLException {
-        return  EditoraDAO.buscar(nome);
+    public List<Editora> buscar(String nome) throws BancoException, ClassNotFoundException, SQLException {
+        return  EditoraDAO.buscarVarios(nome);
     } 
 }

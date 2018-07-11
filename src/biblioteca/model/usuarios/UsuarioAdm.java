@@ -25,6 +25,9 @@ public class UsuarioAdm
     public void setCargo(String cargo) {
         this.cargo = cargo;
     }
-   
+   @Override
+    public String toString() {
+        return "Nome: "+ nome +" ,Login: "+ login +" ,Senha: "+ senha+ ",Cargo:"+ cargo +"\n";
+    }
     
 }

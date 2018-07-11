@@ -156,4 +156,27 @@ public class UsuarioDAO {
         return item;
     }
     
+    public static List<Usuario> buscarVarios(String nome) throws BancoException, ClassNotFoundException, SQLException {
+        String sql = "SELECT * FROM \"Usuario\""
+                    + " WHERE usuario LIKE '"+ nome + "%'";   
+        
+        Usuario item = null;
+        List<Usuario> retorno = new ArrayList<Usuario>();
+
+        PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
+        try{
+            ResultSet res = stmt.executeQuery();
+            while (res.next()) {
+                item = getInstance(res);
+                retorno.add(item);
+            }
+        }catch(SQLException ex){
+            if(item == null){
+                JOptionPane.showMessageDialog(null,"Item não encontrado");
+            }else{
+                JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
+            }   
+        }
+        return retorno;
+    }
 }

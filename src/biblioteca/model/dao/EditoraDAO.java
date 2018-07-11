@@ -8,6 +8,7 @@ package biblioteca.model.dao;
 import biblioteca.exception.BancoException;
 import biblioteca.model.dao.postgre.PostgreDAO;
 import biblioteca.model.livros.Editora;
+import biblioteca.model.usuarios.Cargo;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -153,5 +154,29 @@ public class EditoraDAO {
             }   
         }
         return item;
+    }
+    
+    public static List<Editora> buscarVarios(String nome) throws BancoException, ClassNotFoundException, SQLException {
+        String sql = "SELECT * FROM \"Editora\""
+                    + " WHERE editora LIKE '"+ nome + "%'";   
+        
+        Editora item = null;
+        List<Editora> retorno = new ArrayList<Editora>();
+
+        PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
+        try{
+            ResultSet res = stmt.executeQuery();
+            while (res.next()) {
+                item = getInstance(res);
+                retorno.add(item);
+            }
+        }catch(SQLException ex){
+            if(item == null){
+                JOptionPane.showMessageDialog(null,"Item não encontrado");
+            }else{
+                JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
+            }   
+        }
+        return retorno;
     }
 }

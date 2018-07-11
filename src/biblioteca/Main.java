@@ -9,10 +9,12 @@ import biblioteca.control.AutorController;
 import biblioteca.control.CargoController;
 import biblioteca.control.EditoraController;
 import biblioteca.control.GeneroController;
+import biblioteca.control.UsuarioAdmController;
 import biblioteca.control.UsuarioController;
 import biblioteca.exception.BancoException;
 import biblioteca.model.dao.postgre.PostgreDAO;
 import biblioteca.model.usuarios.Cargo;
+import biblioteca.model.usuarios.UsuarioAdm;
 import java.sql.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -85,7 +87,7 @@ public class Main extends Application{
         //busca cargo pelo login
         System.out.println("Buscar : " + controleGenero.buscar("terror"));
 //      //remover cargo
-        controleGenero.remover( controleGenero.buscar("terror"));
+//        controleGenero.remover( controleGenero.buscar("terror"));
         
         System.out.println("\n---------- Funçoes do Autor ------------\n");
          //Funções Cargo
@@ -117,7 +119,7 @@ public class Main extends Application{
         //busca cargo pelo login
         System.out.println("Buscar : " + controleEditora.buscar("teste"));
 //      //remover cargo
-        controleEditora.remover( controleEditora.buscar("teste"));
+//        controleEditora.remover( controleEditora.buscar("teste"));
         
         System.out.println("\n---------- Funçoes do Usuario ------------\n");
          //Funções Cargo
@@ -132,6 +134,19 @@ public class Main extends Application{
         //busca cargo pelo login
         System.out.println("Buscar : " + controleUsuario.buscar("me"));
 //      //remover cargo
-        controleUsuario.remover( controleUsuario.buscar("me"));
+//        controleUsuario.remover(controleUsuario.buscar("me"));
+
+        System.out.println("\n---------- Funçoes do Adm ------------\n");
+        UsuarioAdmController controleAdm = 
+                new UsuarioAdmController();
+
+          controleAdm.cadastrar(0,"Quero","muito","matar","Administrador");
+          controleAdm.cadastrar(0,"sei","la","gente","Administrador");
+        
+        //listar Cargos
+        System.out.println("Lista de generos: " + controleAdm.listar());
+        //busca cargo pelo login
+        System.out.println("Buscar : " + controleAdm.buscar("la"));
+        controleAdm.remover(controleAdm.buscar("la"));
     }
 }

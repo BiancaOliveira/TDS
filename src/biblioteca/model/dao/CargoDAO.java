@@ -160,7 +160,7 @@ public class CargoDAO {
     
     public static List<Cargo> buscarVarios(String nome) throws BancoException, ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM \"Cargo\""
-                    + " WHERE cargo='"+ nome + "'";   
+                    + " WHERE cargo LIKE '"+ nome + "%'";   
         
         Cargo item = null;
         List<Cargo> retorno = new ArrayList<Cargo>();

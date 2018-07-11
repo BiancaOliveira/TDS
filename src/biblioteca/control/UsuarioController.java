@@ -32,7 +32,7 @@ public class UsuarioController {
       
     }
     
-    public Usuario buscar(String login) throws BancoException, ClassNotFoundException, SQLException {
-        return  UsuarioDAO.buscar(login);
+    public List<Usuario> buscar(String login) throws BancoException, ClassNotFoundException, SQLException {
+        return  UsuarioDAO.buscarVarios(login);
     }
 }
