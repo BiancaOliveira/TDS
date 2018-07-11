@@ -82,20 +82,19 @@ public class CargoDAO {
     }
     public  static void alterar(Cargo ob) throws BancoException, ClassNotFoundException, SQLException{
 //        con = PostgreDAO.getConnection();  
+    
         if(buscar(ob.getNome()) != null){
-            JOptionPane.showMessageDialog(null,"Cadastro existente");
+            JOptionPane.showMessageDialog(null,"Cargo existente");
         }else{
-            ob.setIdCargo(codigo());
-            String sql = "UPDATE INTO \"Cargo\" SET cargo'" + ob.getNome() + "'"
+            String sql = "UPDATE INTO \"Cargo\" SET cargo= '" + ob.getNome() + "'"
                     + " WHERE \"idCargo\"=" + ob.getIdCargo();
             PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
             try{
                 if (stmt.executeUpdate() == 1){
                     JOptionPane.showMessageDialog(null,"Alterado com sucesso");
-                }
-
+                 }
             }catch(SQLException ex){
-//                Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);
+    //                Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);
                 JOptionPane.showMessageDialog(null,"Erro ao Alterar");
             }
         }
@@ -157,6 +156,30 @@ public class CargoDAO {
             }   
         }
         return item;
+    }
+    
+    public static List<Cargo> buscarVarios(String nome) throws BancoException, ClassNotFoundException, SQLException {
+        String sql = "SELECT * FROM \"Cargo\""
+                    + " WHERE cargo='"+ nome + "'";   
+        
+        Cargo item = null;
+        List<Cargo> retorno = new ArrayList<Cargo>();
+
+        PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
+        try{
+            ResultSet res = stmt.executeQuery();
+            while (res.next()) {
+                item = getInstance(res);
+                retorno.add(item);
+            }
+        }catch(SQLException ex){
+            if(item == null){
+                JOptionPane.showMessageDialog(null,"Item não encontrado");
+            }else{
+                JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
+            }   
+        }
+        return retorno;
     }
     
 }

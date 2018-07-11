@@ -6,6 +6,7 @@
 package biblioteca.model.dao;
 
 import biblioteca.exception.BancoException;
+import static biblioteca.model.dao.EditoraDAO.buscar;
 import biblioteca.model.dao.postgre.PostgreDAO;
 import biblioteca.model.livros.Autor;
 import java.sql.*;
@@ -77,11 +78,11 @@ public class AutorDAO {
     }
     public  static void alterar(Autor ob) throws BancoException, ClassNotFoundException, SQLException{
 //        con = PostgreDAO.getConnection();  
+        
         if(buscar(ob.getNome()) != null){
-            JOptionPane.showMessageDialog(null,"Cadastro existente");
+            JOptionPane.showMessageDialog(null,"Autor existente");
         }else{
-            ob.setIdAutor(codigo());
-            String sql = "UPDATE INTO \"Autor\" SET autor'" + ob.getNome() + "'"
+            String sql = "UPDATE INTO \"Autor\" SET autor = '" + ob.getNome() + "'"
                     + " WHERE \"idAutor\"=" + ob.getIdAutor();
             PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
             try{
@@ -89,8 +90,8 @@ public class AutorDAO {
                     JOptionPane.showMessageDialog(null,"Alterado com sucesso");
                 }
 
-            }catch(SQLException ex){
-//                Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);
+             }catch(SQLException ex){
+    //                Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);
                 JOptionPane.showMessageDialog(null,"Erro ao Alterar");
             }
         }
@@ -152,5 +153,29 @@ public class AutorDAO {
             }   
         }
         return item;
+    }
+    
+    public static List<Autor> buscarVarios(String nome) throws BancoException, ClassNotFoundException, SQLException {
+        String sql = "SELECT * FROM \"Autor\""
+                    + " WHERE autor LIKE '"+ nome + "%'";   
+        
+        Autor item = null;
+        List<Autor> retorno = new ArrayList<Autor>();
+
+        PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
+        try{
+            ResultSet res = stmt.executeQuery();
+            while (res.next()) {
+                item = getInstance(res);
+                retorno.add(item);
+            }
+        }catch(SQLException ex){
+            if(item == null){
+                JOptionPane.showMessageDialog(null,"Item não encontrado");
+            }else{
+                JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
+            }   
+        }
+        return retorno;
     }
 }

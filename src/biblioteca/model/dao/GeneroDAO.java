@@ -76,14 +76,13 @@ public class GeneroDAO {
                 JOptionPane.showMessageDialog(null,"Erro ao remover");
             }
     }
-    public  static void alterar(Genero genero) throws BancoException, ClassNotFoundException, SQLException{
+    public  static void alterar(Genero ob) throws BancoException, ClassNotFoundException, SQLException{
 //        con = PostgreDAO.getConnection();  
-        if(buscar(genero.getNome()) != null){
-            JOptionPane.showMessageDialog(null,"Cadastro existente");
+        if(buscar(ob.getNome()) != null){
+            JOptionPane.showMessageDialog(null,"Genero existente");
         }else{
-            genero.setIdGenero(codigo());
-            String sql = "UPDATE INTO \"Genero\" SET genero'" + genero.getNome() + "'"
-                    + " WHERE \"idGeneros\"=" + genero.getIdGenero();
+            String sql = "UPDATE INTO \"Genero\" SET genero= '" + ob.getNome() + "'"
+                    + " WHERE \"idGeneros\"=" + ob.getIdGenero();
             PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
             try{
                 if (stmt.executeUpdate() == 1){
@@ -91,7 +90,7 @@ public class GeneroDAO {
                 }
 
             }catch(SQLException ex){
-//                Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);
+    //               Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);
                 JOptionPane.showMessageDialog(null,"Erro ao Alterar");
             }
         }

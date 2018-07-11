@@ -1,6 +1,10 @@
 package biblioteca.control;
+import biblioteca.exception.BancoException;
 import biblioteca.model.bd.BD;
+import biblioteca.model.dao.UsuarioDAO;
 import biblioteca.model.usuarios.Usuario;
+import java.sql.SQLException;
+import java.util.List;
 import java.util.Set;
 
 /*
@@ -13,27 +17,22 @@ import java.util.Set;
  *
  * @author Bianca
  */
-public class UsuarioController <C extends Usuario> {
+public class UsuarioController {
     
-    public  boolean cadastrarUsuario(C usuario){
-      return BD.getBanco().addUsuario(usuario);
+    public void cadastrar(int id, String nome, String login, String senha) throws BancoException, ClassNotFoundException, SQLException{
+       UsuarioDAO.inserir(new Usuario(id,nome,login,senha));
     }
     
-    public boolean removerUsuario(String login){
-        C usuario = buscarUsuario(login);     
-        return BD.getBanco().removerUsuario(usuario);
+    public void remover(Usuario ob) throws BancoException, ClassNotFoundException, SQLException{
+        UsuarioDAO.excluir(ob);
+    }
+
+    public List<Usuario> listar() throws BancoException, ClassNotFoundException, SQLException{
+      return  UsuarioDAO.listar();
+      
     }
     
-     public C buscarUsuario(String login) {
-        for (Usuario usuario : listarUsuarios()) {
-            if (usuario.getLogin() == login)
-                return (C) usuario;
-        }
-        return null;
+    public Usuario buscar(String login) throws BancoException, ClassNotFoundException, SQLException {
+        return  UsuarioDAO.buscar(login);
     }
-    
-    public  Set<Usuario> listarUsuarios(){
-        return BD.getBanco().listarUsuarios();
-    }
-  
 }

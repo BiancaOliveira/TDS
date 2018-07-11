@@ -9,6 +9,7 @@ import biblioteca.control.AutorController;
 import biblioteca.control.CargoController;
 import biblioteca.control.EditoraController;
 import biblioteca.control.GeneroController;
+import biblioteca.control.UsuarioController;
 import biblioteca.exception.BancoException;
 import biblioteca.model.dao.postgre.PostgreDAO;
 import biblioteca.model.usuarios.Cargo;
@@ -69,7 +70,7 @@ public class Main extends Application{
         //busca cargo pelo login
         System.out.println("Buscar cargo 'Bibliotecario': " + controleCargos.buscarCargo("Administrador"));
 //      //remover cargo
-        controleCargos.removerCargo( controleCargos.buscarCargo("Administrador"));
+//        controleCargos.removerCargo(controleCargos.buscarCargo("Administrador"));
         
         System.out.println("\n---------- Funçoes do Genero ------------\n");
          //Funções Cargo
@@ -92,6 +93,8 @@ public class Main extends Application{
                 new AutorController();
 
           controleAutor.cadastrar(0,"bart");
+          controleAutor.cadastrar(0,"bart sasa");
+          controleAutor.cadastrar(0,"bart boi");
 
         
         //listar Cargos
@@ -99,7 +102,7 @@ public class Main extends Application{
         //busca cargo pelo login
         System.out.println("Buscar : " + controleAutor.buscar("bart"));
 //      //remover cargo
-        controleAutor.remover( controleAutor.buscar("bart"));
+        
         
         System.out.println("\n---------- Funçoes do Editora ------------\n");
          //Funções Cargo
@@ -115,5 +118,20 @@ public class Main extends Application{
         System.out.println("Buscar : " + controleEditora.buscar("teste"));
 //      //remover cargo
         controleEditora.remover( controleEditora.buscar("teste"));
+        
+        System.out.println("\n---------- Funçoes do Usuario ------------\n");
+         //Funções Cargo
+        UsuarioController controleUsuario= 
+                new UsuarioController();
+
+          controleUsuario.cadastrar(0,"Quero","me","matar");
+
+        
+        //listar Cargos
+        System.out.println("Lista : " + controleUsuario.listar());
+        //busca cargo pelo login
+        System.out.println("Buscar : " + controleUsuario.buscar("me"));
+//      //remover cargo
+        controleUsuario.remover( controleUsuario.buscar("me"));
     }
 }

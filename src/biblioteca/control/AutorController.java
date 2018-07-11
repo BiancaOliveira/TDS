@@ -30,7 +30,7 @@ public class AutorController {
       return  AutorDAO.listar();
     }
     
-    public Autor buscar(String nome) throws BancoException, ClassNotFoundException, SQLException {
-        return  AutorDAO.buscar(nome);
+    public List<Autor> buscar(String nome) throws BancoException, ClassNotFoundException, SQLException {
+        return  AutorDAO.buscarVarios(nome);
     }
 }

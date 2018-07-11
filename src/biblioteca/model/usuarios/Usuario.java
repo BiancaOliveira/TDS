@@ -9,7 +9,7 @@ package biblioteca.model.usuarios;
  *
  * @author Bianca
  */
-public abstract class Usuario implements Comparable<Usuario> {
+public  class Usuario implements Comparable<Usuario> {
     private int idUsuario;
     String nome;
     String login;
@@ -30,10 +30,16 @@ public abstract class Usuario implements Comparable<Usuario> {
         this.senha = senha;           
     }
 
-    public int getId() {
+    public int getIdUsuario() {
         return idUsuario;
     }
 
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+   
+    
     public String getNome() {
         return nome;
     }
@@ -86,7 +92,8 @@ public abstract class Usuario implements Comparable<Usuario> {
     
     @Override
     public int compareTo(Usuario o) {
-       if (login != o.login) return 1;
+       if (idUsuario < o.idUsuario) return -1;
+       else if (idUsuario > o.idUsuario) return 1;
        else return 0;
     }
     

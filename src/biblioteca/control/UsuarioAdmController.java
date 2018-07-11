@@ -5,8 +5,14 @@
  */
 package biblioteca.control;
 
+import biblioteca.exception.BancoException;
 import biblioteca.model.bd.BD;
+import biblioteca.model.dao.UsuarioAdmDAO;
+import biblioteca.model.dao.UsuarioDAO;
+import biblioteca.model.usuarios.Cargo;
+import biblioteca.model.usuarios.Usuario;
 import biblioteca.model.usuarios.UsuarioAdm;
+import java.sql.SQLException;
 import java.util.Set;
 
 /**
@@ -14,10 +20,11 @@ import java.util.Set;
  * @author Bianca
  */
 public class UsuarioAdmController 
-    extends UsuarioController <UsuarioAdm>{
+    extends UsuarioController{
     
-    public Set<UsuarioAdm> listarUsuariosAdms() {
-        return BD.getBanco().listarUsuariosAdms();
-    }  
+    public void cadastrar(int id, String nome, String login, String senha, String cargo) throws BancoException, ClassNotFoundException, SQLException{
+       UsuarioAdmDAO.inserir(new UsuarioAdm(id,nome,login,senha, cargo));
+    }
+    
     
 }
