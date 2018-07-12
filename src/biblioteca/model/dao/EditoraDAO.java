@@ -31,7 +31,7 @@ public class EditoraDAO {
      * @throws java.sql.SQLException    Exeções Sql
      */
     public static int codigo() throws BancoException, ClassNotFoundException, SQLException{
-        String sql = "SELECT * FROM \"Autor\"";
+        String sql = "SELECT * FROM \"Editora\"";
         
         int id = 0;
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
