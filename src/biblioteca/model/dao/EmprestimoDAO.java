@@ -34,7 +34,7 @@ public class EmprestimoDAO {
      * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
      * @throws java.sql.SQLException    Exeções Sql     */
     public static int codigo() throws BancoException, ClassNotFoundException, SQLException{
-        String sql = "SELECT * FROM \"Emprestimo\"";
+        String sql = "SELECT * FROM \"Emprestimos\"";
         
         int id = 0;
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
@@ -89,7 +89,7 @@ public class EmprestimoDAO {
      */
     public static int buscarIdUsuario(String nome) throws BancoException, ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM \"Usuario\""
-                    + " WHERE =login'"+ nome + "'";   
+                    + " WHERE login ='"+ nome + "'";   
         
         int idUsuario = 0;
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
@@ -107,6 +107,7 @@ public class EmprestimoDAO {
         }
         return idUsuario;
     }
+    
     /**
      * Inclui o Emprestimo na tabela Emprestimo 
      * @param ob objeto
@@ -116,6 +117,7 @@ public class EmprestimoDAO {
      */
     public  static void inserir(Emprestimo ob) throws BancoException, ClassNotFoundException, SQLException{
         int livro = buscarIdLivro(ob.livro);
+        System.out.println(livro);
         int usuario = buscarIdUsuario(ob.usuario);
         
         if(buscarNumeroExemplares(livro) > 0){
@@ -217,7 +219,7 @@ public class EmprestimoDAO {
 
         Livro liv = LivroDAO.buscarID(res.getInt("id_livros"));
         Usuario usu = UsuarioDAO.buscarID(res.getInt("id_usuario"));
-        int id = res.getInt("idEmprestimo");
+        int id = res.getInt("idEmprestimos");
         String livro = liv.getTitulo();
         String usuario= usu.getLogin();
         Date dataEmprestimo = res.getDate("dataEmprestimo");
@@ -229,7 +231,7 @@ public class EmprestimoDAO {
     }
     /**
      * Busca um Emprestimo na tabela Emprestimo 
-     * @param id id do cargo
+     * @param id id do emprestimo
      * @return um objetos
      * @throws biblioteca.exception.BancoException Exeção geral do banco
      * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
@@ -272,12 +274,16 @@ public class EmprestimoDAO {
         try{
             ResultSet res = stmt.executeQuery();
             if (res.next()) {
+                
                 numeroExemplares  = res.getInt("numeroExemplares");
+                System.out.println(numeroExemplares);
             }
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
  
         }
+                        System.out.println(numeroExemplares);
+
         return numeroExemplares;
     }
 

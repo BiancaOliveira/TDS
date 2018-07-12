@@ -8,6 +8,7 @@ package biblioteca;
 import biblioteca.control.AutorController;
 import biblioteca.control.CargoController;
 import biblioteca.control.EditoraController;
+import biblioteca.control.EmprestimoController;
 import biblioteca.control.GeneroController;
 import biblioteca.control.LivroController;
 import biblioteca.control.LoginController;
@@ -25,19 +26,23 @@ import biblioteca.model.usuarios.UsuarioAdm;
 import biblioteca.model.usuarios.UsuarioAluno;
 import biblioteca.model.usuarios.UsuarioFuncionario;
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Calendar;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
+import java.util.Date;
 /**
  *
  * @author Bianca
  */
 public class Main extends Application{
 
-
+    
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -122,7 +127,6 @@ public class Main extends Application{
 
           controleEditora.cadastrar(0,"teste");
 
-        
         //listar Cargos
         System.out.println("Lista : " + controleEditora.listar());
         //busca cargo pelo login
@@ -200,7 +204,7 @@ public class Main extends Application{
 
 
         
-    System.out.println("\n---------- Funçoes do login ------------\n");
+        System.out.println("\n---------- Funçoes do login ------------\n");
         LoginController controleLogin = 
                 new LoginController();
         
@@ -218,8 +222,25 @@ public class Main extends Application{
         }else if(teste1 == 3){
             UsuarioFuncionario fun = UsuarioFuncionarioDAO.buscar("muito");
         }
+      
+        System.out.println("\n---------- Funçoes do Emprestimo ------------\n");
+            EmprestimoController controleEmpre = 
+                    new EmprestimoController();
 
-//          controleAl.cadastrar(0,"faz de fas","fas","dada",4558,"9999999");
+        Date dataEmprestimo  = new Date();
+        Date dataDevolucao  = new Date();
+        SimpleDateFormat formato= new SimpleDateFormat("dd/MM/yyyy");
+        
+        System.out.println(formato.format(dataEmprestimo));
+        Calendar c = Calendar.getInstance(); 
+        c.setTime(dataDevolucao); 
+        c.add(Calendar.DATE, 15);
+        dataDevolucao = c.getTime();
+  
+        System.out.println(formato.format(dataDevolucao));
+    
+        
+        controleEmpre.cadastrar(0,dataEmprestimo,dataDevolucao,"BID","muito",true);
 //          controleAl.cadastrar(0,"faz de","afsa","dada",4558,"(45)9999999");        
 //        //listar Cargos
 //        System.out.println("Lista de generos: " + controleAl.listar());
