@@ -6,28 +6,38 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="principal" minHeight="600.0" minWidth="1000.0" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: e8ddc7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="biblioteca.control.telaInicialController">
+<AnchorPane fx:id="principal" minHeight="600.0" minWidth="1000.0" prefHeight="650.0" prefWidth="1000.0" style="-fx-background-color: e8ddc7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="biblioteca.Telas.telaInicialController">
    <children>
-      <BorderPane layoutX="-6.0" layoutY="-5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="610.0" prefWidth="1016.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BorderPane fx:id="borderPane" layoutX="-6.0" layoutY="-5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="610.0" prefWidth="1016.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
             <VBox prefHeight="600.0" prefWidth="185.0" style="-fx-background-color: #590f0f;" BorderPane.alignment="CENTER">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="185.0" style="-fx-background-color: transparent; -fx-text-fill: e8ddc7;" text="Livros">
+                  <Button mnemonicParsing="false" onAction="#chamaLivros" prefHeight="45.0" prefWidth="185.0" style="-fx-background-color: transparent; -fx-text-fill: e8ddc7;" text="Livros">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="185.0" style="-fx-background-color: transparent; -fx-text-fill: e8ddc7;" text="Autores">
+                  <Button mnemonicParsing="false" onAction="#chamaAutores" prefHeight="45.0" prefWidth="185.0" style="-fx-background-color: transparent; -fx-text-fill: e8ddc7;" text="Autores">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="185.0" style="-fx-background-color: transparent; -fx-text-fill: e8ddc7;" text="Gêneros">
+                  <Button mnemonicParsing="false" onAction="#chamaGeneros" prefHeight="45.0" prefWidth="185.0" style="-fx-background-color: transparent; -fx-text-fill: e8ddc7;" text="Gêneros">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="185.0" style="-fx-background-color: transparent; -fx-text-fill: e8ddc7;" text="Usuários">
+                  <Button mnemonicParsing="false" onAction="#chamaUsuarios" prefHeight="45.0" prefWidth="185.0" style="-fx-background-color: transparent; -fx-text-fill: e8ddc7;" text="Usuários">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="10.0" layoutY="145.0" mnemonicParsing="false" onAction="#chamaCargos" prefHeight="45.0" prefWidth="185.0" style="-fx-background-color: transparent; -fx-text-fill: e8ddc7;" text="Cargos">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="10.0" layoutY="190.0" mnemonicParsing="false" onAction="#chamaEditoras" prefHeight="45.0" prefWidth="185.0" style="-fx-background-color: transparent; -fx-text-fill: e8ddc7;" text="Editoras">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -35,6 +45,9 @@
                </children>
             </VBox>
          </left>
+         <center>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+         </center>
       </BorderPane>
    </children>
 </AnchorPane>
