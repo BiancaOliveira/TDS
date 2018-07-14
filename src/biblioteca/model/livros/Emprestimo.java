@@ -17,13 +17,13 @@ import javax.swing.text.DateFormatter;
  */
 public class Emprestimo implements Comparable<Emprestimo>{
     public  int idEmprestimo;
-    public Date dataEmprestimo;
-    public Date dataDevolucao;
+    public String dataEmprestimo;
+    public String dataDevolucao;
     public String usuario;
     public String livro;
     public boolean status;
 
-    public Emprestimo(int idEmprestimo, Date dataEmprestimo, Date  dataDevolucao, String livro, String usuario,boolean status) {
+    public Emprestimo(int idEmprestimo, String dataEmprestimo, String  dataDevolucao, String livro, String usuario,boolean status) {
         this.idEmprestimo = idEmprestimo;
         this.status = status;
         this.livro = livro;
@@ -33,9 +33,9 @@ public class Emprestimo implements Comparable<Emprestimo>{
     }
 
     
-    DateFormat dataFormato =  DateFormat.getDateInstance(DateFormat.MEDIUM);   
+    
     public int getIdEmprestimo() {
-        return  idEmprestimo;
+        return idEmprestimo;
     }
 
     public void setIdEmprestimo(int idEmprestimo) {
@@ -43,20 +43,40 @@ public class Emprestimo implements Comparable<Emprestimo>{
     }
 
     public String getDataEmprestimo() {
-        return dataFormato.format(dataEmprestimo);
+        return dataEmprestimo;
     }
 
-    public void setDataEmprestimo(Date dataEmprestimo) {
+    public void setDataEmprestimo(String dataEmprestimo) {
         this.dataEmprestimo = dataEmprestimo;
     }
 
     public String getDataDevolucao() {
-        return dataFormato.format(dataDevolucao);
+        return dataDevolucao;
     }
 
-    public void setDataDevolucao(Date dataDevolucao) {
+    public void setDataDevolucao(String dataDevolucao) {
         this.dataDevolucao = dataDevolucao;
     }
+    
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getLivro() {
+        return livro;
+    }
+
+    public void setLivro(String livro) {
+        this.livro = livro;
+    }
+
+   
+
 
     public boolean getStatus() {
         return status;
@@ -65,18 +85,6 @@ public class Emprestimo implements Comparable<Emprestimo>{
     public void setStatus(boolean status) {
         this.status = status;
     }
-    
-    public boolean status( LocalDate dataEmprestimo, LocalDate  dataDevolucao){
-        LocalDate dataAtual = LocalDate.now();//data atual
-        
-        if(dataDevolucao.compareTo(dataAtual)>= 0){
-            this.status = true;
-        }else{
-            this.status = false;
-        }
-        return status;
-    }
-    
     
     /**
      * Compara dois Emprestimos considerando o nome deles
@@ -113,7 +121,7 @@ public class Emprestimo implements Comparable<Emprestimo>{
     @Override
     public String toString() {
         return "Codigo: " + idEmprestimo + ", dataEmprestimo: " + dataEmprestimo 
-                + "dataDevolucao: " + dataDevolucao + ", Livro: " + livro 
-                +"Usuario: " + usuario + ", status: " + status + "\n";    
+                + ", dataDevolucao: " + dataDevolucao + ", Livro: " + livro 
+                +", Usuario: " + usuario + ", Status: " + status + "\n";    
     }
 }

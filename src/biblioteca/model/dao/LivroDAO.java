@@ -33,19 +33,18 @@ public class LivroDAO {
      * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
      * @throws java.sql.SQLException    Exeções Sql     */
     public static int codigo() throws BancoException, ClassNotFoundException, SQLException{
-        String sql = "SELECT * FROM \"Livros\"";
+        String sql = "SELECT MAX(\"idLivros\") AS \"idLivros\" from \"Livros\"";
         
         int id = 0;
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
         try{
             ResultSet res = stmt.executeQuery();
-            while(res.next()){
+            if(res.next()){
                 id = res.getInt("idLivros") + 1;
             }         
         }catch(SQLException ex){
           Logger.getLogger("Erro");
         }
-        System.out.println(id);
         return id;
     }
     
@@ -68,11 +67,7 @@ public class LivroDAO {
                  idEditora = res.getInt("idEditora");
             }
         }catch(SQLException ex){
-            if(idEditora == 0){
-                JOptionPane.showMessageDialog(null,"Item não encontrado");
-            }else{
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
-            }   
         }
         return idEditora;
     }
@@ -96,11 +91,7 @@ public class LivroDAO {
                  idAutor = res.getInt("idAutor");
             }
         }catch(SQLException ex){
-            if(idAutor == 0){
-                JOptionPane.showMessageDialog(null,"Item não encontrado");
-            }else{
-                JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
-            }   
+                JOptionPane.showMessageDialog(null,"Erro ao buscar");  
         }
         return idAutor;
     }
@@ -121,19 +112,17 @@ public class LivroDAO {
         try{
             ResultSet res = stmt.executeQuery();
             if (res.next()) {
-                 idGenero = res.getInt("idGenero");
+                 idGenero = res.getInt("idGeneros");
             }
         }catch(SQLException ex){
-            if(idGenero == 0){
-                JOptionPane.showMessageDialog(null,"Item não encontrado");
-            }else{
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
-            }   
+//                Logger.getLogger(LivroDAO.class.getName()).log(Level.SEVERE,null,ex);
+
         }
         return idGenero;
     }
     /**
-     * Inclui o Livro na tabela Livro 
+     * Inclui o Livro na tabela Livros 
      * @param ob objeto
      * @throws biblioteca.exception.BancoException Exeção geral do banco
      * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
@@ -142,9 +131,8 @@ public class LivroDAO {
     public  static void inserir(Livro ob) throws BancoException, ClassNotFoundException, SQLException{
 //        con = PostgreDAO.getConnection();
         
-        
         if(buscar(ob.getTitulo()) != null){
-            JOptionPane.showMessageDialog(null,"Cadastro existente");
+            JOptionPane.showMessageDialog(null,"Esse livro já possui cadastro");
         }else{
             ob.setIdLivro(codigo());
             
@@ -159,7 +147,7 @@ public class LivroDAO {
                     + "VALUES(" + ob.getIdLivro() + ",'" + ob.getTitulo() + "'" 
                     + "," + editora  + "," + autor  + "," +ob.getNumeroExemplares()+","
                     + genero + ",'" + ob.getDescricao() + "'," + coautor+")";  
-                    ;
+                    
             PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
             try{
                 if (stmt.executeUpdate() == 1){
@@ -167,13 +155,13 @@ public class LivroDAO {
                 }
 
             }catch(SQLException ex){
-                Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);
+                Logger.getLogger(LivroDAO.class.getName()).log(Level.SEVERE,null,ex);
                 JOptionPane.showMessageDialog(null,"Erro ao cadastrar");
             }
         }
     }
      /**
-     * Exclui o Livro na tabela Livro 
+     * Exclui o Livro na tabela Livros 
      * @param ob objeto
      * @throws biblioteca.exception.BancoException Exeção geral do banco
      * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
@@ -195,7 +183,7 @@ public class LivroDAO {
             }
     }
      /**
-     * Altera o Livro na tabela Livro 
+     * Altera o Livro na tabela Livros 
      * @param ob objeto
      * @throws biblioteca.exception.BancoException Exeção geral do banco
      * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
@@ -208,27 +196,31 @@ public class LivroDAO {
         int genero = buscarIdGenero(ob.genero);
         int coautor = buscarIdAutor(ob.coautores);
 
-        String sql = "UPDATE INTO \"Livros\" SET titulo'" + ob.getTitulo() 
-                + "', id_editora = " + editora + ", autor" + autor 
-                + ",\"numeroEcemplares\" =" + ob.getNumeroExemplares() 
-                + ",genero =" +  genero + ",descricao = '" + ob.getDescricao()
-                + "',id_couator=" + coautor
-                + " WHERE \"idLivros\"='" + ob.getIdLivro() + "'";
-                
-        PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
+        if(buscar(ob.getTitulo()) != null){
+            JOptionPane.showMessageDialog(null,"Esse livro já possui cadastro");
+        }else{
+            String sql = "UPDATE \"Livros\" SET titulo'" + ob.getTitulo() 
+                    + "', id_editora = " + editora + ", autor" + autor 
+                    + ",\"numeroEcemplares\" =" + ob.getNumeroExemplares() 
+                    + ",genero =" +  genero + ",descricao = '" + ob.getDescricao()
+                    + "',id_couator=" + coautor
+                    + " WHERE \"idLivros\"='" + ob.getIdLivro() + "'";
 
-        try{
-            if (stmt.executeUpdate() == 1){
-                JOptionPane.showMessageDialog(null,"Alterado com sucesso");
+            PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
+
+            try{
+                if (stmt.executeUpdate() == 1){
+                    JOptionPane.showMessageDialog(null,"Alterado com sucesso");
+                }
+
+            }catch(SQLException ex){
+//                    Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);
+                JOptionPane.showMessageDialog(null,"Erro ao Alterar");
             }
-
-        }catch(SQLException ex){
-                Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);
-            JOptionPane.showMessageDialog(null,"Erro ao Alterar");
         }
     }
      /**
-     * Lista os Usuario na tabela Usuario 
+     * Lista os Livro na tabela Livros 
      * @return lista de objetos
      * @throws biblioteca.exception.BancoException Exeção geral do banco
      * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
@@ -262,7 +254,7 @@ public class LivroDAO {
         }catch(SQLException ex){
             Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);
              if(retorno == null){
-                JOptionPane.showMessageDialog(null,"Nenhum item encontrado");
+                JOptionPane.showMessageDialog(null,"Nenhum livro encontrado");
             }else{
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
             }
@@ -297,7 +289,7 @@ public class LivroDAO {
         return item;
     }
     /**
-     * Busca um Livro na tabela Livro 
+     * Busca um Livro na tabela Livros 
      * @param nome login do usuario
      * @return um objetos
      * @throws biblioteca.exception.BancoException Exeção geral do banco
@@ -316,18 +308,13 @@ public class LivroDAO {
                 item = getInstance(res);
             }
         }catch(SQLException ex){
-            Logger.getLogger(LivroDAO.class.getName()).log(Level.SEVERE,null,ex);
-            if(item == null){
-                JOptionPane.showMessageDialog(null,"Item não encontrado");
-            }else{
-                JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
-            }   
+                JOptionPane.showMessageDialog(null,"Erro ao buscar");  
         }
         return item;
     }
     
     /**
-     * Busca um Livro na tabela Livro 
+     * Busca um Livro na tabela Livros
      * @param id id do Livro
      * @return um objetos
      * @throws biblioteca.exception.BancoException Exeção geral do banco
@@ -347,7 +334,7 @@ public class LivroDAO {
             }
         }catch(SQLException ex){
             if(item == null){
-                JOptionPane.showMessageDialog(null,"Item não encontrado");
+                JOptionPane.showMessageDialog(null,"Livro não encontrado");
             }else{
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
             }   
@@ -355,7 +342,7 @@ public class LivroDAO {
         return item;
     }
     /**
-     * Busca  por titulo Usuario na tabela Usuario 
+     * Busca Livro por titulo na tabela Livros
      * @param nome nome do livro
      * @return lista de objetos
      * @throws biblioteca.exception.BancoException Exeção geral do banco
@@ -378,7 +365,7 @@ public class LivroDAO {
             }
         }catch(SQLException ex){
             if(item == null){
-                JOptionPane.showMessageDialog(null,"Item não encontrado");
+                JOptionPane.showMessageDialog(null,"Livro não encontrado");
             }else{
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
             }   

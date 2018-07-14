@@ -30,13 +30,13 @@ public class UsuarioDAO {
      * @throws java.sql.SQLException    Exeções Sql
      */
     public static int codigo() throws BancoException, ClassNotFoundException, SQLException{
-        String sql = "SELECT * FROM \"Usuario\"";
+        String sql = "SELECT MAX(\"idUsuario\") AS \"idUsuario\" from \"Usuario\"";
         
         int id = 0;
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
         try{
             ResultSet res = stmt.executeQuery();
-            while(res.next()){
+            if(res.next()){
                 id = res.getInt("idUsuario") + 1;
             }         
         }catch(SQLException ex){
@@ -106,7 +106,7 @@ public class UsuarioDAO {
     public  static void alterar(Usuario ob) throws BancoException, ClassNotFoundException, SQLException{
 //        con = PostgreDAO.getConnection();  
         
-        String sql = "UPDATE INTO \"Usuario\" SET usuario'" + ob.getNome() 
+        String sql = "UPDATE \"Usuario\" SET usuario'" + ob.getNome() 
                 + "', senha = " + ob.getSenha() + 
                 " WHERE \"idUsuario\"=" + ob.getIdUsuario();
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
@@ -146,7 +146,7 @@ public class UsuarioDAO {
                 
         }catch(SQLException ex){
              if(retorno == null){
-                JOptionPane.showMessageDialog(null,"Nenhum item encontrado");
+                JOptionPane.showMessageDialog(null,"Nenhum usuario encontrado");
             }else{
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
             }
@@ -191,7 +191,7 @@ public class UsuarioDAO {
             }
         }catch(SQLException ex){
             if(item == null){
-                JOptionPane.showMessageDialog(null,"Item não encontrado");
+                JOptionPane.showMessageDialog(null,"Usuario não encontrado");
             }else{
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
             }   
@@ -201,7 +201,7 @@ public class UsuarioDAO {
     
     /**
      * Busca um Usuario na tabela Usuario 
-     * @param id id do USUARIO
+     * @param id id do Usuario
      * @return um objetos
      * @throws biblioteca.exception.BancoException Exeção geral do banco
      * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
@@ -220,7 +220,7 @@ public class UsuarioDAO {
             }
         }catch(SQLException ex){
             if(item == null){
-                JOptionPane.showMessageDialog(null,"Item não encontrado");
+                JOptionPane.showMessageDialog(null,"Usuario não encontrado");
             }else{
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
             }   
@@ -253,7 +253,7 @@ public class UsuarioDAO {
             }
         }catch(SQLException ex){
             if(item == null){
-                JOptionPane.showMessageDialog(null,"Item não encontrado");
+                JOptionPane.showMessageDialog(null,"Usuario não encontrado");
             }else{
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
             }   

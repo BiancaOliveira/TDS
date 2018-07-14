@@ -6,7 +6,6 @@
 package biblioteca.model.dao;
 
 import biblioteca.exception.BancoException;
-import static biblioteca.model.dao.EditoraDAO.buscar;
 import biblioteca.model.dao.postgre.PostgreDAO;
 import biblioteca.model.livros.Autor;
 import java.sql.*;
@@ -23,20 +22,20 @@ import javax.swing.JOptionPane;
 public class AutorDAO {
     /**
      * Busca o idAutor na tabela Autor
-     * @return id pk do Auto que vai ser utilizado para salvar na tabela Autor
+     * @return id pk do Autor que vai ser utilizado para salvar na tabela Autor
      * @throws biblioteca.exception.BancoException Exeção geral do banco
      * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
      * @throws java.sql.SQLException    Exeções Sql
      
      */   
     public static int codigo() throws BancoException, ClassNotFoundException, SQLException{
-        String sql = "SELECT * FROM \"Autor\"";
+        String sql = "SELECT MAX(\"idAutor\") AS \"idAutor\" from \"Autor\"";
         
         int id = 0;
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
         try{
             ResultSet res = stmt.executeQuery();
-            while(res.next()){
+            if(res.next()){
                 id = res.getInt("idAutor") + 1;
             }         
         }catch(SQLException ex){
@@ -57,7 +56,7 @@ public class AutorDAO {
         
         
         if(buscar(ob.getNome()) != null){
-            JOptionPane.showMessageDialog(null,"Cadastro existente");
+            JOptionPane.showMessageDialog(null,"Esse autor já possui cadastro");
         }else{
             ob.setIdAutor(codigo());
             String sql = "INSERT INTO \"Autor\" (\"idAutor\",autor)"
@@ -107,9 +106,9 @@ public class AutorDAO {
 //        con = PostgreDAO.getConnection();  
         
         if(buscar(ob.getNome()) != null){
-            JOptionPane.showMessageDialog(null,"Autor existente");
+            JOptionPane.showMessageDialog(null,"Esse autor já possui cadastro");
         }else{
-            String sql = "UPDATE INTO \"Autor\" SET autor = '" + ob.getNome() + "'"
+            String sql = "UPDATE  \"Autor\" SET autor = '" + ob.getNome() + "'"
                     + " WHERE \"idAutor\"=" + ob.getIdAutor();
             PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
             try{
@@ -150,7 +149,7 @@ public class AutorDAO {
                 
         }catch(SQLException ex){
              if(retorno == null){
-                JOptionPane.showMessageDialog(null,"Nenhum item encontrado");
+                JOptionPane.showMessageDialog(null,"Nenhum autor encontrado");
             }else{
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
             }
@@ -197,11 +196,7 @@ public class AutorDAO {
                 item = getInstance(res);
             }
         }catch(SQLException ex){
-            if(item == null){
-                JOptionPane.showMessageDialog(null,"Item não encontrado");
-            }else{
-                JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
-            }   
+            JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
         }
         return item;
     }
@@ -226,7 +221,7 @@ public class AutorDAO {
             }
         }catch(SQLException ex){
             if(item == null){
-                JOptionPane.showMessageDialog(null,"Item não encontrado");
+                JOptionPane.showMessageDialog(null,"Autor não encontrado");
             }else{
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
             }   
@@ -259,7 +254,7 @@ public class AutorDAO {
             }
         }catch(SQLException ex){
             if(item == null){
-                JOptionPane.showMessageDialog(null,"Item não encontrado");
+                JOptionPane.showMessageDialog(null,"Autor não encontrado");
             }else{
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
             }   

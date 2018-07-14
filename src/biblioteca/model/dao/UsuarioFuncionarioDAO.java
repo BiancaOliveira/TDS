@@ -34,13 +34,13 @@ public class UsuarioFuncionarioDAO {
      * @throws java.sql.SQLException    Exeções Sql     */
     
      public static int codigo() throws BancoException, ClassNotFoundException, SQLException{
-        String sql = "SELECT * FROM \"Usuario\"";
+        String sql = "SELECT MAX(\"idUsuario\") AS \"idUsuario\" from \"Usuario\"";
         
         int id = 0;
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
         try{
             ResultSet res = stmt.executeQuery();
-            while(res.next()){
+            if(res.next()){
                 id = res.getInt("idUsuario") + 1;
             }         
         }catch(SQLException ex){
@@ -61,7 +61,7 @@ public class UsuarioFuncionarioDAO {
 //        con = PostgreDAO.getConnection();
         
         if(buscar(ob.getLogin()) != null){
-            JOptionPane.showMessageDialog(null,"Este usuario já esta sendo utilizado");
+            JOptionPane.showMessageDialog(null,"Este usuário já esta sendo utilizado");
         }else{
             ob.setIdUsuario(codigo());
             int idCargo = buscarIdCargo(ob.cargo);
@@ -129,12 +129,8 @@ public class UsuarioFuncionarioDAO {
                  idCargo = res.getInt("idCargo");
             }
         }catch(SQLException ex){
-//            Logger.getLogger(UsuarioFuncionarioDAO.class.getName()).log(Level.SEVERE,null,ex);
-            if(idCargo == 0){
-                JOptionPane.showMessageDialog(null,"Item não encontrado");
-            }else{
-                JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
-            }   
+
+                JOptionPane.showMessageDialog(null,"Erro ao buscar");    
         }
         return idCargo;
     }
@@ -150,7 +146,7 @@ public class UsuarioFuncionarioDAO {
     public  static void alterar(UsuarioFuncionario ob) throws BancoException, ClassNotFoundException, SQLException{
 //        con = PostgreDAO.getConnection();  
         int idCargo = buscarIdCargo(ob.cargo);
-        String sql = "UPDATE INTO \"Usuario\" SET usuario'" + ob.getNome() 
+        String sql = "UPDATE \"Usuario\" SET usuario'" + ob.getNome() 
                 + "', senha = " + ob.getSenha() 
                 + " WHERE \"idUsuario\"=" + ob.getIdUsuario() + ";"
                 +"UPDATE INTO \"Funcionario\" SET id_cargo= " + idCargo + ""
@@ -200,7 +196,7 @@ public class UsuarioFuncionarioDAO {
         }catch(SQLException ex){
 //            Logger.getLogger(UsuarioFuncionarioDAO.class.getName()).log(Level.SEVERE,null,ex);
             if(retorno == null){
-                JOptionPane.showMessageDialog(null,"Nenhum item encontrado");
+                JOptionPane.showMessageDialog(null,"Nenhum usuário encontrado");
             }else{
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
             }
@@ -238,7 +234,7 @@ public class UsuarioFuncionarioDAO {
 
         }catch(SQLException ex){
             if(item == null){
-                JOptionPane.showMessageDialog(null,"Item não encontrado");
+                JOptionPane.showMessageDialog(null,"Usuário não encontrado");
             }else{
 //                Logger.getLogger(UsuarioFuncionarioDAO.class.getName()).log(Level.SEVERE,null,ex);
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
@@ -270,7 +266,7 @@ public class UsuarioFuncionarioDAO {
             }
         }catch(SQLException ex){
             if(item == null){
-                JOptionPane.showMessageDialog(null,"Item não encontrado");
+                JOptionPane.showMessageDialog(null,"Usuário não encontrado");
             }else{
 //                Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE,null,ex);
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
@@ -300,7 +296,7 @@ public class UsuarioFuncionarioDAO {
                 item = getInstance(idUsuario);            }
         }catch(SQLException ex){
             if(item == null){
-                JOptionPane.showMessageDialog(null,"Item não encontrado");
+                JOptionPane.showMessageDialog(null,"Usuário não encontrado");
             }else{
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
             }   
@@ -335,7 +331,7 @@ public class UsuarioFuncionarioDAO {
                 }            }
         }catch(SQLException ex){
             if(item == null){
-                JOptionPane.showMessageDialog(null,"Item não encontrado");
+                JOptionPane.showMessageDialog(null,"Usuário não encontrado");
             }else{
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
             }   

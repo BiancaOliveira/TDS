@@ -33,13 +33,13 @@ public class UsuarioAlunoDAO {
      */
     
      public static int codigo() throws BancoException, ClassNotFoundException, SQLException{
-        String sql = "SELECT * FROM \"Usuario\"";
+        String sql = "SELECT MAX(\"idUsuario\") AS \"idUsuario\" from \"Usuario\"";
         
         int id = 0;
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
         try{
             ResultSet res = stmt.executeQuery();
-            while(res.next()){
+            if(res.next()){
                 id = res.getInt("idUsuario") + 1;
             }         
         }catch(SQLException ex){
@@ -62,7 +62,7 @@ public class UsuarioAlunoDAO {
 //        System.out.println(ob.getTelefone());
 //        System.out.println(ob.getLogin());
         if(buscar(ob.getLogin()) != null){
-            JOptionPane.showMessageDialog(null,"Este usuario já esta sendo utilizado");
+            JOptionPane.showMessageDialog(null,"Este usuário já esta sendo utilizado");
         }else{
             ob.setIdUsuario(codigo());
             String sql = "INSERT INTO \"Usuario\" (\"idUsuario\",usuario,login,senha)"
@@ -122,7 +122,7 @@ public class UsuarioAlunoDAO {
     
     public  static void alterar(UsuarioAluno ob) throws BancoException, ClassNotFoundException, SQLException{
 //        con = PostgreDAO.getConnection();  
-        String sql = "UPDATE INTO \"Usuario\" SET usuario'" + ob.getNome() 
+        String sql = "UPDATE \"Usuario\" SET usuario'" + ob.getNome() 
                 + "', senha = " + ob.getSenha() 
                 + " WHERE \"idUsuario\"=" + ob.getIdUsuario() + ";"
                 +"UPDATE INTO \"UsuarioAluno\" SET telefone= " + ob.getTelefone() + ""
@@ -170,7 +170,7 @@ public class UsuarioAlunoDAO {
                 
         }catch(SQLException ex){
              if(retorno == null){
-                JOptionPane.showMessageDialog(null,"Nenhum item encontrado");
+                JOptionPane.showMessageDialog(null,"Nenhum Usuário encontrado");
             }else{
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
             }
@@ -208,7 +208,7 @@ public class UsuarioAlunoDAO {
 
         }catch(SQLException ex){
             if(item == null){
-                JOptionPane.showMessageDialog(null,"Item não encontrado");
+                JOptionPane.showMessageDialog(null,"Usuário não encontrado");
             }else{
 //                Logger.getLogger(UsuarioAdmDAO.class.getName()).log(Level.SEVERE,null,ex);
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
@@ -240,7 +240,7 @@ public class UsuarioAlunoDAO {
             }
         }catch(SQLException ex){
             if(item == null){
-                JOptionPane.showMessageDialog(null,"Item não encontrado");
+                JOptionPane.showMessageDialog(null,"Usuário não encontrado");
             }else{
 //                Logger.getLogger(UsuarioAlunoDAO.class.getName()).log(Level.SEVERE,null,ex);
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
@@ -271,7 +271,7 @@ public class UsuarioAlunoDAO {
                 item = getInstance(idUsuario);            }
         }catch(SQLException ex){
             if(item == null){
-                JOptionPane.showMessageDialog(null,"Item não encontrado");
+                JOptionPane.showMessageDialog(null,"Usuário não encontrado");
             }else{
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
             }   
@@ -308,7 +308,7 @@ public class UsuarioAlunoDAO {
             }
         }catch(SQLException ex){
             if(item == null){
-                JOptionPane.showMessageDialog(null,"Item não encontrado");
+                JOptionPane.showMessageDialog(null,"Usuário não encontrado");
             }else{
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
             }   

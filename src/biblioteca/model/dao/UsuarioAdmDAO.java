@@ -6,8 +6,6 @@
 package biblioteca.model.dao;
 
 import biblioteca.exception.BancoException;
-import static biblioteca.model.dao.UsuarioDAO.buscar;
-import static biblioteca.model.dao.UsuarioDAO.codigo;
 import biblioteca.model.dao.postgre.PostgreDAO;
 import biblioteca.model.usuarios.Cargo;
 import biblioteca.model.usuarios.Usuario;
@@ -36,13 +34,13 @@ public class UsuarioAdmDAO {
      * @throws java.sql.SQLException    Exeções Sql     */
     
     public static int codigo() throws BancoException, ClassNotFoundException, SQLException{
-        String sql = "SELECT * FROM \"Usuario\"";
+        String sql = "SELECT MAX(\"idUsuario\") AS \"idUsuario\" from \"Usuario\"";
         
         int id = 0;
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
         try{
             ResultSet res = stmt.executeQuery();
-            while(res.next()){
+            if(res.next()){
                 id = res.getInt("idUsuario") + 1;
             }         
         }catch(SQLException ex){
@@ -62,7 +60,7 @@ public class UsuarioAdmDAO {
 //        con = PostgreDAO.getConnection();
         
         if(buscar(ob.getLogin()) != null){
-            JOptionPane.showMessageDialog(null,"Este usuario já esta sendo utilizado");
+            JOptionPane.showMessageDialog(null,"Este usuário já esta sendo utilizado");
         }else{
             ob.setIdUsuario(codigo());
             int idCargo = buscarIdCargo(ob.cargo);
@@ -131,11 +129,7 @@ public class UsuarioAdmDAO {
                  idCargo = res.getInt("idCargo");
             }
         }catch(SQLException ex){
-            if(idCargo == 0){
-                JOptionPane.showMessageDialog(null,"Item não encontrado");
-            }else{
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
-            }   
         }
         return idCargo;
     }
@@ -151,7 +145,7 @@ public class UsuarioAdmDAO {
     public  static void alterar(UsuarioAdm ob) throws BancoException, ClassNotFoundException, SQLException{
 
         int idCargo = buscarIdCargo(ob.cargo);
-        String sql = "UPDATE INTO \"Usuario\" SET usuario'" + ob.getNome() 
+        String sql = "UPDATE \"Usuario\" SET usuario'" + ob.getNome() 
                 + "', senha = " + ob.getSenha() 
                 + " WHERE \"idUsuario\"=" + ob.getIdUsuario() + ";"
                 +"UPDATE INTO \"Administrador\" SET id_cargo= " + idCargo + ""
@@ -170,7 +164,7 @@ public class UsuarioAdmDAO {
     }
     
     /**
-     * Lista o UsuarioAdm na tabela Adiministrador atravez do Usuario na tabela Usuario e do cargo na tabela Cargo
+     * Lista o UsuarioAdm na tabela Adiministrador atravez do usuario(login) na tabela Usuario e do cargo na tabela Cargo
      * @return lista de objetos
      * @throws biblioteca.exception.BancoException Exeção geral do banco
      * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
@@ -200,7 +194,7 @@ public class UsuarioAdmDAO {
                 
         }catch(SQLException ex){
              if(retorno == null){
-                JOptionPane.showMessageDialog(null,"Nenhum item encontrado");
+                JOptionPane.showMessageDialog(null,"Nenhum usuário encontrado");
             }else{
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
             }
@@ -239,7 +233,7 @@ public class UsuarioAdmDAO {
 
         }catch(SQLException ex){
             if(item == null){
-                JOptionPane.showMessageDialog(null,"Item não encontrado");
+                JOptionPane.showMessageDialog(null,"Usuário não encontrado");
             }else{
 //                Logger.getLogger(UsuarioAdmDAO.class.getName()).log(Level.SEVERE,null,ex);
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
@@ -271,7 +265,7 @@ public class UsuarioAdmDAO {
             }
         }catch(SQLException ex){
             if(item == null){
-                JOptionPane.showMessageDialog(null,"Item não encontrado");
+                JOptionPane.showMessageDialog(null,"Usuário não encontrado");
             }else{
 //                Logger.getLogger(UsuarioAdmDAO.class.getName()).log(Level.SEVERE,null,ex);
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
@@ -301,7 +295,7 @@ public class UsuarioAdmDAO {
                 item = getInstance(idUsuario);            }
         }catch(SQLException ex){
             if(item == null){
-                JOptionPane.showMessageDialog(null,"Item não encontrado");
+                JOptionPane.showMessageDialog(null,"Usuário não encontrado");
             }else{
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
             }   
@@ -336,7 +330,7 @@ public class UsuarioAdmDAO {
             }
         }catch(SQLException ex){
             if(item == null){
-                JOptionPane.showMessageDialog(null,"Item não encontrado");
+                JOptionPane.showMessageDialog(null,"Usuário não encontrado");
             }else{
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
             }   

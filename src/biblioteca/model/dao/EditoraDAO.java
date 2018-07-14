@@ -8,7 +8,6 @@ package biblioteca.model.dao;
 import biblioteca.exception.BancoException;
 import biblioteca.model.dao.postgre.PostgreDAO;
 import biblioteca.model.livros.Editora;
-import biblioteca.model.usuarios.Cargo;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,13 +30,13 @@ public class EditoraDAO {
      * @throws java.sql.SQLException    Exeções Sql
      */
     public static int codigo() throws BancoException, ClassNotFoundException, SQLException{
-        String sql = "SELECT * FROM \"Editora\"";
+        String sql = "SELECT MAX(\"idEditora\") AS \"idEditora\" from \"Editora\"";
         
         int id = 0;
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
         try{
             ResultSet res = stmt.executeQuery();
-            while(res.next()){
+            if(res.next()){
                 id = res.getInt("idEditora") + 1;
             }         
         }catch(SQLException ex){
@@ -56,8 +55,8 @@ public class EditoraDAO {
 //        con = PostgreDAO.getConnection();
         
         
-        if(buscar(ob.getNome()) != null){
-            JOptionPane.showMessageDialog(null,"Cadastro existente");
+        if(buscar(ob.getNome()) != null){         
+            JOptionPane.showMessageDialog(null,"Essa editora já possui cadastro");
         }else{
             ob.setIdEditora(codigo());
             String sql = "INSERT INTO \"Editora\" (\"idEditora\",editora)"
@@ -73,6 +72,7 @@ public class EditoraDAO {
                 JOptionPane.showMessageDialog(null,"Erro ao cadastrar");
             }
         }
+        
     }
     /**
      * Exclui o Editora na tabela Editora 
@@ -106,9 +106,9 @@ public class EditoraDAO {
     public  static void alterar(Editora ob) throws BancoException, ClassNotFoundException, SQLException{
 //        con = PostgreDAO.getConnection();  
        if(buscar(ob.getNome()) != null){
-            JOptionPane.showMessageDialog(null,"Editora existente");
+            JOptionPane.showMessageDialog(null,"Essa editora já possui cadastro");
         }else{
-            String sql = "UPDATE INTO \"Editora\" SET editora = '" + ob.getNome() + "'"
+            String sql = "UPDATE  \"Editora\" SET editora = '" + ob.getNome() + "'"
                     + " WHERE \"idEditora\"=" + ob.getIdEditora();
             PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
             try{
@@ -148,7 +148,7 @@ public class EditoraDAO {
                 
         }catch(SQLException ex){
              if(retorno == null){
-                JOptionPane.showMessageDialog(null,"Nenhum item encontrado");
+                JOptionPane.showMessageDialog(null,"Nenhuma editora encontrada");
             }else{
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
             }
@@ -190,11 +190,7 @@ public class EditoraDAO {
                 item = getInstance(res);
             }
         }catch(SQLException ex){
-            if(item == null){
-                JOptionPane.showMessageDialog(null,"Item não encontrado");
-            }else{
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
-            }   
         }
         return item;
     }
@@ -219,7 +215,7 @@ public class EditoraDAO {
             }
         }catch(SQLException ex){
             if(item == null){
-                JOptionPane.showMessageDialog(null,"Item não encontrado");
+                JOptionPane.showMessageDialog(null,"Editora não encontrada");
             }else{
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
             }   
@@ -250,7 +246,7 @@ public class EditoraDAO {
             }
         }catch(SQLException ex){
             if(item == null){
-                JOptionPane.showMessageDialog(null,"Item não encontrado");
+                JOptionPane.showMessageDialog(null,"Editora não encontrado");
             }else{
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
             }   

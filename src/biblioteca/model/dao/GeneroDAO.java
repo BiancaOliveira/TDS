@@ -29,13 +29,13 @@ public class GeneroDAO {
      * @throws java.sql.SQLException    Exeções Sql
      */
     public static int codigo() throws BancoException, ClassNotFoundException, SQLException{
-        String sql = "SELECT * FROM \"Genero\"";
+        String sql = "SELECT MAX(\"idGeneros\") AS \"idGeneros\" from \"Genero\"";
         
         int id = 0;
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
         try{
             ResultSet res = stmt.executeQuery();
-            while(res.next()){
+            if(res.next()){
                 id = res.getInt("idGeneros") + 1;
             }         
         }catch(SQLException ex){
@@ -55,7 +55,7 @@ public class GeneroDAO {
         
         
         if(buscar(ob.getNome()) != null){
-            JOptionPane.showMessageDialog(null,"Cadastro existente");
+            JOptionPane.showMessageDialog(null,"Esse genero já possui cadastro");
         }else{
             ob.setIdGenero(codigo());
             String sql = "INSERT INTO \"Genero\" (\"idGeneros\", genero)"
@@ -104,9 +104,9 @@ public class GeneroDAO {
     public  static void alterar(Genero ob) throws BancoException, ClassNotFoundException, SQLException{
 //        con = PostgreDAO.getConnection();  
         if(buscar(ob.getNome()) != null){
-            JOptionPane.showMessageDialog(null,"Genero existente");
+            JOptionPane.showMessageDialog(null,"Esse genero já possui cadastro");
         }else{
-            String sql = "UPDATE INTO \"Genero\" SET genero= '" + ob.getNome() + "'"
+            String sql = "UPDATE \"Genero\" SET genero= '" + ob.getNome() + "'"
                     + " WHERE \"idGeneros\"=" + ob.getIdGenero();
             PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
             try{
@@ -146,7 +146,7 @@ public class GeneroDAO {
                 
         }catch(SQLException ex){
              if(retorno == null){
-                JOptionPane.showMessageDialog(null,"Nenhum item encontrado");
+                JOptionPane.showMessageDialog(null,"Nenhum genero encontrado");
             }else{
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
             }
@@ -190,11 +190,7 @@ public class GeneroDAO {
                 item = getInstance(res);
             }
         }catch(SQLException ex){
-            if(item == null){
-                JOptionPane.showMessageDialog(null,"Item não encontrado");
-            }else{
-                JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
-            }   
+                JOptionPane.showMessageDialog(null,"Erro ao buscar");   
         }
         return item;
     }
@@ -250,7 +246,7 @@ public class GeneroDAO {
             }
         }catch(SQLException ex){
             if(item == null){
-                JOptionPane.showMessageDialog(null,"Item não encontrado");
+                JOptionPane.showMessageDialog(null,"Genero não encontrado");
             }else{
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
             }   

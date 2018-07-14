@@ -12,7 +12,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
@@ -30,13 +29,13 @@ public class CargoDAO {
      */
     
     public static int codigo() throws BancoException, ClassNotFoundException, SQLException{
-        String sql = "SELECT * FROM \"Cargo\"";
+        String sql = "SELECT MAX(\"idCargo\") AS \"idCargo\" from \"Cargo\"";
         
         int id = 0;
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
         try{
             ResultSet res = stmt.executeQuery();
-            while(res.next()){
+            if(res.next()){
                 id = res.getInt("idCargo") + 1;
             }         
         }catch(SQLException ex){
@@ -56,7 +55,7 @@ public class CargoDAO {
         
         
         if(buscar(ob.getNome()) != null){
-            JOptionPane.showMessageDialog(null,"Cadastro existente");
+            JOptionPane.showMessageDialog(null,"Esse cargo já possui cadastro");
         }else{
             ob.setIdCargo(codigo());
             String sql = "INSERT INTO \"Cargo\" (\"idCargo\",cargo)"
@@ -106,9 +105,9 @@ public class CargoDAO {
 //        con = PostgreDAO.getConnection();  
     
         if(buscar(ob.getNome()) != null){
-            JOptionPane.showMessageDialog(null,"Cargo existente");
+            JOptionPane.showMessageDialog(null,"Esse cargo já possui cadastro");
         }else{
-            String sql = "UPDATE INTO \"Cargo\" SET cargo= '" + ob.getNome() + "'"
+            String sql = "UPDATE  \"Cargo\" SET cargo= '" + ob.getNome() + "'"
                     + " WHERE \"idCargo\"=" + ob.getIdCargo();
             PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
             try{
@@ -147,7 +146,7 @@ public class CargoDAO {
                 
         }catch(SQLException ex){
              if(retorno == null){
-                JOptionPane.showMessageDialog(null,"Nenhum item encontrado");
+                JOptionPane.showMessageDialog(null,"Nenhum cargo encontrado");
             }else{
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
             }
@@ -190,11 +189,7 @@ public class CargoDAO {
                 item = getInstance(res);
             }
         }catch(SQLException ex){
-            if(item == null){
-                JOptionPane.showMessageDialog(null,"Item não encontrado");
-            }else{
-                JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
-            }   
+                JOptionPane.showMessageDialog(null,"Erro ao buscar");  
         }
         return item;
     }
@@ -219,7 +214,7 @@ public class CargoDAO {
             }
         }catch(SQLException ex){
             if(item == null){
-                JOptionPane.showMessageDialog(null,"Item não encontrado");
+                JOptionPane.showMessageDialog(null,"Cargo não encontrado");
             }else{
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
             }   
@@ -252,7 +247,7 @@ public class CargoDAO {
             }
         }catch(SQLException ex){
             if(item == null){
-                JOptionPane.showMessageDialog(null,"Item não encontrado");
+                JOptionPane.showMessageDialog(null,"Cargo não encontrado");
             }else{
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
             }   
