@@ -3,6 +3,7 @@ import biblioteca.exception.BancoException;
 import biblioteca.model.bd.BD;
 import biblioteca.model.dao.UsuarioDAO;
 import biblioteca.model.usuarios.Usuario;
+
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Set;
@@ -17,9 +18,9 @@ import java.util.Set;
  *
  * @author Bianca
  */
-public class UsuarioController {
+public class UsuarioController<U extends Usuario> {
     
-    public void cadastrar(int id, String nome, String login, String senha) throws BancoException, ClassNotFoundException, SQLException{
+    public void cadastrar(int id, String nome, String login, String senha) throws BancoException, ClassNotFoundException, SQLException {
        UsuarioDAO.inserir(new Usuario(id,nome,login,senha));
     }
     
@@ -29,10 +30,15 @@ public class UsuarioController {
 
     public List<Usuario> listar() throws BancoException, ClassNotFoundException, SQLException{
       return  UsuarioDAO.listar();
-      
+
     }
     
     public List<Usuario> buscar(String nome) throws BancoException, ClassNotFoundException, SQLException {
         return  UsuarioDAO.buscarVarios(nome);
     }
+
+    public Usuario login(String nome) throws BancoException, SQLException, ClassNotFoundException {
+        return UsuarioDAO.buscar(nome);
+    }
+  
 }

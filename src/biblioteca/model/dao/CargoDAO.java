@@ -11,8 +11,8 @@ import biblioteca.model.usuarios.Cargo;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collections;
+//import java.util.List;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
@@ -82,7 +82,7 @@ public class CargoDAO {
      */
     public static void excluir(Cargo ob) throws BancoException, ClassNotFoundException, SQLException{
         String sql = " Delete  FROM \"Cargo\""
-                + "WHERE cargo ='" + ob.getNome() + "'";
+                + "WHERE idCargo =" + ob.getIdCargo();
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
             try{
                 if (stmt.executeUpdate() > 0){
@@ -132,7 +132,7 @@ public class CargoDAO {
         String sql = "SELECT * FROM \"Cargo\"";
         
         
-        List<Cargo> retorno = new ArrayList<Cargo>();
+        ArrayList<Cargo> retorno = new ArrayList<Cargo>();
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
         try{
             ResultSet res = stmt.executeQuery();
@@ -180,7 +180,8 @@ public class CargoDAO {
     
     public static Cargo buscar(String nome) throws BancoException, ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM \"Cargo\""
-                    + " WHERE cargo='"+ nome + "'";   
+                    + " WHERE cargo='"+ nome + "'";
+
         
         Cargo item = null;
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
@@ -236,12 +237,12 @@ public class CargoDAO {
      * @throws java.sql.SQLException    Exeções Sql
      */
     
-    public static List<Cargo> buscarVarios(String nome) throws BancoException, ClassNotFoundException, SQLException {
+    public static ArrayList<Cargo> buscarVarios(String nome) throws BancoException, ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM \"Cargo\""
                     + " WHERE cargo LIKE '%"+ nome + "%'";   
         
         Cargo item = null;
-        List<Cargo> retorno = new ArrayList<Cargo>();
+        ArrayList<Cargo> retorno = new ArrayList<Cargo>();
 
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
         try{

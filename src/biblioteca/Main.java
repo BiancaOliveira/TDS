@@ -23,6 +23,7 @@ import biblioteca.model.dao.UsuarioFuncionarioDAO;
 import biblioteca.model.dao.postgre.PostgreDAO;
 import biblioteca.model.usuarios.Cargo;
 import biblioteca.model.usuarios.UsuarioAdm;
+
 import biblioteca.model.usuarios.UsuarioAluno;
 import biblioteca.model.usuarios.UsuarioFuncionario;
 import java.sql.*;
@@ -30,6 +31,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Calendar;
+
+import biblioteca.model.usuarios.Usuario;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -42,16 +45,16 @@ import java.util.Date;
  */
 public class Main extends Application{
 
-    
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        Parent p = FXMLLoader.load(getClass().getResource("Telas/cargo.fxml"));
+        Parent p = FXMLLoader.load(getClass().getResource("Telas/telaInicial.fxml"));
         //Parent p = FXMLLoader.load(getClass().getResource("Telas/Login.fxml"));
         Scene scene = new Scene(p);
         primaryStage.setScene(scene);
-        //primaryStage.setResizable(false);
+        primaryStage.setResizable(false);
         primaryStage.setTitle("Biblioteca");
 
         //Para tela inicial
@@ -71,6 +74,8 @@ public class Main extends Application{
     private static boolean retorno = false;
     
     public static void main(String[] args) throws BancoException, ClassNotFoundException, SQLException  {
+        launch(args);
+
         con = PostgreDAO.getConnection();
 
         System.out.println("\n---------- Funçoes do cargo ------------\n");
@@ -127,6 +132,7 @@ public class Main extends Application{
 
           controleEditora.cadastrar(0,"teste");
 
+        
         //listar Cargos
         System.out.println("Lista : " + controleEditora.listar());
         //busca cargo pelo login
@@ -222,24 +228,24 @@ public class Main extends Application{
         }else if(teste1 == 3){
             UsuarioFuncionario fun = UsuarioFuncionarioDAO.buscar("muito");
         }
-      
+
         System.out.println("\n---------- Funçoes do Emprestimo ------------\n");
-            EmprestimoController controleEmpre = 
+            EmprestimoController controleEmpre =
                     new EmprestimoController();
 
         Date dataEmprestimo  = new Date();
         Date dataDevolucao  = new Date();
         SimpleDateFormat formato= new SimpleDateFormat("dd/MM/yyyy");
-        
+
         System.out.println(formato.format(dataEmprestimo));
-        Calendar c = Calendar.getInstance(); 
-        c.setTime(dataDevolucao); 
+        Calendar c = Calendar.getInstance();
+        c.setTime(dataDevolucao);
         c.add(Calendar.DATE, 15);
         dataDevolucao = c.getTime();
-  
+
         System.out.println(formato.format(dataDevolucao));
-    
-        
+
+
         controleEmpre.cadastrar(0,dataEmprestimo,dataDevolucao,"BID","muito",true);
 //          controleAl.cadastrar(0,"faz de","afsa","dada",4558,"(45)9999999");        
 //        //listar Cargos

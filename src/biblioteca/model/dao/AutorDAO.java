@@ -248,7 +248,7 @@ public class AutorDAO {
                     + " WHERE autor LIKE '%"+ nome + "%'";   
         
         Autor item = null;
-        List<Autor> retorno = new ArrayList<Autor>();
+        ArrayList<Autor> retorno = new ArrayList<Autor>();
 
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
         try{
