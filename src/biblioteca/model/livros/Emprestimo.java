@@ -16,12 +16,12 @@ import javax.swing.text.DateFormatter;
  * @author Bianca
  */
 public class Emprestimo implements Comparable<Emprestimo>{
-    public  int idEmprestimo;
-    public String dataEmprestimo;
-    public String dataDevolucao;
-    public String usuario;
-    public String livro;
-    public boolean status;
+    private  int idEmprestimo;
+    private String dataEmprestimo;
+    private String dataDevolucao;
+    private String usuario;
+    private String livro;
+    private boolean status;
 
     public Emprestimo(int idEmprestimo, String dataEmprestimo, String  dataDevolucao, String livro, String usuario,boolean status) {
         this.idEmprestimo = idEmprestimo;

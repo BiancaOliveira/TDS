@@ -13,14 +13,14 @@ import java.util.List;
  * @author Bianca
  */
 public class Livro implements Comparable<Livro>{
-    public int idLivro;
-    public String titulo;
-    public int numeroExemplares;
-    public String descricao;
-    public String autor;
-    public String coautores;
-    public String editora;
-    public String genero;
+    private int idLivro;
+    private String titulo;
+    private int numeroExemplares;
+    private String descricao;
+    private String autor;
+    private String coautores;
+    private String editora;
+    private String genero;
       
 
     public Livro() {

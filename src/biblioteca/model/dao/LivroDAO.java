@@ -136,10 +136,10 @@ public class LivroDAO {
         }else{
             ob.setIdLivro(codigo());
             
-            int editora = buscarIdEditora(ob.editora);
-            int autor = buscarIdAutor(ob.autor);
-            int genero = buscarIdGenero(ob.genero);
-            int coautor = buscarIdAutor(ob.coautores);
+            int editora = buscarIdEditora(ob.getEditora());
+            int autor = buscarIdAutor(ob.getAutor());
+            int genero = buscarIdGenero(ob.getGenero());
+            int coautor = buscarIdAutor(ob.getCoautores());
  
             
             String sql = "INSERT INTO \"Livros\" (\"idLivros\", titulo, id_editora, autor, \"numeroExemplares\","
@@ -191,10 +191,10 @@ public class LivroDAO {
      */
     public  static void alterar(Livro ob) throws BancoException, ClassNotFoundException, SQLException{
 //        con = PostgreDAO.getConnection();  
-        int editora = buscarIdEditora(ob.editora);
-        int autor = buscarIdAutor(ob.autor);
-        int genero = buscarIdGenero(ob.genero);
-        int coautor = buscarIdAutor(ob.coautores);
+        int editora = buscarIdEditora(ob.getEditora());
+        int autor = buscarIdAutor(ob.getAutor());
+        int genero = buscarIdGenero(ob.getGenero());
+        int coautor = buscarIdAutor(ob.getCoautores());
 
         if(buscar(ob.getTitulo()) != null){
             JOptionPane.showMessageDialog(null,"Esse livro já possui cadastro");

@@ -146,7 +146,7 @@ public class EmprestimoDAO {
      * @throws java.sql.SQLException    Exeções Sql
      */
     public static int buscarNumeroExemplaresDisponiveis(Emprestimo ob) throws BancoException, ClassNotFoundException, SQLException {
-        int livro = buscarIdLivro(ob.livro);
+        int livro = buscarIdLivro(ob.getLivro());
         int numeroExemplares = buscarNumeroExemplares(livro);
 
         String sql = "SELECT * FROM \"Emprestimos\""
@@ -175,8 +175,8 @@ public class EmprestimoDAO {
      * @throws java.sql.SQLException    Exeções Sql
      */ 
     public  static void inserir(Emprestimo ob) throws BancoException, ClassNotFoundException, SQLException{
-        int livro = buscarIdLivro(ob.livro);
-        int usuario = buscarIdUsuario(ob.usuario);
+        int livro = buscarIdLivro(ob.getLivro());
+        int usuario = buscarIdUsuario(ob.getUsuario());
         
 //        System.out.println("Emp: " + ob.dataEmprestimo);
 //        System.out.println("Dev: " + ob.getDataDevolucao());
