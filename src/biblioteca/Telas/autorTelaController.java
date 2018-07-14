@@ -44,7 +44,7 @@ public class autorTelaController implements Initializable {
 
 
         colunaNome.setCellValueFactory(new PropertyValueFactory<Autor, String>("Nome"));
-        colunaID.setCellValueFactory(new PropertyValueFactory<Autor, Integer>("Id"));
+        colunaID.setCellValueFactory(new PropertyValueFactory<Autor, Integer>("idAutor"));
     }
 
     public void deletaAutor(ActionEvent actionEvent) throws BancoException, SQLException, ClassNotFoundException {

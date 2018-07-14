@@ -44,7 +44,7 @@ public class editoraTelaController implements Initializable {
 
 
         colunaNome.setCellValueFactory(new PropertyValueFactory<Editora, String>("Nome"));
-        colunaID.setCellValueFactory(new PropertyValueFactory<Editora, Integer>("Id"));
+        colunaID.setCellValueFactory(new PropertyValueFactory<Editora, Integer>("idEditora"));
     }
 
     public void cadastroEditora(ActionEvent actionEvent) throws BancoException, SQLException, ClassNotFoundException {

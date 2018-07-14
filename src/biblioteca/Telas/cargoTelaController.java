@@ -101,6 +101,7 @@ public class cargoTelaController implements Initializable {
         Stage stage = new Stage();
 
         FXMLLoader fxml = new FXMLLoader(getClass().getResource("alteraCargo.fxml"));
+        fxml.setController(new alteraCargoController(a));
 
         Parent c = fxml.load();
 
@@ -117,6 +118,6 @@ public class cargoTelaController implements Initializable {
 
 
         colunaNome.setCellValueFactory(new PropertyValueFactory<Cargo, String>("Nome"));
-        colunaID.setCellValueFactory(new PropertyValueFactory<Cargo, String>("Id"));
+        colunaID.setCellValueFactory(new PropertyValueFactory<Cargo, String>("idCargo"));
     }
 }

@@ -9,10 +9,10 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class alteraCargoController implements Initializable{
+public class alteraCargoController{
 
     @FXML
-    private TextField nomeCargo;
+    public TextField nomeCargo;
 
     private Cargo cargo;
 
@@ -20,10 +20,14 @@ public class alteraCargoController implements Initializable{
 //    telaInicialController main;
 
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public alteraCargoController(Cargo cargo) {
+        this.cargo = cargo;
+        System.out.println(cargo.getNome());
+        nomeCargo.setText("Meu pau");
 
     }
 
+    public void init(Cargo cargo){
 
+    }
 }

@@ -45,7 +45,7 @@ public class generoTelaController implements Initializable {
 
 
         colunaNome.setCellValueFactory(new PropertyValueFactory<Genero, String>("Nome"));
-        colunaID.setCellValueFactory(new PropertyValueFactory<Genero, Integer>("Id"));
+        colunaID.setCellValueFactory(new PropertyValueFactory<Genero, Integer>("idGenero"));
     }
 
     public void cadastroGenero(ActionEvent actionEvent) throws BancoException, SQLException, ClassNotFoundException {
