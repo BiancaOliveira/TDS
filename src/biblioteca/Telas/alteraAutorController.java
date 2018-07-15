@@ -1,43 +1,38 @@
 package biblioteca.Telas;
 
-import biblioteca.control.CargoController;
-import biblioteca.model.usuarios.Cargo;
+import biblioteca.control.AutorController;
+import biblioteca.model.livros.Autor;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class alteraCargoController implements Initializable{
+public class alteraAutorController implements Initializable {
 
     @FXML
-    public TextField nomeCargo;
+    public TextField nome;
 
     @FXML
     public Label id;
 
-    private Cargo cargo;
-
-
-    public alteraCargoController(Cargo cargo) {
-        this.cargo = cargo;
-
-    }
-
+    private Autor autor;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        nomeCargo.setText(cargo.getNome());
-        id.setText(String.valueOf(cargo.getIdCargo()));
+        nome.setText(autor.getNome());
+        id.setText(String.valueOf(autor.getIdAutor()));
     }
 
+    public alteraAutorController(Autor autor) {
+        this.autor = autor;
+    }
 
     public void altera(ActionEvent actionEvent) {
-        CargoController controleCargo= new CargoController();
+        AutorController controleAutor = new AutorController();
 
         System.out.println("Finge que alterou");
 

@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 //import java.util.List;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
@@ -79,15 +80,14 @@ public class CargoDAO {
      */
     public static void excluir(Cargo ob) throws BancoException, ClassNotFoundException, SQLException{
         String sql = " Delete  FROM \"Cargo\""
-                + "WHERE idCargo =" + ob.getIdCargo();
+                + "WHERE \"idCargo\" =" + ob.getIdCargo();
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
             try{
                 if (stmt.executeUpdate() > 0){
                     JOptionPane.showMessageDialog(null,"Removido com sucesso");
                 }
-
             }catch(SQLException ex){
-//                Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);                
+//                Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);
                 JOptionPane.showMessageDialog(null,"Erro ao remover");
             }
     }
@@ -160,7 +160,7 @@ public class CargoDAO {
         Collections.sort(retorno);
         return retorno;
     }
-    
+
     /**
      * Busca por nome um cargo na tabela Cargo 
      * @param nome nome do cargo

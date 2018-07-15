@@ -53,6 +53,7 @@ public class cargoTelaController implements Initializable {
     
 
     ObservableList<Cargo> data = FXCollections.observableArrayList();
+    ObservableList<Cargo> data2 = FXCollections.observableArrayList();
 
 
     public void cadastroCargo(ActionEvent actionEvent) throws BancoException, SQLException, ClassNotFoundException {
@@ -65,10 +66,18 @@ public class cargoTelaController implements Initializable {
         CargoController controleCargo= new CargoController();
 
         controleCargo.cadastrarCargo(0, nome);
+
+        tabelaCargos.refresh();
     }
 
     public void buscaCargo(ActionEvent actionEvent) throws BancoException, SQLException, ClassNotFoundException {
         String nome;
+
+        data.removeAll(data);
+
+        System.out.println(data.size());
+
+        tabelaCargos.getItems().clear();
 
         nome= campoBuscaCargo.getText();
 
@@ -80,7 +89,10 @@ public class cargoTelaController implements Initializable {
             data.add(a);
         }
 
+        System.out.println(data.size());
         tabelaCargos.setItems(data);
+
+        tabelaCargos.refresh();
 
     }
 
@@ -90,13 +102,17 @@ public class cargoTelaController implements Initializable {
 
 
         Cargo a = tabelaCargos.getSelectionModel().getSelectedItem();
+
+        data.remove(a);
+
         CargoController controleCargo= new CargoController();
         controleCargo.removerCargo(a);
+        listaTudo();
+
     }
 
     public void alteraCargo(ActionEvent actionEvent) throws IOException {
         Cargo a = tabelaCargos.getSelectionModel().getSelectedItem();
-        enviadoDeDeus=a;
 
         Stage stage = new Stage();
 
@@ -109,6 +125,7 @@ public class cargoTelaController implements Initializable {
         stage.setScene(scene);
         stage.show();
 
+
     }
 
 
@@ -119,5 +136,33 @@ public class cargoTelaController implements Initializable {
 
         colunaNome.setCellValueFactory(new PropertyValueFactory<Cargo, String>("Nome"));
         colunaID.setCellValueFactory(new PropertyValueFactory<Cargo, String>("idCargo"));
+
+    }
+
+    public void listaTudo() throws BancoException, SQLException, ClassNotFoundException {
+        data.removeAll(data);
+
+        //System.out.println(data.size());
+
+        tabelaCargos.getItems().clear();
+
+
+        CargoController controleCargo= new CargoController();
+
+        cargos= (ArrayList<Cargo>) controleCargo.listarCargos();
+
+        for (Cargo a: cargos) {
+            data.add(a);
+        }
+
+        //System.out.println(data.size());
+        tabelaCargos.setItems(data);
+
+        tabelaCargos.refresh();
+    }
+
+    public void listaCargos(ActionEvent actionEvent) throws BancoException, SQLException, ClassNotFoundException {
+        listaTudo();
+
     }
 }
