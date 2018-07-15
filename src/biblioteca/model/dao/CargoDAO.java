@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 //import java.util.List;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
@@ -82,7 +83,7 @@ public class CargoDAO {
      */
     public static void excluir(Cargo ob) throws BancoException, ClassNotFoundException, SQLException{
         String sql = " Delete  FROM \"Cargo\""
-                + "WHERE idCargo =" + ob.getIdCargo();
+                + "WHERE \"idCargo\" =" + ob.getIdCargo();
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
             try{
                 if (stmt.executeUpdate() > 0){
@@ -90,7 +91,7 @@ public class CargoDAO {
                 }
 
             }catch(SQLException ex){
-//                Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);
+                Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);
                 
                 JOptionPane.showMessageDialog(null,"Erro ao remover");
             }
@@ -157,7 +158,7 @@ public class CargoDAO {
     }
     /**
      * Constrói um objeto Cargo a partir de um ResultSet
-     * @param rs Result set contendo a linha que será usada
+     * @param res Result set contendo a linha que será usada
      * @return objeto 
      * @throws java.sql.SQLException    Exeções Sql
      */

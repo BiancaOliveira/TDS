@@ -45,8 +45,9 @@
                               <TableColumn prefWidth="101.0" />
                           </columns>
                         </TableView>
-                        <Button layoutX="734.0" layoutY="553.0" mnemonicParsing="false" text="Alterar" onAction="#alteraCargo"/>
+                        <Button layoutX="734.0" layoutY="553.0" mnemonicParsing="false" onAction="#alteraCargo" text="Alterar" />
                         <Button layoutX="661.0" layoutY="553.0" mnemonicParsing="false" onAction="#deletaCargo" text="Remover" />
+                        <Button fx:id="botaoBuscaCargo1" layoutX="661.0" layoutY="22.0" mnemonicParsing="false" onAction="#listaCargos" text="Listar todos" />
                      </children></AnchorPane>
                     </content>
                 </Tab>
