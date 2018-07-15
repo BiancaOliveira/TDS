@@ -52,7 +52,7 @@ public class MultasDAO {
         }catch(SQLException ex){
           Logger.getLogger("Erro");
         }
-        return id + 1;
+        return id;
     }
     
     /**
@@ -89,7 +89,6 @@ public class MultasDAO {
      * @throws java.sql.SQLException    Exeções Sql     */
     public static double taixa() throws BancoException, ClassNotFoundException, SQLException{
         String sql = "SELECT MAX taxa AS taxa from \"Multas\"";
-        
         double taxa = 0.50;
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
         try{
@@ -123,8 +122,8 @@ public class MultasDAO {
             ResultSet res = stmt.executeQuery();
             if (res.next()) {              
                 LocalDate dataDevolucao =  LocalDate.parse(res.getString("dataDevolucao"), formato);
-                Period periodo = Period.between(dataDevolucao, dataAtual);
-                valor = taixa() * periodo.getDays();
+//                Period periodo = Period.between(dataDevolucao, dataAtual);
+                valor = taixa() * ChronoUnit.DAYS.between(dataDevolucao, dataAtual);
             }
         }catch(SQLException ex){
             System.out.println("Erro"); 
@@ -164,7 +163,10 @@ public class MultasDAO {
     public  static void inserir(ResultSet res) throws BancoException, ClassNotFoundException, SQLException{         
        double taxa = taixa();
        double valor = calculaValor(res.getInt("idEmprestimos"));
-        if(buscarIdEmprestimos(res.getInt("idEmprestimos")) == null){
+        if(buscarIdEmprestimos(res.getInt("idEmprestimos")) != null){
+            atualizaValorTabela(res.getInt("idEmprestimos"), valor);
+        }else{
+            atualizaValorTabela(res.getInt("idEmprestimos"), valor);
             String sql = "INSERT INTO \"Multas\" (\"idMultas\",taxa, "
                     + "\"valorTotal\", id_usuario, status, id_emprestimos)"
                     + "VALUES(" + codigo()+ "," + taxa
@@ -178,11 +180,55 @@ public class MultasDAO {
                 Logger.getLogger(MultasDAO.class.getName()).log(Level.SEVERE,null,ex);
 //                JOptionPane.showMessageDialog(null,"Erro ao cadastrar");
             }
-        }else{
-            atualizaValorTabela(res.getInt("idEmprestimos"), valor);
         }
     }
    
+     /**
+     * Altera o status da multa na tabela Multa 
+     * @param id id da Multa
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
+     */
+    public  static void alterarStatus(int id) throws BancoException, ClassNotFoundException, SQLException{
+        String sql = "UPDATE INTO \"Multas\" SET status = " + true 
+                + " WHERE \"idMultas\"=" + id ;
+
+        PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
+        try{
+            if (stmt.executeUpdate() == 1){
+                JOptionPane.showMessageDialog(null,"Multa paga");
+            }
+        }catch(SQLException ex){
+//                    Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);
+            JOptionPane.showMessageDialog(null,"Erro ao Alterar");
+        }
+    }
+    
+     /**
+     * Altera a taxa da multa na tabela Multa 
+     * @param taxa nova taxa
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
+     */
+    public  static void alterarTaxa(double taxa) throws BancoException, ClassNotFoundException, SQLException{
+        int id = codigo() - 1;
+        
+        String sql = "UPDATE INTO \"Multas\" SET taxa = " + taxa 
+                + " WHERE \"idMultas\"=" + id ;
+
+        PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
+        try{
+            if (stmt.executeUpdate() == 1){
+                JOptionPane.showMessageDialog(null,"Taxa alterada com sucesso");
+            }
+        }catch(SQLException ex){
+//                    Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);
+            JOptionPane.showMessageDialog(null,"Erro ao Alterar");
+        }
+    }
+    
     /**
      * Constrói um objeto Multas a partir de um ResultSet
      * @param res Result set contendo a linha que será usada
@@ -210,7 +256,6 @@ public class MultasDAO {
      * @throws biblioteca.exception.BancoException Exeção geral do banco
      * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
      * @throws java.sql.SQLException    Exeções Sql
-     * @throws java.text.ParseException  Exeções do Date 
      */
     public static void atualizaValor() throws BancoException, ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM \"Multas\""
@@ -262,16 +307,16 @@ public class MultasDAO {
         return retorno;
     }
     
-     /**
+    /**
      * Busca por status as multas na tabela Multas 
-     * @param status
-     * @param nome nome da editora(parte do nome)
+     * @param status status da multa
      * @return lista de objetos
      * @throws biblioteca.exception.BancoException Exeção geral do banco
      * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
      * @throws java.sql.SQLException    Exeções Sql
-     */
-    public static List<Multas> buscarVarios(boolean status) throws BancoException, ClassNotFoundException, SQLException {
+    */
+    public static List<Multas> buscarStatus(boolean status) throws BancoException, ClassNotFoundException, SQLException {
+        atualizaValor();
         String sql = "SELECT * FROM \"Multas\""
                     + " WHERE status = "+ status ;   
         
@@ -292,8 +337,43 @@ public class MultasDAO {
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
             }   
         }
+        Collections.sort(retorno);
         return retorno;
     }   
-
+    
+    /**
+     * Busca por usuario uma multa na tabela Multas 
+     * @param nome nome do usuario
+     * @return lista de objetos
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
+    */
+    public static Multas buscarUuario(String nome) throws BancoException, ClassNotFoundException, SQLException {
+        atualizaValor();
+        int id = EmprestimoDAO.buscarIdUsuario(nome);
+        String sql = "SELECT * FROM \"Multas\""
+                    + " WHERE id_usuario= "+ id ;   
+        
+        Multas item = null;
+        List<Multas> retorno = new ArrayList<Multas>();
+        PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
+        try{
+            ResultSet res = stmt.executeQuery();
+            while (res.next()) {
+                item = getInstance(res);
+                retorno.add(item);
+            }
+        }catch(SQLException ex){
+            Logger.getLogger(EmprestimoDAO.class.getName()).log(Level.SEVERE,null,ex);
+            if(item == null){
+                JOptionPane.showMessageDialog(null,"Multa não encontrada");
+            }else{
+                JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
+            }   
+        }
+        Collections.sort(retorno);
+        return item;
+    }   
 
 }

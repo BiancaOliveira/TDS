@@ -12,6 +12,7 @@ import biblioteca.control.EmprestimoController;
 import biblioteca.control.GeneroController;
 import biblioteca.control.LivroController;
 import biblioteca.control.LoginController;
+import biblioteca.control.MultasController;
 import biblioteca.control.UsuarioAdmController;
 import biblioteca.control.UsuarioAlunoController;
 import biblioteca.control.UsuarioController;
@@ -252,5 +253,23 @@ public class Main extends Application{
         //busca cargo pelo login
 //        System.out.println("Buscar : " + controleEmpre.buscarLivro("DSterte"));
         System.out.println("Buscar s : " + controleEmpre.buscarStatus(false));
+    
+//        
+        System.out.println("\n---------- Funçoes do Multas ------------\n");
+            MultasController controleMultas =
+                    new MultasController();
+        
+        //listar Cargos
+        System.out.println("Lista : " + controleMultas.listar());
+        //busca cargo pelo status
+        System.out.println("Buscar  s: " + controleMultas.buscarStatus(false));
+        //busca cargo pelo usuario
+        System.out.println("Buscar mi : " + controleMultas.buscarUsuario("mi"));
+    
+    
+    
     }
+    
+    
+    
 }

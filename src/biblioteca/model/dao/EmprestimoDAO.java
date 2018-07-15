@@ -13,7 +13,6 @@ import biblioteca.model.usuarios.Usuario;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -220,17 +219,17 @@ public class EmprestimoDAO {
             }
     }
    
-     /**
+    /**
      * Altera o Emprestimo na tabela Emprestimo 
      * @param ob objeto
      * @throws biblioteca.exception.BancoException Exeção geral do banco
      * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
      * @throws java.sql.SQLException    Exeções Sql
-     */
+    */
     public  static void alterar(Emprestimo ob) throws BancoException, ClassNotFoundException, SQLException{
-        String sql = "UPDATE INTO \"Emprestimos\" SET dataDevolucao'" 
-                + ob.getDataDevolucao() + "'," + "status" + ob.getStatus() 
-                + " WHERE \"idEmprestimos\"='" + ob.getIdEmprestimo()+ "'";
+        String sql = "UPDATE INTO \"Emprestimos\" SET dataDevolucao = '" 
+                + ob.getDataDevolucao() + "'," + "status =" + ob.getStatus() 
+                + " WHERE \"idEmprestimos\"=" + ob.getIdEmprestimo();
 
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
         try{
@@ -324,7 +323,6 @@ public class EmprestimoDAO {
      * @throws biblioteca.exception.BancoException Exeção geral do banco
      * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
      * @throws java.sql.SQLException    Exeções Sql
-     * @throws java.text.ParseException Exeções do Date
      */
     public static List<Emprestimo> listar() throws BancoException, ClassNotFoundException, SQLException{
         atualizaStatus();

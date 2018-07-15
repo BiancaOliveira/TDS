@@ -195,11 +195,11 @@ public class LivroDAO {
         if(buscar(ob.getTitulo()) != null){
             JOptionPane.showMessageDialog(null,"Esse livro já possui cadastro");
         }else{
-            String sql = "UPDATE \"Livros\" SET titulo'" + ob.getTitulo() 
-                    + "', id_editora = " + editora + ", autor" + autor 
-                    + ",\"numeroEcemplares\" =" + ob.getNumeroExemplares() 
-                    + ",genero =" +  genero + ",descricao = '" + ob.getDescricao()
-                    + "',id_couator=" + coautor
+            String sql = "UPDATE \"Livros\" SET titulo='" + ob.getTitulo() 
+                    + "', id_editora = " + editora + ", autor =" + autor 
+                    + ",\"numeroEcemplares\" = " + ob.getNumeroExemplares() 
+                    + ",genero = " +  genero + ",descricao = '" + ob.getDescricao()
+                    + "',id_couator = " + coautor
                     + " WHERE \"idLivros\"='" + ob.getIdLivro() + "'";
 
             PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
