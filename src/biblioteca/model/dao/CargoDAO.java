@@ -27,8 +27,7 @@ public class CargoDAO {
      * @throws biblioteca.exception.BancoException Exeção geral do banco
      * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
      * @throws java.sql.SQLException    Exeções Sql
-     */
-    
+     */   
     public static int codigo() throws BancoException, ClassNotFoundException, SQLException{
         String sql = "SELECT MAX(\"idCargo\") AS \"idCargo\" from \"Cargo\"";
         
@@ -44,6 +43,7 @@ public class CargoDAO {
         }
         return id;
     }
+    
     /**
      * Inclui o Cargo na tabela Cargo 
      * @param ob objeto
@@ -51,10 +51,7 @@ public class CargoDAO {
      * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
      * @throws java.sql.SQLException    Exeções Sql
      */
-    public  static void inserir(Cargo ob) throws BancoException, ClassNotFoundException, SQLException{
-//        con = PostgreDAO.getConnection();
-        
-        
+    public  static void inserir(Cargo ob) throws BancoException, ClassNotFoundException, SQLException{     
         if(buscar(ob.getNome()) != null){
             JOptionPane.showMessageDialog(null,"Esse cargo já possui cadastro");
         }else{
@@ -66,13 +63,13 @@ public class CargoDAO {
                 if (stmt.executeUpdate() == 1){
                     JOptionPane.showMessageDialog(null,"Cadastrado com sucesso");
                 }
-
             }catch(SQLException ex){
 //                Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);
                 JOptionPane.showMessageDialog(null,"Erro ao cadastrar");
             }
         }
     }
+    
     /**
      * Exclui o Cargo na tabela Cargo 
      * @param ob objeto
@@ -90,11 +87,11 @@ public class CargoDAO {
                 }
 
             }catch(SQLException ex){
-//                Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);
-                
+//                Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);                
                 JOptionPane.showMessageDialog(null,"Erro ao remover");
             }
     }
+    
     /**
      * Altera o Cargo na tabela Cargo 
      * @param ob objeto
@@ -103,8 +100,6 @@ public class CargoDAO {
      * @throws java.sql.SQLException    Exeções Sql
      */
     public  static void alterar(Cargo ob) throws BancoException, ClassNotFoundException, SQLException{
-//        con = PostgreDAO.getConnection();  
-    
         if(buscar(ob.getNome()) != null){
             JOptionPane.showMessageDialog(null,"Esse cargo já possui cadastro");
         }else{
@@ -121,8 +116,23 @@ public class CargoDAO {
             }
         }
     }
+   
     /**
-     * Lista os Cargo na tabela Cargo 
+     * Constrói um objeto Cargo a partir de um ResultSet
+     * @param res Result set contendo a linha que será usada
+     * @return objeto 
+     * @throws java.sql.SQLException    Exeções Sql
+     */
+    private static Cargo getInstance(ResultSet res) throws SQLException {
+        int id = res.getInt("idCargo");
+        String nome = res.getString("cargo");
+        Cargo item = new Cargo(id, nome);
+           
+        return item;
+    }
+    
+    /**
+     * Lista todos os cargos na tabela Cargo 
      * @return lista de objetos
      * @throws biblioteca.exception.BancoException Exeção geral do banco
      * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
@@ -131,20 +141,15 @@ public class CargoDAO {
     public static List<Cargo> listar() throws BancoException, ClassNotFoundException, SQLException{
         String sql = "SELECT * FROM \"Cargo\"";
         
-        
+        Cargo item = null;
         ArrayList<Cargo> retorno = new ArrayList<Cargo>();
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
         try{
             ResultSet res = stmt.executeQuery();
             while(res.next()){
-                int id = res.getInt("idCargo");
-                String nome = res.getString("cargo");
-                Cargo item = new Cargo(id,nome);
-//                item.setIdCargo(res.getInt("idCargo"));
-//                item.setNome(res.getString("nome"));
+                item = getInstance(res);
                 retorno.add(item);
-            }
-                
+            }             
         }catch(SQLException ex){
              if(retorno == null){
                 JOptionPane.showMessageDialog(null,"Nenhum cargo encontrado");
@@ -155,33 +160,18 @@ public class CargoDAO {
         Collections.sort(retorno);
         return retorno;
     }
+    
     /**
-     * Constrói um objeto Cargo a partir de um ResultSet
-     * @param rs Result set contendo a linha que será usada
-     * @return objeto 
-     * @throws java.sql.SQLException    Exeções Sql
-     */
-    private static Cargo getInstance(ResultSet res)
-        throws SQLException {
-        int id = res.getInt("idCargo");
-        String nome = res.getString("cargo");
-        Cargo item = new Cargo(id, nome);
-           
-        return item;
-    }
-    /**
-     * Busca um Cargo na tabela Cargo 
+     * Busca por nome um cargo na tabela Cargo 
      * @param nome nome do cargo
      * @return  objeto
      * @throws biblioteca.exception.BancoException Exeção geral do banco
      * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
      * @throws java.sql.SQLException    Exeções Sql
-     */
-    
+     */  
     public static Cargo buscar(String nome) throws BancoException, ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM \"Cargo\""
                     + " WHERE cargo='"+ nome + "'";
-
         
         Cargo item = null;
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
@@ -195,8 +185,9 @@ public class CargoDAO {
         }
         return item;
     }
+    
     /**
-     * Busca um Cargo na tabela Cargo 
+     * Busca por id um cargo na tabela Cargo 
      * @param id id do cargo
      * @return um objetos
      * @throws biblioteca.exception.BancoException Exeção geral do banco
@@ -225,21 +216,19 @@ public class CargoDAO {
     }
     
     /**
-     * Busca  Cargo na tabela Cargo 
+     * Busca por nome(parte) um cargo na tabela Cargo 
      * @param nome nome do cargo
      * @return lista um objetos
      * @throws biblioteca.exception.BancoException Exeção geral do banco
      * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
      * @throws java.sql.SQLException    Exeções Sql
-     */
-    
+     */    
     public static ArrayList<Cargo> buscarVarios(String nome) throws BancoException, ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM \"Cargo\""
                     + " WHERE cargo LIKE '%"+ nome + "%'";   
         
         Cargo item = null;
         ArrayList<Cargo> retorno = new ArrayList<Cargo>();
-
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
         try{
             ResultSet res = stmt.executeQuery();
@@ -254,6 +243,7 @@ public class CargoDAO {
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
             }   
         }
+        Collections.sort(retorno);
         return retorno;
     }
     

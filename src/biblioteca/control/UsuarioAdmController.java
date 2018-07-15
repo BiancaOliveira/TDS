@@ -28,10 +28,13 @@ public class UsuarioAdmController {
     public void remover(UsuarioAdm ob) throws BancoException, ClassNotFoundException, SQLException{
         UsuarioAdmDAO.excluir(ob);
     }
+    
+    public void altera(UsuarioAdm ob) throws BancoException, ClassNotFoundException, SQLException{
+        UsuarioAdmDAO.alterar(ob);
+    }
 
     public List<UsuarioAdm> listar() throws BancoException, ClassNotFoundException, SQLException{
       return  UsuarioAdmDAO.listarAdm();
-      
     }
     
     public List<UsuarioAdm> buscar(String nome) throws BancoException, ClassNotFoundException, SQLException {

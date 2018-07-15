@@ -156,7 +156,7 @@ public class GeneroDAO {
     }
     /**
      * Constrói um objeto Genero a partir de um ResultSet
-     * @param rs Result set contendo a linha que será usada
+     * @param res Result set contendo a linha que será usada
      * @return objeto 
      * @throws java.sql.SQLException    Exeções Sql
 

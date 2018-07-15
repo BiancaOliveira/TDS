@@ -22,8 +22,6 @@ import javax.swing.JOptionPane;
  * @author Bianca
  */
 public class LoginDAO {
-    
-    
     /**
      * Busca um Usuario na tabela Usuario 
      * @param nome usuario do usuario
@@ -32,8 +30,7 @@ public class LoginDAO {
      * @throws biblioteca.exception.BancoException Exeção geral do banco
      * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
      * @throws java.sql.SQLException    Exeções Sql
-     */
-    
+     */    
     public static boolean login(String nome , String senha) throws BancoException, ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM \"Usuario\""
                     + " WHERE login='"+ nome + "' and senha= '"+ senha +"';";   
@@ -62,8 +59,7 @@ public class LoginDAO {
      * @throws biblioteca.exception.BancoException Exeção geral do banco
      * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
      * @throws java.sql.SQLException    Exeções Sql
-     */
-    
+     */   
     public static int tipoUsuario(String usuario) throws BancoException, ClassNotFoundException, SQLException{
         String sql = "SELECT * FROM \"Usuario\""
                     + " WHERE login='"+ usuario +"'";
@@ -76,7 +72,6 @@ public class LoginDAO {
                 UsuarioAdm adm = UsuarioAdmDAO.buscarID(id);
                 UsuarioAluno alu = UsuarioAlunoDAO.buscarID(id);
                 UsuarioFuncionario func = UsuarioFuncionarioDAO.buscarID(id);
-                
                 if(adm != null){
                     tipo = 1;      //Adiministrador            
                 }else if(alu != null){

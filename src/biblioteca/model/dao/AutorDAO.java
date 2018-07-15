@@ -52,27 +52,25 @@ public class AutorDAO {
      * @throws java.sql.SQLException    Exeções Sql
      */
     public  static void inserir(Autor ob) throws BancoException, ClassNotFoundException, SQLException{
-//        con = PostgreDAO.getConnection();
-        
-        
         if(buscar(ob.getNome()) != null){
             JOptionPane.showMessageDialog(null,"Esse autor já possui cadastro");
         }else{
             ob.setIdAutor(codigo());
             String sql = "INSERT INTO \"Autor\" (\"idAutor\",autor)"
                     + "VALUES(" + ob.getIdAutor() + ",'" + ob.getNome() + "')";
+            
             PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
             try{
                 if (stmt.executeUpdate() == 1){
                     JOptionPane.showMessageDialog(null,"Cadastrado com sucesso");
                 }
-
             }catch(SQLException ex){
 //                Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);
                 JOptionPane.showMessageDialog(null,"Erro ao cadastrar");
             }
         }
     }
+  
     /**
      * Exclui o Autor na tabela Autor 
      * @param ob objeto
@@ -83,18 +81,18 @@ public class AutorDAO {
     public static void excluir(Autor ob) throws BancoException, ClassNotFoundException, SQLException{
         String sql = " Delete  FROM \"Autor\""
                 + "WHERE autor ='" + ob.getNome() + "'";
+        
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
             try{
                 if (stmt.executeUpdate() > 0){
                     JOptionPane.showMessageDialog(null,"Removido com sucesso");
                 }
-
             }catch(SQLException ex){
-//                Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);
-                
+//                Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);     
                 JOptionPane.showMessageDialog(null,"Erro ao remover");
             }
     }
+  
     /**
      * Altera o Autor na tabela Autor 
      * @param ob objeto
@@ -103,27 +101,41 @@ public class AutorDAO {
      * @throws java.sql.SQLException    Exeções Sql
      */
     public  static void alterar(Autor ob) throws BancoException, ClassNotFoundException, SQLException{
-//        con = PostgreDAO.getConnection();  
-        
         if(buscar(ob.getNome()) != null){
             JOptionPane.showMessageDialog(null,"Esse autor já possui cadastro");
         }else{
             String sql = "UPDATE  \"Autor\" SET autor = '" + ob.getNome() + "'"
                     + " WHERE \"idAutor\"=" + ob.getIdAutor();
+            
             PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
             try{
                 if (stmt.executeUpdate() == 1){
                     JOptionPane.showMessageDialog(null,"Alterado com sucesso");
                 }
-
              }catch(SQLException ex){
     //                Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);
                 JOptionPane.showMessageDialog(null,"Erro ao Alterar");
             }
         }
     }
+    
+      /**
+     * Constrói um objeto Autor a partir de um ResultSet
+     * @param res Result set contendo a linha que será usada
+     * @return objeto 
+     * @throws java.sql.SQLException    Exeções Sql
+
+     */    
+    private static Autor getInstance(ResultSet res)throws SQLException {
+        int id = res.getInt("idAutor");
+        String nome = res.getString("autor");
+        Autor item = new Autor(id, nome);
+           
+        return item;
+    }
+    
     /**
-     * Lista o Autor na tabela Autor 
+     * Lista  todos os Autores na tabela Autor 
      * @return  lista de objetos
      * @throws biblioteca.exception.BancoException Exeção geral do banco
      * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
@@ -131,19 +143,15 @@ public class AutorDAO {
 
      */
     public static List<Autor> listar() throws BancoException, ClassNotFoundException, SQLException{
-        String sql = "SELECT * FROM \"Autor\"";
+        String sql = "SELECT * FROM \"Autor\"";       
         
-        
+        Autor item = null;
         List<Autor> retorno = new ArrayList<Autor>();
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
         try{
             ResultSet res = stmt.executeQuery();
             while(res.next()){
-                int id = res.getInt("idAutor");
-                String nome = res.getString("autor");
-                Autor item = new Autor(id,nome);
-//                item.setIdCargo(res.getInt("idCargo"));
-//                item.setNome(res.getString("nome"));
+                item = getInstance(res);
                 retorno.add(item);
             }
                 
@@ -156,34 +164,16 @@ public class AutorDAO {
         }
         Collections.sort(retorno);
         return retorno;
-    }
+    } 
     
     /**
-     * Constrói um objeto Autor a partir de um ResultSet
-     * @param rs Result set contendo a linha que será usada
-     * @return objeto 
-     * @throws java.sql.SQLException    Exeções Sql
-
-     */
-    
-    private static Autor getInstance(ResultSet res)
-        throws SQLException {
-        int id = res.getInt("idAutor");
-        String nome = res.getString("autor");
-        Autor item = new Autor(id, nome);
-           
-        return item;
-    }
-    
-    /**
-     * busca um Autor na tabela Autor 
+     * busca por nome um  autor na tabela Autor 
      * @param nome nome autor
      * @return um objetos
      * @throws biblioteca.exception.BancoException Exeção geral do banco
      * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
      * @throws java.sql.SQLException    Exeções Sql
-     */
-    
+     */  
     public static Autor buscar(String nome) throws BancoException, ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM \"Autor\""
                     + " WHERE autor='"+ nome + "'";   
@@ -200,8 +190,9 @@ public class AutorDAO {
         }
         return item;
     }
+    
     /**
-     * Busca um Autor na tabela Autor 
+     * Busca por id um autor na tabela Autor 
      * @param id id do Autor
      * @return um objetos
      * @throws biblioteca.exception.BancoException Exeção geral do banco
@@ -230,14 +221,13 @@ public class AutorDAO {
     }
     
     /**
-     * busca Autor na tabela Autor 
+     * busca pot nome(parte) um auror na tabela Autor 
      * @param nome nome do autor
      * @return lista de objetos
      * @throws biblioteca.exception.BancoException Exeção geral do banco
      * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
      * @throws java.sql.SQLException    Exeções Sql
-     */
-    
+     */   
     public static List<Autor> buscarVarios(String nome) throws BancoException, ClassNotFoundException, SQLException {
         String sql = "SELECT * FROM \"Autor\""
                     + " WHERE autor LIKE '%"+ nome + "%'";   
@@ -259,6 +249,7 @@ public class AutorDAO {
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
             }   
         }
+        Collections.sort(retorno);
         return retorno;
     }
 }

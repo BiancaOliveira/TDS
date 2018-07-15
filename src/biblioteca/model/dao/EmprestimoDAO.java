@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -48,8 +49,7 @@ public class EmprestimoDAO {
         }catch(SQLException ex){
           Logger.getLogger("Erro");
         }
-//        System.out.println(id);
-        return id + 1;
+        return id;
     }
 
     /**
@@ -132,7 +132,6 @@ public class EmprestimoDAO {
             }
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
- 
         }
         return numeroExemplares;
     }
@@ -151,8 +150,8 @@ public class EmprestimoDAO {
 
         String sql = "SELECT * FROM \"Emprestimos\""
                     + " WHERE \"id_livros\"="+ livro ;      
-        int exemplaresDisponiveis = 0;
-        
+       
+        int exemplaresDisponiveis = 0;     
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
         try{
             ResultSet res = stmt.executeQuery();
@@ -161,9 +160,7 @@ public class EmprestimoDAO {
             }
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
- 
         }
-
         return numeroExemplares-exemplaresDisponiveis;
     }
     
@@ -178,13 +175,11 @@ public class EmprestimoDAO {
         int livro = buscarIdLivro(ob.getLivro());
         int usuario = buscarIdUsuario(ob.getUsuario());
         
-//        System.out.println("Emp: " + ob.dataEmprestimo);
-//        System.out.println("Dev: " + ob.getDataDevolucao());
         if(buscarNumeroExemplaresDisponiveis(ob) == 0){
             JOptionPane.showMessageDialog(null,"Livro sem exemplares disponiveis");
         }else{
             ob.setIdEmprestimo(codigo());
-//            System.out.println(buscarNumeroExemplaresDisponiveis(ob));
+
             String sql = "INSERT INTO \"Emprestimos\" (\"idEmprestimos\", \"dataEmprestimo\", "
                     + "\"dataDevolucao\",id_livros, id_usuario, status)"
                     + "VALUES(" + ob.getIdEmprestimo()+ ",'" + ob.getDataEmprestimo()
@@ -196,9 +191,8 @@ public class EmprestimoDAO {
                 if (stmt.executeUpdate() == 1){
                     JOptionPane.showMessageDialog(null,"Cadastrado com sucesso");
                 }
-
             }catch(SQLException ex){
-                Logger.getLogger(EmprestimoDAO.class.getName()).log(Level.SEVERE,null,ex);
+//                Logger.getLogger(EmprestimoDAO.class.getName()).log(Level.SEVERE,null,ex);
                 JOptionPane.showMessageDialog(null,"Erro ao cadastrar");
             }
         }
@@ -222,7 +216,6 @@ public class EmprestimoDAO {
 
             }catch(SQLException ex){
 //                Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);
-                
                 JOptionPane.showMessageDialog(null,"Erro ao remover");
             }
     }
@@ -235,18 +228,15 @@ public class EmprestimoDAO {
      * @throws java.sql.SQLException    Exeções Sql
      */
     public  static void alterar(Emprestimo ob) throws BancoException, ClassNotFoundException, SQLException{
-//        con = PostgreDAO.getConnection();  
         String sql = "UPDATE INTO \"Emprestimos\" SET dataDevolucao'" 
                 + ob.getDataDevolucao() + "'," + "status" + ob.getStatus() 
                 + " WHERE \"idEmprestimos\"='" + ob.getIdEmprestimo()+ "'";
 
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
-
         try{
             if (stmt.executeUpdate() == 1){
                 JOptionPane.showMessageDialog(null,"Alterado com sucesso");
             }
-
         }catch(SQLException ex){
 //                    Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);
             JOptionPane.showMessageDialog(null,"Erro ao Alterar");
@@ -254,57 +244,67 @@ public class EmprestimoDAO {
     }  
     
     /**
-     * Lista os Emprestimo na tabela Emprestimo 
-     * @return lista de objetos
+     * Atualiza a status do emprestimo 
      * @throws biblioteca.exception.BancoException Exeção geral do banco
      * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
      * @throws java.sql.SQLException    Exeções Sql
-     * @throws java.text.ParseException Exeções do Date
      */
-    public static List<Emprestimo> listar() throws BancoException, ClassNotFoundException, SQLException, ParseException{
-        atualizaStatus();
+    public static void atualizaStatus() throws BancoException, ClassNotFoundException, SQLException{
         String sql = "SELECT * FROM \"Emprestimos\"";
-               
-        List<Emprestimo> retorno = new ArrayList<Emprestimo>();
+        
+        DateTimeFormatter formato =
+                        DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate dataAtual = LocalDate.now();//data atual 
+        boolean status;
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
         try{
             ResultSet res = stmt.executeQuery();
-            while(res.next()){
-                Livro liv = LivroDAO.buscarID(res.getInt("id_livros"));
-                Usuario usu = UsuarioDAO.buscarID(res.getInt("id_usuario"));
-                int id = res.getInt("idEmprestimos");
-                String livro = liv.getTitulo();
-                String usuario= usu.getLogin();
-                String dataEmprestimo = res.getString("dataEmprestimo");
-                String dataDevolucao = res.getString("dataDevolucao");
-                boolean status = res.getBoolean("status");
-                Emprestimo item = new Emprestimo(id,dataEmprestimo,dataDevolucao,livro,usuario,status);
-                retorno.add(item);
+            while (res.next()) {           
+                LocalDate dataDevolucao =  LocalDate.parse(res.getString("dataDevolucao"), formato);      
+                if(dataDevolucao.compareTo(dataAtual)>= 0){
+                    status = true;
+                }else{
+                    status = false;
+                    atualizaTabela(res.getInt("idEmprestimos"),status);
+                    MultasDAO.inserir(res);
+                }
             }
-                
         }catch(SQLException ex){
+            System.out.println("Erro ao atualizar status"); 
             Logger.getLogger(EmprestimoDAO.class.getName()).log(Level.SEVERE,null,ex);
-             if(retorno == null){
-                JOptionPane.showMessageDialog(null,"Nenhum item encontrado");
-            }else{
-                JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
-            }
-        }
-        Collections.sort(retorno);
-        return retorno;
+        }      
     }
     
     /**
+     * Atualiza a tabela Emprestimo 
+     * @param id pk da tabela Emprestimos
+     * @param status satatus do emprestimo
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
+     */
+    public  static void atualizaTabela(int id, boolean status) throws BancoException, ClassNotFoundException, SQLException{
+        String sql = "UPDATE  \"Emprestimos\" SET status =" + status 
+                + " WHERE \"idEmprestimos\"=" + id;
+
+        PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
+        try{
+            stmt.executeUpdate();
+        }catch(SQLException ex){
+//            Logger.getLogger(EmprestimoDAO.class.getName()).log(Level.SEVERE,null,ex);
+            System.out.println("erro oa atualizar");
+        }
+    } 
+     
+    /**
      * Constrói um objeto Emprestimo a partir de um ResultSet
-     * @param rs Result set contendo a linha que será usada
+     * @param res Result set contendo a linha que será usada
      * @return objeto 
      * @throws biblioteca.exception.BancoException Exeção geral do banco
      * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
      * @throws java.sql.SQLException    Exeções Sql
      */
-    private static Emprestimo getInstance(ResultSet res)
-        throws SQLException, BancoException, ClassNotFoundException {
-
+    private static Emprestimo getInstance(ResultSet res) throws SQLException, BancoException, ClassNotFoundException {
         Livro liv = LivroDAO.buscarID(res.getInt("id_livros"));
         Usuario usu = UsuarioDAO.buscarID(res.getInt("id_usuario"));
         int id = res.getInt("idEmprestimos");
@@ -314,11 +314,45 @@ public class EmprestimoDAO {
         String dataDevolucao = res.getString("dataDevolucao");
         boolean status = res.getBoolean("status");
         Emprestimo item = new Emprestimo(id,dataEmprestimo,dataDevolucao,livro,usuario,status);
+        
         return item;
     }
     
     /**
-     * Busca um Emprestimo na tabela Emprestimo 
+     * Lista todos os emprestimos na tabela Emprestimo 
+     * @return lista de objetos
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
+     * @throws java.text.ParseException Exeções do Date
+     */
+    public static List<Emprestimo> listar() throws BancoException, ClassNotFoundException, SQLException{
+        atualizaStatus();
+        String sql = "SELECT * FROM \"Emprestimos\"";
+        
+        Emprestimo item = null;
+        List<Emprestimo> retorno = new ArrayList<Emprestimo>();
+        PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
+        try{
+            ResultSet res = stmt.executeQuery();
+            while(res.next()){
+                item = getInstance(res);
+                retorno.add(item);
+            }           
+        }catch(SQLException ex){
+            Logger.getLogger(EmprestimoDAO.class.getName()).log(Level.SEVERE,null,ex);
+            if(retorno == null){
+                JOptionPane.showMessageDialog(null,"Nenhum emprestimo encontrado");
+            }else{
+                JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
+            }
+        }
+        Collections.sort(retorno);
+        return retorno;
+    }
+
+    /**
+     * Busca por id um emprestimo na tabela Emprestimo 
      * @param id id do emprestimo
      * @return um objetos
      * @throws biblioteca.exception.BancoException Exeção geral do banco
@@ -338,73 +372,51 @@ public class EmprestimoDAO {
             }
         }catch(SQLException ex){
             if(item == null){
-                JOptionPane.showMessageDialog(null,"Item não encontrado");
+                JOptionPane.showMessageDialog(null,"Emprestimo não encontrado");
             }else{
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
             }   
-                        Logger.getLogger(EmprestimoDAO.class.getName()).log(Level.SEVERE,null,ex);
-
+//            Logger.getLogger(EmprestimoDAO.class.getName()).log(Level.SEVERE,null,ex);
         }
         return item;
     }
-     /**
-     * Atualiza a status do emprestimo 
+    
+    /**
+     * Busca por status um emprestimo na tabela Emprestimo 
+     * @param status sratus do emprestimo
+     * @return um objetos
      * @throws biblioteca.exception.BancoException Exeção geral do banco
      * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
      * @throws java.sql.SQLException    Exeções Sql
-     * @throws java.text.ParseException  Exeções do Date 
      */
-    public static void atualizaStatus() throws BancoException, ClassNotFoundException, SQLException, ParseException{
-        String sql = "SELECT * FROM \"Emprestimos\"";
+    public static List<Emprestimo> buscarStatus(boolean status) throws BancoException, ClassNotFoundException, SQLException {
+        String sql = "SELECT * FROM \"Emprestimos\""
+                    + " WHERE status = "+ status ;   
         
-        boolean status;
+        Emprestimo item = null;
+        List<Emprestimo> retorno = new ArrayList<Emprestimo>();
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
         try{
             ResultSet res = stmt.executeQuery();
             while (res.next()) {
-                SimpleDateFormat formato= new SimpleDateFormat("dd/MM/yyyy");
-                Date data = formato.parse(res.getString("dataDevolucao"));             
-                Date dataAtual = new Date();//data atual
-        
-                if(data.compareTo(dataAtual)>= 0){
-                    status = true;
-                }else{
-                    status = false;
-                }
-                atualizaTabela(res.getInt("idEmprestimos"),status);
+                item = getInstance(res);
+                retorno.add(item);
             }
         }catch(SQLException ex){
-            System.out.println("Erro ao atualizar status"); 
-            Logger.getLogger(EmprestimoDAO.class.getName()).log(Level.SEVERE,null,ex);
-        }      
-    }
-     /**
-     * Atualiza a tabela Emprestimo 
-     * @param id pk da tabela Emprestimos
-     * @param status satatus do emprestimo
-     * @throws biblioteca.exception.BancoException Exeção geral do banco
-     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
-     * @throws java.sql.SQLException    Exeções Sql
-     */
-    public  static void atualizaTabela(int id, boolean status) throws BancoException, ClassNotFoundException, SQLException{
-//        con = PostgreDAO.getConnection();  
-
-        String sql = "UPDATE  \"Emprestimos\" SET status =" + status 
-                + " WHERE \"idEmprestimos\"=" + id;
-
-        PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
-
-        try{
-            stmt.executeUpdate();
-//                System.out.println("atualizado com sucesso");
-        }catch(SQLException ex){
-            Logger.getLogger(EmprestimoDAO.class.getName()).log(Level.SEVERE,null,ex);
-            System.out.println("atulizado ao Alterar");
+//            Logger.getLogger(EmprestimoDAO.class.getName()).log(Level.SEVERE,null,ex);
+            if(item == null){
+                JOptionPane.showMessageDialog(null,"Nenhum emprestimo encontrado");
+            }else{
+                JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
+            }   
         }
+        Collections.sort(retorno);
+        return retorno;
     } 
+  
      /**
-     * Busca Editora na tabela Editora 
-     * @param nome nome da editora(parte do nome)
+     * Busca por livro um emprestimo na tabela Emprestimos 
+     * @param nome nome do livro
      * @return lista de objetos
      * @throws biblioteca.exception.BancoException Exeção geral do banco
      * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
@@ -418,7 +430,6 @@ public class EmprestimoDAO {
         
         Emprestimo item = null;
         List<Emprestimo> retorno = new ArrayList<Emprestimo>();
-
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
         try{
             ResultSet res = stmt.executeQuery();
@@ -427,14 +438,14 @@ public class EmprestimoDAO {
                 retorno.add(item);
             }
         }catch(SQLException ex){
-                        Logger.getLogger(EmprestimoDAO.class.getName()).log(Level.SEVERE,null,ex);
-
+//            Logger.getLogger(EmprestimoDAO.class.getName()).log(Level.SEVERE,null,ex);
             if(item == null){
                 JOptionPane.showMessageDialog(null,"Emprestimo não encontrado");
             }else{
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
             }   
         }
+        Collections.sort(retorno);
         return retorno;
     }   
 

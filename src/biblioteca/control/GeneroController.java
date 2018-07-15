@@ -25,6 +25,10 @@ public class GeneroController{
     public void remover(Genero ob) throws BancoException, ClassNotFoundException, SQLException{
         GeneroDAO.excluir(ob);
     }
+    
+    public void altera(Genero ob) throws BancoException, ClassNotFoundException, SQLException{
+        GeneroDAO.alterar(ob);
+    }
 
     public List<Genero> listar() throws BancoException, ClassNotFoundException, SQLException{
       return  GeneroDAO.listar();

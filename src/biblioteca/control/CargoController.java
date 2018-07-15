@@ -25,12 +25,11 @@ public class CargoController{
     public void removerCargo(Cargo ob) throws BancoException, ClassNotFoundException, SQLException{
         CargoDAO.excluir(ob);
     }
-//    
-//    public boolean removerCargo(String nome){
-//        C cargo = buscarCargo(nome);
-//        return BD.getBanco().removerCargo(cargo);
-//    }
-//   
+    
+    public void altera(Cargo ob) throws BancoException, ClassNotFoundException, SQLException{
+        CargoDAO.alterar(ob);
+    }
+ 
     public List<Cargo> listarCargos() throws BancoException, ClassNotFoundException, SQLException{
       return  CargoDAO.listar();
       

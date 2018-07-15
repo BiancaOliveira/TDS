@@ -21,13 +21,17 @@ public class UsuarioAlunoController{
     public void cadastrar(int id, String nome, String login, String senha,int numeroRegistro ,String telefone) throws BancoException, ClassNotFoundException, SQLException{
        UsuarioAlunoDAO.inserir(new UsuarioAluno(id,nome,login,senha, numeroRegistro,telefone));
     }
+    
     public void remover(UsuarioAluno ob) throws BancoException, ClassNotFoundException, SQLException{
         UsuarioAlunoDAO.excluir(ob);
     }
 
+    public void altera(UsuarioAluno ob) throws BancoException, ClassNotFoundException, SQLException{
+        UsuarioAlunoDAO.alterar(ob);
+    }
+    
     public List<UsuarioAluno> listar() throws BancoException, ClassNotFoundException, SQLException{
       return  UsuarioAlunoDAO.listar();
-      
     }
     
     public List<UsuarioAluno> buscar(String nome) throws BancoException, ClassNotFoundException, SQLException {

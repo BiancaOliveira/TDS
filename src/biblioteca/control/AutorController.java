@@ -26,6 +26,10 @@ public class AutorController {
         AutorDAO.excluir(ob);
     }
 
+    public void altera(Autor ob) throws BancoException, ClassNotFoundException, SQLException{
+        AutorDAO.alterar(ob);
+    }
+    
     public List<Autor> listar() throws BancoException, ClassNotFoundException, SQLException{
       return  AutorDAO.listar();
     }

@@ -28,6 +28,10 @@ public class UsuarioFuncionarioController {
         UsuarioFuncionarioDAO.excluir(ob);
     }
 
+    public void altera(UsuarioFuncionario ob) throws BancoException, ClassNotFoundException, SQLException{
+        UsuarioFuncionarioDAO.alterar(ob);
+    }
+    
     public List<UsuarioFuncionario> listar() throws BancoException, ClassNotFoundException, SQLException{
       return  UsuarioFuncionarioDAO.listar();
       

@@ -28,9 +28,12 @@ public class UsuarioController<U extends Usuario> {
         UsuarioDAO.excluir(ob);
     }
 
+    public void altera(Usuario ob) throws BancoException, ClassNotFoundException, SQLException{
+        UsuarioDAO.alterar(ob);
+    }
+    
     public List<Usuario> listar() throws BancoException, ClassNotFoundException, SQLException{
       return  UsuarioDAO.listar();
-
     }
     
     public List<Usuario> buscar(String nome) throws BancoException, ClassNotFoundException, SQLException {

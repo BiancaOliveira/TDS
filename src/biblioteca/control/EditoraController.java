@@ -27,6 +27,10 @@ public class EditoraController{
         EditoraDAO.excluir(ob);
     }
 
+    public void altera(Editora ob) throws BancoException, ClassNotFoundException, SQLException{
+        EditoraDAO.alterar(ob);
+    }
+    
     public List<Editora> listar() throws BancoException, ClassNotFoundException, SQLException{
       return  EditoraDAO.listar();
       

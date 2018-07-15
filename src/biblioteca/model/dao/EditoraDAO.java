@@ -45,17 +45,15 @@ public class EditoraDAO {
         }
         return id;
     }
+   
     /**
-     * Inclui o Editora na tabela Editora 
+     * Inclui a Editora na tabela Editora 
      * @param ob objeto
      * @throws biblioteca.exception.BancoException Exeção geral do banco
      * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
      * @throws java.sql.SQLException    Exeções Sql
      */
-    public  static void inserir(Editora ob) throws BancoException, ClassNotFoundException, SQLException{
-//        con = PostgreDAO.getConnection();
-        
-        
+    public  static void inserir(Editora ob) throws BancoException, ClassNotFoundException, SQLException{ 
         if(buscar(ob.getNome()) != null){         
             JOptionPane.showMessageDialog(null,"Essa editora já possui cadastro");
         }else{
@@ -67,16 +65,16 @@ public class EditoraDAO {
                 if (stmt.executeUpdate() == 1){
                     JOptionPane.showMessageDialog(null,"Cadastrado com sucesso");
                 }
-
             }catch(SQLException ex){
-                Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);
+//                Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);
                 JOptionPane.showMessageDialog(null,"Erro ao cadastrar");
             }
         }
         
     }
+    
     /**
-     * Exclui o Editora na tabela Editora 
+     * Exclui a Editora na tabela Editora 
      * @param ob objeto
      * @throws biblioteca.exception.BancoException Exeção geral do banco
      * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
@@ -92,11 +90,11 @@ public class EditoraDAO {
                 }
 
             }catch(SQLException ex){
-//                Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);
-                
+//                Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);                
                 JOptionPane.showMessageDialog(null,"Erro ao remover");
             }
     }
+    
     /**
      * Altera o Editora na tabela Editora 
      * @param ob objeto
@@ -105,7 +103,6 @@ public class EditoraDAO {
      * @throws java.sql.SQLException    Exeções Sql
      */
     public  static void alterar(Editora ob) throws BancoException, ClassNotFoundException, SQLException{
-//        con = PostgreDAO.getConnection();  
        if(buscar(ob.getNome()) != null){
             JOptionPane.showMessageDialog(null,"Essa editora já possui cadastro");
         }else{
@@ -116,50 +113,16 @@ public class EditoraDAO {
                 if (stmt.executeUpdate() == 1){
                     JOptionPane.showMessageDialog(null,"Alterado com sucesso");
                 }
-
             }catch(SQLException ex){
     //                Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);
                 JOptionPane.showMessageDialog(null,"Erro ao Alterar");
             }
        }
     }
-    /**
-     * Lista os Editora na tabela Editora 
-     * @return lista de objetos
-     * @throws biblioteca.exception.BancoException Exeção geral do banco
-     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
-     * @throws java.sql.SQLException    Exeções Sql
-     */
-    public static List<Editora> listar() throws BancoException, ClassNotFoundException, SQLException{
-        String sql = "SELECT * FROM \"Editora\"";
-        
-        
-        List<Editora> retorno = new ArrayList<Editora>();
-        PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
-        try{
-            ResultSet res = stmt.executeQuery();
-            while(res.next()){
-                int id = res.getInt("idEditora");
-                String nome = res.getString("editora");
-                Editora item = new Editora(id,nome);
-//                item.setIdCargo(res.getInt("idCargo"));
-//                item.setNome(res.getString("nome"));
-                retorno.add(item);
-            }
-                
-        }catch(SQLException ex){
-             if(retorno == null){
-                JOptionPane.showMessageDialog(null,"Nenhuma editora encontrada");
-            }else{
-                JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
-            }
-        }
-        Collections.sort(retorno);
-        return retorno;
-    }
+   
     /**
      * Constrói um objeto Editora a partir de um ResultSet
-     * @param rs Result set contendo a linha que será usada
+     * @param res Result set contendo a linha que será usada
      * @return objeto 
      * @throws SQLException
      */
@@ -171,8 +134,39 @@ public class EditoraDAO {
            
         return item;
     }
+    
     /**
-     * Busca um Editora na tabela Editora 
+     * Lista todas as editoras na tabela Editora 
+     * @return lista de objetos
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
+     */
+    public static List<Editora> listar() throws BancoException, ClassNotFoundException, SQLException{
+        String sql = "SELECT * FROM \"Editora\"";   
+        
+        Editora item = null;
+        List<Editora> retorno = new ArrayList<Editora>();
+        PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
+        try{
+            ResultSet res = stmt.executeQuery();
+            while(res.next()){
+                item = getInstance(res);
+                retorno.add(item);
+            }       
+        }catch(SQLException ex){
+             if(retorno == null){
+                JOptionPane.showMessageDialog(null,"Nenhuma editora encontrada");
+            }else{
+                JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
+            }
+        }
+        Collections.sort(retorno);
+        return retorno;
+    }
+    
+    /**
+     * Busca por nome uma editora na tabela Editora 
      * @param nome nome da editora
      * @return um objeto
      * @throws biblioteca.exception.BancoException Exeção geral do banco
@@ -195,8 +189,9 @@ public class EditoraDAO {
         }
         return item;
     }
+    
     /**
-     * Busca um Editora na tabela Editora 
+     * Busca por id uma editora na tabela Editora 
      * @param id id do Editora
      * @return um objetos
      * @throws biblioteca.exception.BancoException Exeção geral do banco
@@ -223,8 +218,9 @@ public class EditoraDAO {
         }
         return item;
     }
+    
     /**
-     * Busca Editora na tabela Editora 
+     * Busca por nomw(parte) Editora na tabela Editora 
      * @param nome nome da editora(parte do nome)
      * @return lista de objetos
      * @throws biblioteca.exception.BancoException Exeção geral do banco
@@ -252,6 +248,7 @@ public class EditoraDAO {
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
             }   
         }
+        Collections.sort(retorno);
         return retorno;
     }
 }

@@ -100,8 +100,8 @@ public class Emprestimo implements Comparable<Emprestimo>{
         return u.idEmprestimo == this.idEmprestimo; 
     }
     /**
-     * Calcula o hascode do Genero considerando o nome (veja equals)
-     * @return O hashcode do nome do Genero
+     * Calcula o hascode do Emprestimos considerando o nome (veja equals)
+     * @return O hashcode do nome do Emprestimos
      */
 
     @Override

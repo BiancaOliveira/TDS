@@ -26,6 +26,10 @@ public class LivroController {
         LivroDAO.excluir(ob);
     }
 
+    public void altera(Livro ob) throws BancoException, ClassNotFoundException, SQLException{
+        LivroDAO.alterar(ob);
+    }
+    
     public List<Livro> listar() throws BancoException, ClassNotFoundException, SQLException{
       return  LivroDAO.listar();
       

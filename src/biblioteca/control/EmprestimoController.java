@@ -27,11 +27,18 @@ public class EmprestimoController {
     }
 
     public List<Emprestimo> listar() throws BancoException, ClassNotFoundException, SQLException, ParseException{
-      return  EmprestimoDAO.listar();
-      
+      return  EmprestimoDAO.listar();     
     }
     
-    public List<Emprestimo> buscar(String nome) throws BancoException, ClassNotFoundException, SQLException {
+    public void altera(Emprestimo ob) throws BancoException, ClassNotFoundException, SQLException{
+        EmprestimoDAO.alterar(ob);
+    }
+    
+    public List<Emprestimo> buscarLivro(String nome) throws BancoException, ClassNotFoundException, SQLException {
         return  EmprestimoDAO.buscarVarios(nome);
+    }
+    
+    public List<Emprestimo> buscarStatus(boolean status) throws BancoException, ClassNotFoundException, SQLException {
+        return  EmprestimoDAO.buscarStatus(status);
     }
 }

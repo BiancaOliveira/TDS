@@ -71,6 +71,7 @@ public class LivroDAO {
         }
         return idEditora;
     }
+  
     /**
      * Busca o idAutor na tabela Autor
      * @param nome nome da autor
@@ -95,6 +96,7 @@ public class LivroDAO {
         }
         return idAutor;
     }
+    
     /**
      * Busca o idGenero na tabela Genero
      * @param nome nome da genero
@@ -117,10 +119,10 @@ public class LivroDAO {
         }catch(SQLException ex){
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
 //                Logger.getLogger(LivroDAO.class.getName()).log(Level.SEVERE,null,ex);
-
         }
         return idGenero;
     }
+    
     /**
      * Inclui o Livro na tabela Livros 
      * @param ob objeto
@@ -128,19 +130,15 @@ public class LivroDAO {
      * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
      * @throws java.sql.SQLException    Exeções Sql
      */
-    public  static void inserir(Livro ob) throws BancoException, ClassNotFoundException, SQLException{
-//        con = PostgreDAO.getConnection();
-        
+    public  static void inserir(Livro ob) throws BancoException, ClassNotFoundException, SQLException{  
         if(buscar(ob.getTitulo()) != null){
             JOptionPane.showMessageDialog(null,"Esse livro já possui cadastro");
         }else{
-            ob.setIdLivro(codigo());
-            
+            ob.setIdLivro(codigo());      
             int editora = buscarIdEditora(ob.getEditora());
             int autor = buscarIdAutor(ob.getAutor());
             int genero = buscarIdGenero(ob.getGenero());
             int coautor = buscarIdAutor(ob.getCoautores());
- 
             
             String sql = "INSERT INTO \"Livros\" (\"idLivros\", titulo, id_editora, autor, \"numeroExemplares\","
                     + " id_genero, descricao, id_couator)"
@@ -153,14 +151,14 @@ public class LivroDAO {
                 if (stmt.executeUpdate() == 1){
                     JOptionPane.showMessageDialog(null,"Cadastrado com sucesso");
                 }
-
             }catch(SQLException ex){
-                Logger.getLogger(LivroDAO.class.getName()).log(Level.SEVERE,null,ex);
+//                Logger.getLogger(LivroDAO.class.getName()).log(Level.SEVERE,null,ex);
                 JOptionPane.showMessageDialog(null,"Erro ao cadastrar");
             }
         }
     }
-     /**
+  
+    /**
      * Exclui o Livro na tabela Livros 
      * @param ob objeto
      * @throws biblioteca.exception.BancoException Exeção geral do banco
@@ -175,14 +173,13 @@ public class LivroDAO {
                 if (stmt.executeUpdate() > 0){
                     JOptionPane.showMessageDialog(null,"Removido com sucesso");
                 }
-
             }catch(SQLException ex){
 //                Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);
-                
                 JOptionPane.showMessageDialog(null,"Erro ao remover");
             }
     }
-     /**
+   
+    /**
      * Altera o Livro na tabela Livros 
      * @param ob objeto
      * @throws biblioteca.exception.BancoException Exeção geral do banco
@@ -190,7 +187,6 @@ public class LivroDAO {
      * @throws java.sql.SQLException    Exeções Sql
      */
     public  static void alterar(Livro ob) throws BancoException, ClassNotFoundException, SQLException{
-//        con = PostgreDAO.getConnection();  
         int editora = buscarIdEditora(ob.getEditora());
         int autor = buscarIdAutor(ob.getAutor());
         int genero = buscarIdGenero(ob.getGenero());
@@ -207,61 +203,17 @@ public class LivroDAO {
                     + " WHERE \"idLivros\"='" + ob.getIdLivro() + "'";
 
             PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
-
             try{
                 if (stmt.executeUpdate() == 1){
                     JOptionPane.showMessageDialog(null,"Alterado com sucesso");
                 }
-
             }catch(SQLException ex){
 //                    Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);
                 JOptionPane.showMessageDialog(null,"Erro ao Alterar");
             }
         }
     }
-     /**
-     * Lista os Livro na tabela Livros 
-     * @return lista de objetos
-     * @throws biblioteca.exception.BancoException Exeção geral do banco
-     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
-     * @throws java.sql.SQLException    Exeções Sql
-     */
-    public static List<Livro> listar() throws BancoException, ClassNotFoundException, SQLException{
-        String sql = "SELECT * FROM \"Livros\"";
-        
-        
-        List<Livro> retorno = new ArrayList<Livro>();
-        PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
-        try{
-            ResultSet res = stmt.executeQuery();
-            while(res.next()){
-                Editora edi = EditoraDAO.buscarID(res.getInt("id_editora"));
-                Genero gen = GeneroDAO.buscarID(res.getInt("id_genero"));
-                Autor aut = AutorDAO.buscarID(res.getInt("autor"));
-                Autor coa = AutorDAO.buscarID(res.getInt("id_couator"));
-                int id = res.getInt("idLivros");
-                String editora= edi.getNome();
-                String genero= gen.getNome();
-                String autor= aut.getNome();
-                String coautor= coa.getNome();
-                String titulo = res.getString("titulo");
-                String descricao = res.getString("descricao");
-                int numeroExemplares = res.getInt("numeroExemplares");
-                Livro item = new Livro(id,titulo,numeroExemplares,descricao,autor,editora,genero,coautor);
-                retorno.add(item);
-            }
-                
-        }catch(SQLException ex){
-            Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);
-             if(retorno == null){
-                JOptionPane.showMessageDialog(null,"Nenhum livro encontrado");
-            }else{
-                JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
-            }
-        }
-        Collections.sort(retorno);
-        return retorno;
-    }
+    
     /**
      * Constrói um objeto Livro a partir de um ResultSet
      * @param rs Result set contendo a linha que será usada
@@ -270,9 +222,7 @@ public class LivroDAO {
      * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
      * @throws java.sql.SQLException    Exeções Sql
      */
-    private static Livro getInstance(ResultSet res)
-        throws SQLException, BancoException, ClassNotFoundException {
-        
+    private static Livro getInstance(ResultSet res) throws  BancoException, ClassNotFoundException, SQLException {
         Editora edi = EditoraDAO.buscarID(res.getInt("id_editora"));
         Genero gen = GeneroDAO.buscarID(res.getInt("id_genero"));
         Autor aut = AutorDAO.buscarID(res.getInt("autor"));
@@ -286,11 +236,44 @@ public class LivroDAO {
         String descricao = res.getString("descricao");
         int numeroExemplares = res.getInt("numeroExemplares");
         Livro item = new Livro(id,titulo,numeroExemplares,descricao,autor,editora,genero,coautor);
+        
         return item;
     }
+    
     /**
-     * Busca um Livro na tabela Livros 
-     * @param nome login do usuario
+     * Lista todos os livros na tabela Livros 
+     * @return lista de objetos
+     * @throws biblioteca.exception.BancoException Exeção geral do banco
+     * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
+     * @throws java.sql.SQLException    Exeções Sql
+     */
+    public static List<Livro> listar() throws BancoException, ClassNotFoundException, SQLException{
+        String sql = "SELECT * FROM \"Livros\"";
+  
+        Livro item = null;
+        List<Livro> retorno = new ArrayList<Livro>();
+        PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
+        try{
+            ResultSet res = stmt.executeQuery();
+            while(res.next()){
+                item = getInstance(res);
+                retorno.add(item);
+            }
+        }catch(SQLException ex){
+            Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);
+             if(retorno == null){
+                JOptionPane.showMessageDialog(null,"Nenhum livro encontrado");
+            }else{
+                JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
+            }
+        }
+        Collections.sort(retorno);
+        return retorno;
+    }
+    
+    /**
+     * Busca por titulo um livro na tabela Livros 
+     * @param nome titulo do livro
      * @return um objetos
      * @throws biblioteca.exception.BancoException Exeção geral do banco
      * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
@@ -314,7 +297,7 @@ public class LivroDAO {
     }
     
     /**
-     * Busca um Livro na tabela Livros
+     * Busca po id um livro na tabela Livros
      * @param id id do Livro
      * @return um objetos
      * @throws biblioteca.exception.BancoException Exeção geral do banco
@@ -341,8 +324,9 @@ public class LivroDAO {
         }
         return item;
     }
+    
     /**
-     * Busca Livro por titulo na tabela Livros
+     * Busca por titulo(parte) um livro na tabela Livros
      * @param nome nome do livro
      * @return lista de objetos
      * @throws biblioteca.exception.BancoException Exeção geral do banco
@@ -355,7 +339,6 @@ public class LivroDAO {
         
         Livro item = null;
         List<Livro> retorno = new ArrayList<Livro>();
-
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
         try{
             ResultSet res = stmt.executeQuery();
@@ -370,6 +353,7 @@ public class LivroDAO {
                 JOptionPane.showMessageDialog(null,"Erro ao buscar"); 
             }   
         }
+        Collections.sort(retorno);
         return retorno;
     }
     
