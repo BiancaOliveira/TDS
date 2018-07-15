@@ -47,8 +47,9 @@
                                         <TableColumn prefWidth="101.0" />
                                     </columns>
                                 </TableView>
-                                <Button layoutX="734.0" layoutY="553.0" mnemonicParsing="false" text="Alterar" />
+                                <Button layoutX="734.0" layoutY="553.0" mnemonicParsing="false" onAction="#alteraEditora" text="Alterar" />
                                 <Button layoutX="661.0" layoutY="553.0" mnemonicParsing="false" onAction="#deletaEditora" text="Remover" />
+                        <Button fx:id="botaoBuscaAutor1" layoutX="665.0" layoutY="22.0" mnemonicParsing="false" onAction="#listaEditoras" text="Listar todos" />
                             </children></AnchorPane>
                     </content>
                 </Tab>
