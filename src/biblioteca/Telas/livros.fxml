@@ -7,16 +7,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane prefHeight="610.0" prefWidth="815.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="biblioteca.control.livrosTelaController">
    <children>
       <TabPane prefHeight="621.0" prefWidth="815.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Cadastro">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: transparent;">
                      <children>
-                        <TextField layoutX="119.0" layoutY="37.0" prefHeight="25.0" prefWidth="581.0" />
+                        <TextField fx:id="titulo" layoutX="119.0" layoutY="37.0" prefHeight="25.0" prefWidth="581.0" />
                         <Label layoutX="47.0" layoutY="36.0" prefHeight="17.0" prefWidth="51.0" text="Título:">
                            <font>
                               <Font size="18.0" />
@@ -27,46 +26,63 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <ComboBox layoutX="118.0" layoutY="81.0" prefHeight="25.0" prefWidth="580.0" />
+                        <ComboBox fx:id="editora" layoutX="118.0" layoutY="81.0" prefHeight="25.0" prefWidth="580.0" />
                         <Label layoutX="47.0" layoutY="120.0" prefHeight="27.0" prefWidth="63.0" text="Autor:">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <ComboBox layoutX="118.0" layoutY="121.0" prefHeight="25.0" prefWidth="246.0" />
+                        <ComboBox fx:id="autor" layoutX="118.0" layoutY="121.0" prefHeight="25.0" prefWidth="246.0" />
                         <Label layoutX="386.0" layoutY="120.0" prefHeight="27.0" prefWidth="88.0" text="Co-autor:">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <ComboBox layoutX="474.0" layoutY="121.0" prefHeight="25.0" prefWidth="225.0" />
+                        <ComboBox fx:id="coautor" layoutX="474.0" layoutY="121.0" prefHeight="25.0" prefWidth="225.0" />
                         <Label layoutX="47.0" layoutY="163.0" prefHeight="27.0" prefWidth="63.0" text="Gênero:">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <ComboBox layoutX="118.0" layoutY="164.0" prefHeight="25.0" prefWidth="230.0" />
+                        <ComboBox fx:id="genero" layoutX="118.0" layoutY="164.0" prefHeight="25.0" prefWidth="230.0" />
                         <Label layoutX="364.0" layoutY="163.0" prefHeight="27.0" prefWidth="132.0" text="Nº exemplares:">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <TextField layoutX="496.0" layoutY="164.0" prefHeight="25.0" prefWidth="205.0" />
+                        <TextField fx:id="exemplares" layoutX="496.0" layoutY="164.0" prefHeight="25.0" prefWidth="205.0" />
                         <Label layoutX="47.0" layoutY="202.0" prefHeight="27.0" prefWidth="92.0" text="Descrição:">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <TextArea layoutX="141.0" layoutY="209.0" prefHeight="200.0" prefWidth="560.0" />
-                        <Button layoutX="625.0" layoutY="435.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="76.0" text="Cadastrar" />
+                        <TextArea fx:id="descricao" layoutX="141.0" layoutY="209.0" prefHeight="200.0" prefWidth="560.0" />
+                        <Button layoutX="625.0" layoutY="435.0" mnemonicParsing="false" onAction="#cadastra" prefHeight="25.0" prefWidth="76.0" text="Cadastrar" />
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
           <Tab text="Consulta">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-            </content>
+              <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: transparent;">
+                      <children>
+                          <TextField fx:id="campoBuscaAutor" layoutX="146.0" layoutY="22.0" prefHeight="25.0" prefWidth="391.0" />
+                          <Button fx:id="botaoBuscaAutor" layoutX="562.0" layoutY="22.0" mnemonicParsing="false" onAction="#buscaLivro" text="Buscar Autor" />
+                          <TableView fx:id="tabelaAutor" layoutY="76.0" prefHeight="471.0" prefWidth="815.0" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="76.0">
+                              <columns>
+                                  <TableColumn fx:id="colunaID" prefWidth="31.0" text="Id" />
+                                  <TableColumn fx:id="colunaNome" prefWidth="224.0" text="Título" />
+                                  <TableColumn prefWidth="170.0" text="Autor" />
+                              <TableColumn prefWidth="115.0" text="Editora" />
+                              <TableColumn prefWidth="100.0" text="Gênero" />
+                              </columns>
+                          </TableView>
+                          <Button layoutX="734.0" layoutY="553.0" mnemonicParsing="false" onAction="#alteraLivro" text="Alterar" />
+                          <Button layoutX="661.0" layoutY="553.0" mnemonicParsing="false" onAction="#deletaLivro" text="Remover" />
+                          <Button fx:id="botaoBuscaAutor1" layoutX="661.0" layoutY="22.0" mnemonicParsing="false" onAction="#listaLivros" text="Listar Todos" />
+                        <Button layoutX="537.0" layoutY="553.0" mnemonicParsing="false" onAction="#maisInformacoes" text="Mais Informações" />
+                      </children></AnchorPane>
+              </content>
           </Tab>
         </tabs>
       </TabPane>

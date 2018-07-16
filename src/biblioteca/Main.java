@@ -72,7 +72,7 @@ public class Main extends Application{
     
 
     public static void main(String[] args) throws BancoException, ClassNotFoundException, SQLException, ParseException  {
-//        launch(args);
+        launch(args);
 
         con = PostgreDAO.getConnection();
      /**

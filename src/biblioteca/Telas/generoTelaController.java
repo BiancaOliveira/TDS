@@ -7,11 +7,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -63,6 +68,12 @@ public class generoTelaController implements Initializable {
 
         nome= campoBuscaGenero.getText();
 
+        data.removeAll(data);
+
+        //System.out.println(data.size());
+
+        tabelaGenero.getItems().clear();
+
         GeneroController controleGenero = new GeneroController();
 
         generos= (ArrayList<Genero>) controleGenero.buscar(nome);
@@ -71,7 +82,10 @@ public class generoTelaController implements Initializable {
             data.add(a);
         }
 
+        //System.out.println(data.size());
         tabelaGenero.setItems(data);
+
+        tabelaGenero.refresh();
     }
 
     public void deletaGenero(ActionEvent actionEvent) throws BancoException, SQLException, ClassNotFoundException {
@@ -81,5 +95,47 @@ public class generoTelaController implements Initializable {
         Genero a = tabelaGenero.getSelectionModel().getSelectedItem();
         GeneroController controleGenero = new GeneroController();
         controleGenero.remover(a);
+
+        listaTudo();
+    }
+
+    public void listaTudo() throws BancoException, SQLException, ClassNotFoundException {
+        data.removeAll(data);
+
+        //System.out.println(data.size());
+
+        tabelaGenero.getItems().clear();
+
+        GeneroController controleGenero = new GeneroController();
+
+        generos= (ArrayList<Genero>) controleGenero.listar();
+
+        for (Genero a: generos) {
+            data.add(a);
+        }
+
+        //System.out.println(data.size());
+        tabelaGenero.setItems(data);
+
+        tabelaGenero.refresh();
+    }
+
+    public void listaGeneros(ActionEvent actionEvent) throws BancoException, SQLException, ClassNotFoundException {
+        listaTudo();
+    }
+
+    public void alteraGenero(ActionEvent actionEvent) throws IOException {
+        Genero a = tabelaGenero.getSelectionModel().getSelectedItem();
+
+        Stage stage = new Stage();
+
+        FXMLLoader fxml = new FXMLLoader(getClass().getResource("alteraGenero.fxml"));
+        fxml.setController(new alteraGeneroController(a));
+
+        Parent c = fxml.load();
+
+        Scene scene = new Scene(c);
+        stage.setScene(scene);
+        stage.show();
     }
 }

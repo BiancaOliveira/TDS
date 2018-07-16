@@ -121,7 +121,7 @@ public class editoraTelaController implements Initializable {
 
         Stage stage = new Stage();
 
-        FXMLLoader fxml = new FXMLLoader(getClass().getResource("alteraAutor.fxml"));
+        FXMLLoader fxml = new FXMLLoader(getClass().getResource("alteraEditora.fxml"));
         fxml.setController(new alteraEditoraController(a));
 
         Parent c = fxml.load();

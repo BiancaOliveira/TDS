@@ -1,49 +1,43 @@
 package biblioteca.Telas;
 
-import biblioteca.control.CargoController;
+import biblioteca.control.GeneroController;
 import biblioteca.exception.BancoException;
-import biblioteca.model.usuarios.Cargo;
+import biblioteca.model.livros.Genero;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class alteraCargoController implements Initializable{
+public class alteraGeneroController implements Initializable {
 
     @FXML
-    public TextField nomeCargo;
+    public TextField nome;
 
     @FXML
     public Label id;
 
-    private Cargo cargo;
-
-
-    public alteraCargoController(Cargo cargo) {
-        this.cargo = cargo;
-
-    }
-
+    private Genero genero;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        nomeCargo.setText(cargo.getNome());
-        id.setText(String.valueOf(cargo.getIdCargo()));
+        nome.setText(genero.getNome());
+        id.setText(String.valueOf(genero.getIdGenero()));
     }
 
+    public alteraGeneroController(Genero genero) {
+        this.genero = genero;
+    }
 
     public void altera(ActionEvent actionEvent) throws BancoException, SQLException, ClassNotFoundException {
-        CargoController controleCargo= new CargoController();
+        GeneroController controleGenero = new GeneroController();
 
-        Cargo b = new Cargo(Integer.parseInt(id.getText()), nomeCargo.getText());
+        Genero b = new Genero(Integer.parseInt(id.getText()), nome.getText());
 
-        controleCargo.altera(b);
-
+        controleGenero.altera(b);
     }
 }

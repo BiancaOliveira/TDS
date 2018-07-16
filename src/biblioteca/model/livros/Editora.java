@@ -76,7 +76,7 @@ public class Editora implements Comparable<Editora>{
 
     @Override
     public String toString() {
-        return "Codigo: " + idEditora + ", Cargo: " + nome + "\n";  
+        return nome;
     }
     
 }

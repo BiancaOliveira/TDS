@@ -1,6 +1,7 @@
 package biblioteca.Telas;
 
 import biblioteca.control.AutorController;
+import biblioteca.exception.BancoException;
 import biblioteca.model.livros.Autor;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class alteraAutorController implements Initializable {
@@ -31,11 +33,11 @@ public class alteraAutorController implements Initializable {
         this.autor = autor;
     }
 
-    public void altera(ActionEvent actionEvent) {
+    public void altera(ActionEvent actionEvent) throws BancoException, SQLException, ClassNotFoundException {
         AutorController controleAutor = new AutorController();
 
-        System.out.println("Finge que alterou");
+        Autor b = new Autor(Integer.parseInt(id.getText()), nome.getText());
 
-        //põe a função de alterar aqui
+        controleAutor.altera(b);
     }
 }
