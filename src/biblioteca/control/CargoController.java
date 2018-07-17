@@ -37,6 +37,9 @@ public class CargoController{
     
     public List<Cargo> buscarCargo(String nome) throws BancoException, ClassNotFoundException, SQLException {
         return  CargoDAO.buscarVarios(nome);
-    } 
-    
+    }
+
+    public Cargo buscarUnico(String nome) throws BancoException, ClassNotFoundException, SQLException {
+        return  CargoDAO.buscar(nome);
+    }
 }

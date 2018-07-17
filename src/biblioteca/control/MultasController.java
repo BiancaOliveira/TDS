@@ -35,5 +35,7 @@ public class MultasController {
     public Multas buscarUsuario(String usuario) throws BancoException, ClassNotFoundException, SQLException {
         return  MultasDAO.buscarUuario(usuario);
     }
+
+
     
 }

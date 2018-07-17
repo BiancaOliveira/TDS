@@ -25,7 +25,6 @@ public abstract class PostgreDAO {
     public static Connection getConnection() throws BancoException, ClassNotFoundException {
         if (conn == null) {
             try {
-                Class.forName(Driver);
                 conn = DriverManager.getConnection(URL, USUARIO, SENHA);
 //                System.out.println("conectado com sucesso");
             } catch (SQLException ex) {

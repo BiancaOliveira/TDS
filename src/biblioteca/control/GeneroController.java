@@ -37,6 +37,10 @@ public class GeneroController{
     
     public List<Genero> buscar(String nome) throws BancoException, ClassNotFoundException, SQLException {
         return  GeneroDAO.buscarVarios(nome);
-    } 
+    }
+
+    public Genero buscarUnico(String nome) throws BancoException, SQLException, ClassNotFoundException {
+        return GeneroDAO.buscar(nome);
+    }
     
 }

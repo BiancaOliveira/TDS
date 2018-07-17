@@ -76,7 +76,7 @@ public class Autor implements Comparable<Autor>{
 
     @Override
     public String toString() {
-        return "Codigo: " + idAutor + ", Cargo: " + nome + "\n";    
+        return nome;
     }
     
     

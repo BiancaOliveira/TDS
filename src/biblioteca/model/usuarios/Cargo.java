@@ -78,7 +78,7 @@ public class Cargo implements Comparable<Cargo>{
 
     @Override
     public String toString() {
-        return "Codigo: " + idCargo + ", Cargo: " + nome + "\n";
+        return nome;
     }
     
 }

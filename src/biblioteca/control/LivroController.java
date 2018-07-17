@@ -38,4 +38,8 @@ public class LivroController {
     public List<Livro> buscar(String nome) throws BancoException, ClassNotFoundException, SQLException {
         return  LivroDAO.buscarVariosTitulo(nome);
     }
+
+    public Livro buscarID(int id) throws BancoException, ClassNotFoundException, SQLException {
+        return  LivroDAO.buscarID(id);
+    }
 }

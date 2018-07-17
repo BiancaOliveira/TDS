@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="610.0" prefWidth="815.0" style="-fx-background-color: #e8ddc7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+
+    <children>
+        <Group layoutX="1.0" layoutY="92.0">
+            <children>
+                <Label layoutX="47.0" layoutY="80.0" prefHeight="27.0" prefWidth="63.0" text="Editora:">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="exemplares" layoutX="496.0" layoutY="164.0" prefHeight="25.0" prefWidth="205.0" />
+                <Label layoutX="386.0" layoutY="120.0" prefHeight="27.0" prefWidth="88.0" text="Co-autor:">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Label layoutX="47.0" layoutY="120.0" prefHeight="27.0" prefWidth="63.0" text="Autor:">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="titulo" layoutX="119.0" layoutY="37.0" prefHeight="25.0" prefWidth="581.0" />
+                <ComboBox fx:id="editora" layoutX="118.0" layoutY="81.0" prefHeight="25.0" prefWidth="580.0" />
+                <Label layoutX="47.0" layoutY="202.0" prefHeight="27.0" prefWidth="92.0" text="Descrição:">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <ComboBox fx:id="autor" layoutX="118.0" layoutY="121.0" prefHeight="25.0" prefWidth="246.0" />
+                <Label layoutX="47.0" layoutY="163.0" prefHeight="27.0" prefWidth="63.0" text="Gênero:">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <TextArea fx:id="descricao" layoutX="141.0" layoutY="209.0" prefHeight="200.0" prefWidth="560.0" />
+                <ComboBox fx:id="genero" layoutX="118.0" layoutY="164.0" prefHeight="25.0" prefWidth="230.0" />
+                <ComboBox fx:id="coautor" layoutX="474.0" layoutY="121.0" prefHeight="25.0" prefWidth="225.0" />
+                <Label layoutX="47.0" layoutY="36.0" prefHeight="17.0" prefWidth="51.0" text="Título:">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Label layoutX="364.0" layoutY="163.0" prefHeight="27.0" prefWidth="132.0" text="Nº exemplares:">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Button layoutX="625.0" layoutY="435.0" mnemonicParsing="false" onAction="#altera" prefHeight="25.0" prefWidth="76.0" text="Alterar" />
+            </children>
+        </Group>
+        <Label layoutX="331.0" layoutY="14.0" text="Alterar Livros" textFill="#590f0f">
+            <font>
+                <Font size="36.0" />
+            </font>
+        </Label>
+      <Label layoutX="75.0" layoutY="77.0" prefHeight="27.0" prefWidth="88.0" text="Id:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="id" layoutX="119.0" layoutY="77.0" prefHeight="27.0" prefWidth="88.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+    </children>
+
+</AnchorPane>

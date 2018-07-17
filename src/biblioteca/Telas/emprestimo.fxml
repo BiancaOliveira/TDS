@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="610.0" prefWidth="815.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="biblioteca.Telas.emprestimoTelaController">
+    <children>
+        <TabPane prefHeight="621.0" prefWidth="815.0" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab text="Cadastro">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: transparent;">
+                            <children>
+                                <TextField fx:id="nomeUsuario" layoutX="146.0" layoutY="80.0" prefHeight="25.0" prefWidth="504.0" />
+                                <Label layoutX="72.0" layoutY="79.0" prefHeight="27.0" prefWidth="80.0" text="Usuário:">
+                                    <font>
+                                        <Font size="18.0" />
+                                    </font>
+                                </Label>
+                                <Button layoutX="667.0" layoutY="80.0" mnemonicParsing="false" onAction="#buscaUsuario" prefHeight="25.0" prefWidth="76.0" text="Buscar" />
+                                <Label layoutX="320.0" layoutY="14.0" text="Empréstimo" textFill="#590f0f">
+                                    <font>
+                                        <Font size="36.0" />
+                                    </font>
+                                </Label>
+                        <TableView fx:id="tabelaUsuarios" layoutY="128.0" prefHeight="219.0" prefWidth="815.0">
+                           <columns>
+                              <TableColumn fx:id="colunaIDU" prefWidth="108.0" text="Id" />
+                              <TableColumn fx:id="colunaNomeU" prefWidth="116.0" text="Nome" />
+                              <TableColumn prefWidth="100.0" />
+                              <TableColumn prefWidth="101.0" />
+                           </columns>
+                        </TableView>
+                        <Label layoutX="66.0" layoutY="369.0" prefHeight="27.0" prefWidth="142.0" text="Código do livro:">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="codLivro" layoutX="201.0" layoutY="370.0" prefHeight="25.0" prefWidth="443.0" />
+                        <Button layoutX="658.0" layoutY="460.0" mnemonicParsing="false" onAction="#cadastraEmprestimo" prefHeight="25.0" prefWidth="76.0" text="Ok" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Consulta">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: transparent;">
+                            <children>
+                                <TableView fx:id="tabelaEmprestimo" layoutY="29.0" prefHeight="518.0" prefWidth="815.0">
+                                    <columns>
+                                        <TableColumn fx:id="colunaID" prefWidth="56.0" text="Id" />
+                                        <TableColumn fx:id="colunaUsuario" prefWidth="209.0" text="Usuario" />
+                                        <TableColumn fx:id="colunaLivro" prefWidth="255.0" text="Livro" />
+                              <TableColumn fx:id="colunaStatus" minWidth="0.0" prefWidth="128.0" text="Devolvido" />
+                              <TableColumn fx:id="colunaData" minWidth="0.0" prefWidth="128.0" text="Data de devolução" />
+                                    </columns>
+                                </TableView>
+                                <Button layoutX="713.0" layoutY="553.0" mnemonicParsing="false" onAction="#devolve" text="Devolução" />
+                        <Button layoutX="631.0" layoutY="553.0" mnemonicParsing="false" onAction="#listaTudo" text="Listar" />
+                            </children></AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
+</AnchorPane>

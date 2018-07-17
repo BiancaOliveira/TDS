@@ -48,7 +48,7 @@
                                     </columns>
                                 </TableView>
                                 <Button layoutX="734.0" layoutY="553.0" mnemonicParsing="false" onAction="#alteraAutor" text="Alterar" />
-                                <Button layoutX="661.0" layoutY="553.0" mnemonicParsing="false" onAction="#deletaAutor" text="Remover" />
+                                <Button fx:id="deleta" layoutX="661.0" layoutY="553.0" mnemonicParsing="false" onAction="#deletaAutor" text="Remover" />
                         <Button fx:id="botaoBuscaAutor1" layoutX="661.0" layoutY="22.0" mnemonicParsing="false" onAction="#listaAutores" text="Listar Todos" />
                             </children></AnchorPane>
                     </content>

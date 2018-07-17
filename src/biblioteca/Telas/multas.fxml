@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="610.0" prefWidth="815.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="biblioteca.Telas.multasTelaController">
+    <children>
+        <TabPane prefHeight="621.0" prefWidth="815.0" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab text="Consulta">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: transparent;">
+                            <children>
+                                <TableView fx:id="tabelaMultas" layoutY="74.0" prefHeight="473.0" prefWidth="815.0">
+                                    <columns>
+                                        <TableColumn fx:id="colunaID" prefWidth="56.0" text="Id" />
+                                        <TableColumn fx:id="colunaUsuario" prefWidth="209.0" text="Usuario" />
+                                        <TableColumn fx:id="colunaLivro" prefWidth="255.0" text="Livro" />
+                                        <TableColumn fx:id="colunaStatus" minWidth="0.0" prefWidth="128.0" text="Pago" />
+                                        <TableColumn fx:id="colunaValor" minWidth="0.0" prefWidth="128.0" text="Valor Total" />
+                                    </columns>
+                                </TableView>
+                                <Button layoutX="679.0" layoutY="553.0" mnemonicParsing="false" onAction="#pagamento" text="Realizar pagamento" />
+                                <Button layoutX="621.0" layoutY="553.0" mnemonicParsing="false" onAction="#listaTudo" text="Listar" />
+                        <Label layoutX="363.0" layoutY="14.0" text="Multas" textFill="#590f0f">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Label>
+                            </children></AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
+
+</AnchorPane>

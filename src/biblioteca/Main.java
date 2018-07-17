@@ -47,8 +47,8 @@ public class Main extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        Parent p = FXMLLoader.load(getClass().getResource("Telas/telaInicial.fxml"));
-        //Parent p = FXMLLoader.load(getClass().getResource("Telas/Login.fxml"));
+        //Parent p = FXMLLoader.load(getClass().getResource("Telas/telaInicial.fxml"));
+        Parent p = FXMLLoader.load(getClass().getResource("Telas/Login.fxml"));
         Scene scene = new Scene(p);
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
@@ -228,43 +228,43 @@ public class Main extends Application{
         }
         */
 //        
-        System.out.println("\n---------- Funçoes do Emprestimo ------------\n");
-            EmprestimoController controleEmpre =
-                    new EmprestimoController();
-
-        LocalDate dataEmprestimo = LocalDate.now();//data atual        
-        LocalDate dataDevolucao = dataEmprestimo.plusDays(15); //adiciona 15 dias a data atual
-
-        DateTimeFormatter formato =
-                DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
-//        Calendar c = Calendar.getInstance(); 
-//        c.setTime(dataEmprestimo); 
-//        c.add(Calendar.DATE, 15);
-        System.out.println(dataEmprestimo.format(formato));
-        System.out.println(dataDevolucao.format(formato));
-//        dataDevolucao =  c.getTime();          
-//        System.out.println(dataDevolucao); System.out.println(dataHora.format(formatter)
-         LocalDate dsa =  LocalDate.parse("12/01/2015", formato);
-        
-        controleEmpre.cadastrar(0,dataEmprestimo.format(formato),dataDevolucao.format(formato),"DSterte","muito",true);     
-        //listar Cargos
-        System.out.println("Lista : " + controleEmpre.listar());
-        //busca cargo pelo login
-//        System.out.println("Buscar : " + controleEmpre.buscarLivro("DSterte"));
-        System.out.println("Buscar s : " + controleEmpre.buscarStatus(false));
-    
-//        
-        System.out.println("\n---------- Funçoes do Multas ------------\n");
-            MultasController controleMultas =
-                    new MultasController();
-        
-        //listar Cargos
-        System.out.println("Lista : " + controleMultas.listar());
-        //busca cargo pelo status
-        System.out.println("Buscar  s: " + controleMultas.buscarStatus(false));
-        //busca cargo pelo usuario
-        System.out.println("Buscar mi : " + controleMultas.buscarUsuario("mi"));
+//        System.out.println("\n---------- Funçoes do Emprestimo ------------\n");
+//            EmprestimoController controleEmpre =
+//                    new EmprestimoController();
+//
+//        LocalDate dataEmprestimo = LocalDate.now();//data atual
+//        LocalDate dataDevolucao = dataEmprestimo.plusDays(15); //adiciona 15 dias a data atual
+//
+//        DateTimeFormatter formato =
+//                DateTimeFormatter.ofPattern("dd/MM /yyyy");
+//
+////        Calendar c = Calendar.getInstance();
+////        c.setTime(dataEmprestimo);
+////        c.add(Calendar.DATE, 15);
+//        System.out.println(dataEmprestimo.format(formato));
+//        System.out.println(dataDevolucao.format(formato));
+////        dataDevolucao =  c.getTime();
+////        System.out.println(dataDevolucao); System.out.println(dataHora.format(formatter)
+//         LocalDate dsa =  LocalDate.parse("12/01/2015", formato);
+//
+//        controleEmpre.cadastrar(0,dataEmprestimo.format(formato),dataDevolucao.format(formato),"DSterte","muito",true);
+//        //listar Cargos
+//        System.out.println("Lista : " + controleEmpre.listar());
+//        //busca cargo pelo login
+////        System.out.println("Buscar : " + controleEmpre.buscarLivro("DSterte"));
+//        System.out.println("Buscar s : " + controleEmpre.buscarStatus(false));
+//
+////
+//        System.out.println("\n---------- Funçoes do Multas ------------\n");
+//            MultasController controleMultas =
+//                    new MultasController();
+//
+//        //listar Cargos
+//        System.out.println("Lista : " + controleMultas.listar());
+//        //busca cargo pelo status
+//        System.out.println("Buscar  s: " + controleMultas.buscarStatus(false));
+//        //busca cargo pelo usuario
+//        System.out.println("Buscar mi : " + controleMultas.buscarUsuario("mi"));
     
     
     

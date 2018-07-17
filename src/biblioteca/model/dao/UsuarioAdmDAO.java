@@ -135,15 +135,17 @@ public class UsuarioAdmDAO {
      */ 
     public  static void alterar(UsuarioAdm ob) throws BancoException, ClassNotFoundException, SQLException{
         int idCargo = buscarIdCargo(ob.cargo);
-        String sql = "UPDATE \"Usuario\" SET usuario'" + ob.getNome() 
-                + "', senha = " + ob.getSenha() 
+        String sql = "UPDATE \"Usuario\" SET usuario='" + ob.getNome()
+                + "', senha = " + ob.getSenha()
                 + " WHERE \"idUsuario\"=" + ob.getIdUsuario() + ";"
-                +"UPDATE INTO \"Administrador\" SET id_cargo= " + idCargo + ""
+                +"UPDATE \"Administrador\" SET id_cargo= " + idCargo + ""
                 + " WHERE id_Usuario =" + ob.getIdUsuario();
+
+
         
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
         try{
-            if (stmt.executeUpdate() == 1){
+            if (stmt.executeUpdate() == 1 ){
                 JOptionPane.showMessageDialog(null,"Alterado com sucesso");
             }
         }catch(SQLException ex){

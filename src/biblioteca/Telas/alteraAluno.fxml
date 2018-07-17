@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="387.0" prefWidth="656.0" style="-fx-background-color: #e8ddc7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+
+    <children>
+        <Label fx:id="labelTitulo" layoutX="281.0" layoutY="36.0" text="Altera Usuário Aluno" textFill="#590f0f">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Label layoutX="20.0" layoutY="99.0" prefHeight="27.0" prefWidth="64.0" text="Id:">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Label fx:id="id" layoutX="99.0" layoutY="99.0" prefHeight="27.0" prefWidth="64.0">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+      <Group layoutX="-14.0" layoutY="89.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+         <children>
+            <Label layoutX="34.0" layoutY="37.0" prefHeight="27.0" prefWidth="80.0" text="Nome:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="34.0" layoutY="71.0" prefHeight="27.0" prefWidth="80.0" text="Usuário:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="34.0" layoutY="110.0" prefHeight="27.0" prefWidth="80.0" text="Senha:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="34.0" layoutY="144.0" prefHeight="27.0" prefWidth="133.0" text="Nº de registro:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="usuario" layoutX="114.0" layoutY="72.0" prefHeight="25.0" prefWidth="606.0" />
+            <Button layoutX="653.0" layoutY="221.0" mnemonicParsing="false" onAction="#altera" text="Alterar" />
+            <PasswordField fx:id="senha" layoutX="114.0" layoutY="110.0" prefHeight="25.0" prefWidth="606.0" />
+            <TextField fx:id="nome" layoutX="114.0" layoutY="38.0" prefHeight="25.0" prefWidth="605.0" />
+            <Label layoutX="34.0" layoutY="178.0" prefHeight="27.0" prefWidth="133.0" text="Telefone:">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="numeroReg" layoutX="157.0" layoutY="145.0" prefHeight="25.0" prefWidth="563.0" />
+            <TextField fx:id="telefone" layoutX="157.0" layoutY="179.0" prefHeight="25.0" prefWidth="563.0" />
+         </children>
+      </Group>
+    </children>
+
+</AnchorPane>

@@ -148,7 +148,7 @@ public class EmprestimoDAO {
         int numeroExemplares = buscarNumeroExemplares(livro);
 
         String sql = "SELECT * FROM \"Emprestimos\""
-                    + " WHERE \"id_livros\"="+ livro ;      
+                    + " WHERE \"id_livros\"="+ livro +"AND status =" + true ;
        
         int exemplaresDisponiveis = 0;     
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
@@ -289,6 +289,10 @@ public class EmprestimoDAO {
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
         try{
             stmt.executeUpdate();
+            if (stmt.executeUpdate() == 1){
+                JOptionPane.showMessageDialog(null,"Devolução concluída");
+            }
+
         }catch(SQLException ex){
 //            Logger.getLogger(EmprestimoDAO.class.getName()).log(Level.SEVERE,null,ex);
             System.out.println("erro oa atualizar");

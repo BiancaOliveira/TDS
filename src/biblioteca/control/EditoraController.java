@@ -6,12 +6,10 @@
 package biblioteca.control;
 
 import biblioteca.exception.BancoException;
-import biblioteca.model.bd.BD;
 import biblioteca.model.dao.EditoraDAO;
 import biblioteca.model.livros.Editora;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Set;
 
 /**
  *
@@ -38,5 +36,9 @@ public class EditoraController{
     
     public List<Editora> buscar(String nome) throws BancoException, ClassNotFoundException, SQLException {
         return  EditoraDAO.buscarVarios(nome);
-    } 
+    }
+
+    public Editora buscarUnico(String nome) throws BancoException, SQLException, ClassNotFoundException {
+        return EditoraDAO.buscar(nome);
+    }
 }

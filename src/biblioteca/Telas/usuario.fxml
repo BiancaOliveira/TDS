@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="biblioteca.Telas.usuarioTelaController">
+
+    <children>
+        <TabPane prefHeight="621.0" prefWidth="815.0" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab text="Cadastro">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: transparent;">
+                            <children>
+                                <Label layoutX="365.0" layoutY="14.0" text="Usuários" textFill="#590f0f">
+                                    <font>
+                                        <Font size="30.0" />
+                                    </font>
+                                </Label>
+                        <TabPane layoutY="73.0" prefHeight="520.0" prefWidth="815.0" tabClosingPolicy="UNAVAILABLE">
+                          <tabs>
+                            <Tab fx:id="proibido1" text="Administrador">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: transparent;">
+                                       <children>
+                                          <Group>
+                                             <children>
+                                                <ComboBox fx:id="cargo1" layoutX="114.0" layoutY="145.0" prefWidth="150.0" />
+                                                <Label layoutX="34.0" layoutY="37.0" prefHeight="27.0" prefWidth="80.0" text="Nome:">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="34.0" layoutY="71.0" prefHeight="27.0" prefWidth="80.0" text="Usuário:">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="34.0" layoutY="110.0" prefHeight="27.0" prefWidth="80.0" text="Senha:">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="34.0" layoutY="144.0" prefHeight="27.0" prefWidth="80.0" text="Cargo:">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="usuario1" layoutX="114.0" layoutY="72.0" prefHeight="25.0" prefWidth="606.0" />
+                                                <Button layoutX="653.0" layoutY="221.0" mnemonicParsing="false" onAction="#cadastraAdmin" text="Cadastrar" />
+                                                <PasswordField fx:id="senha1" layoutX="114.0" layoutY="110.0" prefHeight="25.0" prefWidth="606.0" />
+                                                <TextField fx:id="nome1" layoutX="114.0" layoutY="38.0" prefHeight="25.0" prefWidth="605.0" />
+                                             </children>
+                                          </Group>
+                                       </children>
+                                    </AnchorPane>
+                              </content>
+                            </Tab>
+                            <Tab fx:id="proibido2" text="Funcionário">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: transparent;">
+                                       <children>
+                                          <Group>
+                                             <children>
+                                                <ComboBox fx:id="cargo2" layoutX="114.0" layoutY="145.0" prefWidth="150.0" />
+                                                <Label layoutX="34.0" layoutY="37.0" prefHeight="27.0" prefWidth="80.0" text="Nome:">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="34.0" layoutY="71.0" prefHeight="27.0" prefWidth="80.0" text="Usuário:">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="34.0" layoutY="110.0" prefHeight="27.0" prefWidth="80.0" text="Senha:">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="34.0" layoutY="144.0" prefHeight="27.0" prefWidth="80.0" text="Cargo:">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="usuario2" layoutX="114.0" layoutY="72.0" prefHeight="25.0" prefWidth="606.0" />
+                                                <Button layoutX="653.0" layoutY="221.0" mnemonicParsing="false" onAction="#cadastraFunc" text="Cadastrar" />
+                                                <PasswordField fx:id="senha2" layoutX="114.0" layoutY="110.0" prefHeight="25.0" prefWidth="606.0" />
+                                                <TextField fx:id="nome2" layoutX="114.0" layoutY="38.0" prefHeight="25.0" prefWidth="605.0" />
+                                             </children>
+                                          </Group>
+                                       </children>
+                                    </AnchorPane>
+                              </content>
+                            </Tab>
+                              <Tab text="Aluno">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: transparent;">
+                                       <children>
+                                          <Group>
+                                             <children>
+                                                <Label layoutX="34.0" layoutY="37.0" prefHeight="27.0" prefWidth="80.0" text="Nome:">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="34.0" layoutY="71.0" prefHeight="27.0" prefWidth="80.0" text="Usuário:">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="34.0" layoutY="110.0" prefHeight="27.0" prefWidth="80.0" text="Senha:">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="34.0" layoutY="144.0" prefHeight="27.0" prefWidth="133.0" text="Nº de registro:">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="usuario3" layoutX="114.0" layoutY="72.0" prefHeight="25.0" prefWidth="606.0" />
+                                                <Button layoutX="653.0" layoutY="221.0" mnemonicParsing="false" onAction="#cadastraAluno" text="Cadastrar" />
+                                                <PasswordField fx:id="senha3" layoutX="114.0" layoutY="110.0" prefHeight="25.0" prefWidth="606.0" />
+                                                <TextField fx:id="nome3" layoutX="114.0" layoutY="38.0" prefHeight="25.0" prefWidth="605.0" />
+                                                <Label layoutX="34.0" layoutY="178.0" prefHeight="27.0" prefWidth="133.0" text="Telefone:">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="numeroReg" layoutX="157.0" layoutY="145.0" prefHeight="25.0" prefWidth="563.0" />
+                                                <TextField fx:id="telefone" layoutX="157.0" layoutY="179.0" prefHeight="25.0" prefWidth="563.0" />
+                                             </children>
+                                          </Group>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                          </tabs>
+                        </TabPane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Consulta">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: transparent;">
+                            <children>
+                        <TabPane prefHeight="520.0" prefWidth="815.0" tabClosingPolicy="UNAVAILABLE">
+                           <tabs>
+                              <Tab text="Administrador">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="542.0" prefWidth="815.0" style="-fx-background-color: transparent;">
+                                       <children>
+                                          <Group>
+                                             <children>
+                                                        <Button layoutX="732.0" layoutY="435.0" mnemonicParsing="false" onAction="#alteraAdmin" text="Alterar" />
+                                                        <TableView fx:id="tabelaAdmin" layoutY="76.0" prefHeight="342.0" prefWidth="815.0" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="76.0">
+                                                            <columns>
+                                                                <TableColumn fx:id="colunaIDAdmin" prefWidth="62.0" text="Id" />
+                                                                <TableColumn fx:id="colunaNomeAdmin" prefWidth="186.0" text="Nome" />
+                                                                <TableColumn fx:id="colunaUsuarioAdmin" prefWidth="172.0" text="Usuário" />
+                                                                <TableColumn fx:id="colunaCargoAdmin" prefWidth="148.0" text="Cargo" />
+                                                            </columns>
+                                                        </TableView>
+                                                        <Button fx:id="botaoBuscaAutor" layoutX="562.0" layoutY="22.0" mnemonicParsing="false" onAction="#buscaAdmin" text="Buscar" />
+                                                        <TextField fx:id="campoBuscaAdmin" layoutX="146.0" layoutY="22.0" prefHeight="25.0" prefWidth="391.0" />
+                                                        <Button fx:id="botaoBuscaAutor1" layoutX="629.0" layoutY="22.0" mnemonicParsing="false" onAction="#listarAdmin" text="Listar Todos" />
+                                                        <Button layoutX="646.0" layoutY="435.0" mnemonicParsing="false" onAction="#removeAdmin" text="Remover" />
+                                             </children>
+                                          </Group>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Funcionário">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: transparent;">
+                                       <children>
+                                          <Group>
+                                             <children>
+                                                <Button layoutX="732.0" layoutY="435.0" mnemonicParsing="false" onAction="#alteraFunc" text="Alterar" />
+                                                <TableView fx:id="tabelaFunc" layoutY="76.0" prefHeight="342.0" prefWidth="815.0" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="76.0">
+                                                   <columns>
+                                                      <TableColumn fx:id="colunaIDFunc" prefWidth="62.0" text="Id" />
+                                                      <TableColumn fx:id="colunaNomeFunc" prefWidth="186.0" text="Nome" />
+                                                      <TableColumn fx:id="colunaUsuarioFunc" prefWidth="172.0" text="Usuário" />
+                                                      <TableColumn fx:id="colunaCargoFunc" prefWidth="148.0" text="Cargo" />
+                                                   </columns>
+                                                </TableView>
+                                                <Button fx:id="botaoBuscaAutor1" layoutX="562.0" layoutY="22.0" mnemonicParsing="false" onAction="#buscaFunc" text="Buscar" />
+                                                <TextField fx:id="campoBuscaFunc" layoutX="146.0" layoutY="22.0" prefHeight="25.0" prefWidth="391.0" />
+                                                <Button fx:id="botaoBuscaAutor11" layoutX="629.0" layoutY="22.0" mnemonicParsing="false" onAction="#listarFunc" text="Listar Todos" />
+                                                <Button layoutX="646.0" layoutY="435.0" mnemonicParsing="false" onAction="#removeFunc" text="Remover" />
+                                             </children>
+                                          </Group>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Aluno">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: transparent;">
+                                       <children>
+                                          <Group>
+                                             <children>
+                                                <Button layoutX="732.0" layoutY="435.0" mnemonicParsing="false" onAction="#alteraAluno" text="Alterar" />
+                                                <TableView fx:id="tabelaAluno" layoutY="76.0" prefHeight="342.0" prefWidth="815.0">
+                                                   <columns>
+                                                      <TableColumn fx:id="colunaIDAluno" prefWidth="62.0" text="Id" />
+                                                      <TableColumn fx:id="colunaNomeAluno" prefWidth="186.0" text="Nome" />
+                                                      <TableColumn fx:id="colunaUsuarioAluno" prefWidth="172.0" text="Usuário" />
+                                                      <TableColumn fx:id="colunaNumAluno" prefWidth="148.0" text="Nº de Registro" />
+                                                      <TableColumn fx:id="colunaTelefoneAluno" prefWidth="148.0" text="Telefone" />
+                                                   </columns>
+                                                </TableView>
+                                                <Button fx:id="botaoBuscaAutor11" layoutX="562.0" layoutY="22.0" mnemonicParsing="false" onAction="#buscaAluno" text="Buscar" />
+                                                <TextField fx:id="campoBuscaAluno" layoutX="146.0" layoutY="22.0" prefHeight="25.0" prefWidth="391.0" />
+                                                <Button fx:id="botaoBuscaAutor111" layoutX="629.0" layoutY="22.0" mnemonicParsing="false" onAction="#listarAluno" text="Listar Todos" />
+                                                <Button layoutX="646.0" layoutY="435.0" mnemonicParsing="false" onAction="#removeAluno" text="Remover" />
+                                             </children>
+                                          </Group>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                           </tabs>
+                        </TabPane>
+                            </children></AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
+
+</AnchorPane>

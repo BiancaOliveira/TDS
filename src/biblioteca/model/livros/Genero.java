@@ -76,7 +76,7 @@ public class Genero implements Comparable<Genero>{
 
     @Override
     public String toString() {
-        return "Codigo: " + idGenero + ", Cargo: " + nome + "\n";    
+        return nome;
     }
     
     

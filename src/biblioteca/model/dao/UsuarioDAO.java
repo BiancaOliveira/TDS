@@ -103,7 +103,7 @@ public class UsuarioDAO {
      * @throws java.sql.SQLException    Exeções Sql
      */
     public  static void alterar(Usuario ob) throws BancoException, ClassNotFoundException, SQLException{
-        String sql = "UPDATE \"Usuario\" SET usuario'" + ob.getNome() 
+        String sql = "UPDATE \"Usuario\" SET usuario='" + ob.getNome()
                 + "', senha = " + ob.getSenha() + 
                 " WHERE \"idUsuario\"=" + ob.getIdUsuario();
         

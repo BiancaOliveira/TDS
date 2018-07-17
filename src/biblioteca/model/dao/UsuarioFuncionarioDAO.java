@@ -137,10 +137,10 @@ public class UsuarioFuncionarioDAO {
      */
     public  static void alterar(UsuarioFuncionario ob) throws BancoException, ClassNotFoundException, SQLException{
         int idCargo = buscarIdCargo(ob.cargo);
-        String sql = "UPDATE \"Usuario\" SET usuario'" + ob.getNome() 
-                + "', senha = " + ob.getSenha() 
+        String sql = "UPDATE \"Usuario\" SET usuario='" + ob.getNome()
+                + "', senha =   ' " + ob.getSenha() + "'"
                 + " WHERE \"idUsuario\"=" + ob.getIdUsuario() + ";"
-                +"UPDATE INTO \"Funcionario\" SET id_cargo= " + idCargo + ""
+                +"UPDATE \"Funcionario\" SET id_cargo= " + idCargo + ""
                 + " WHERE id_Usuario =" + ob.getIdUsuario();
       
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
@@ -149,7 +149,7 @@ public class UsuarioFuncionarioDAO {
                 JOptionPane.showMessageDialog(null,"Alterado com sucesso");
             }
         }catch(SQLException ex){
-//            Logger.getLogger(UsuarioFuncionarioDAO.class.getName()).log(Level.SEVERE,null,ex);
+            Logger.getLogger(UsuarioFuncionarioDAO.class.getName()).log(Level.SEVERE,null,ex);
             JOptionPane.showMessageDialog(null,"Erro ao Alterar");
         }
     }

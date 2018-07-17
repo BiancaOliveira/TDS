@@ -110,10 +110,10 @@ public class UsuarioAlunoDAO {
      * @throws java.sql.SQLException    Exeções Sql
      */
     public  static void alterar(UsuarioAluno ob) throws BancoException, ClassNotFoundException, SQLException{
-        String sql = "UPDATE \"Usuario\" SET usuario'" + ob.getNome() 
+        String sql = "UPDATE \"Usuario\" SET usuario ='" + ob.getNome()
                 + "', senha = " + ob.getSenha() 
                 + " WHERE \"idUsuario\"=" + ob.getIdUsuario() + ";"
-                +"UPDATE INTO \"UsuarioAluno\" SET telefone= " + ob.getTelefone() + ""
+                +"UPDATE \"Aluno\" SET telefone= " + ob.getTelefone() + ""
                 + " WHERE id_Usuario =" + ob.getIdUsuario();
         
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);

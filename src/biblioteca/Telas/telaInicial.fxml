@@ -1,17 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="principal" minHeight="600.0" minWidth="1000.0" prefHeight="650.0" prefWidth="1000.0" style="-fx-background-color: e8ddc7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="biblioteca.Telas.telaInicialController">
+<AnchorPane fx:id="principal" minHeight="600.0" minWidth="1000.0" prefHeight="650.0" prefWidth="1000.0" style="-fx-background-color: e8ddc7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane fx:id="borderPane" layoutX="-6.0" layoutY="-5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="610.0" prefWidth="1016.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
             <VBox prefHeight="600.0" prefWidth="185.0" style="-fx-background-color: #590f0f;" BorderPane.alignment="CENTER">
                <children>
+                  <Label fx:id="labelUsuario" alignment="CENTER" contentDisplay="CENTER" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                  </Label>
                   <Button mnemonicParsing="false" onAction="#chamaLivros" prefHeight="45.0" prefWidth="185.0" style="-fx-background-color: transparent; -fx-text-fill: e8ddc7;" text="Livros">
                      <font>
                         <Font size="15.0" />
@@ -38,6 +47,16 @@
                      </font>
                   </Button>
                   <Button layoutX="10.0" layoutY="190.0" mnemonicParsing="false" onAction="#chamaEditoras" prefHeight="45.0" prefWidth="185.0" style="-fx-background-color: transparent; -fx-text-fill: e8ddc7;" text="Editoras">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="10.0" layoutY="255.0" mnemonicParsing="false" onAction="#chamaEmprestimo" prefHeight="45.0" prefWidth="185.0" style="-fx-background-color: transparent; -fx-text-fill: e8ddc7;" text="Empréstimos">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="10.0" layoutY="300.0" mnemonicParsing="false" onAction="#chamaMultas" prefHeight="45.0" prefWidth="185.0" style="-fx-background-color: transparent; -fx-text-fill: e8ddc7;" text="Multas">
                      <font>
                         <Font size="15.0" />
                      </font>

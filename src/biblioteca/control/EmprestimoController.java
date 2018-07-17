@@ -41,4 +41,8 @@ public class EmprestimoController {
     public List<Emprestimo> buscarStatus(boolean status) throws BancoException, ClassNotFoundException, SQLException {
         return  EmprestimoDAO.buscarStatus(status);
     }
+
+    public void atualiza(int id) throws BancoException, SQLException, ClassNotFoundException {
+        EmprestimoDAO.atualizaTabela(id, false);
+    }
 }
