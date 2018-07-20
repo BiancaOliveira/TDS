@@ -282,7 +282,7 @@ public class EmprestimoDAO {
      * @throws java.lang.ClassNotFoundException Exeçõe conexao(driver)
      * @throws java.sql.SQLException    Exeções Sql
      */
-    public  static void atualizaTabela(int id, boolean status) throws BancoException, ClassNotFoundException, SQLException{
+    public  static boolean atualizaTabela(int id, boolean status) throws BancoException, ClassNotFoundException, SQLException{
         String sql = "UPDATE  \"Emprestimos\" SET status =" + status 
                 + " WHERE \"idEmprestimos\"=" + id;
 
@@ -290,13 +290,13 @@ public class EmprestimoDAO {
         try{
             stmt.executeUpdate();
             if (stmt.executeUpdate() == 1){
-                JOptionPane.showMessageDialog(null,"Devolução concluída");
+                return true;
             }
-
         }catch(SQLException ex){
 //            Logger.getLogger(EmprestimoDAO.class.getName()).log(Level.SEVERE,null,ex);
             System.out.println("erro oa atualizar");
         }
+        return false;
     } 
      
     /**

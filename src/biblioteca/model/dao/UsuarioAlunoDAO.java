@@ -98,7 +98,7 @@ public class UsuarioAlunoDAO {
                 }
             }catch(SQLException ex){
 //                Logger.getLogger(UsuarioAdmDAO.class.getName()).log(Level.SEVERE,null,ex);
-                JOptionPane.showMessageDialog(null,"Erro ao remover");
+                JOptionPane.showMessageDialog(null,"Erro ao excluir, usuario associado a um emprestimo");
             }
     }
     

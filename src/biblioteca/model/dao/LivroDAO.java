@@ -175,7 +175,7 @@ public class LivroDAO {
                 }
             }catch(SQLException ex){
 //                Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);
-                JOptionPane.showMessageDialog(null,"Erro ao remover");
+                JOptionPane.showMessageDialog(null,"Erro ao excluir, livro associado a um emprestimo");
             }
     }
    
@@ -191,14 +191,16 @@ public class LivroDAO {
         int autor = buscarIdAutor(ob.getAutor());
         int genero = buscarIdGenero(ob.getGenero());
         int coautor = buscarIdAutor(ob.getCoautores());
-
-        if(buscar(ob.getTitulo()) != null){
+        
+        Livro liv = buscar(ob.getTitulo());
+        
+        if((liv != null) && (liv.getIdLivro() != ob.getIdLivro())){
             JOptionPane.showMessageDialog(null,"Esse livro já possui cadastro");
         }else{
             String sql = "UPDATE \"Livros\" SET titulo='" + ob.getTitulo() 
                     + "', id_editora = " + editora + ", autor =" + autor 
-                    + ",\"numeroEcemplares\" = " + ob.getNumeroExemplares() 
-                    + ",genero = " +  genero + ",descricao = '" + ob.getDescricao()
+                    + ",\"numeroExemplares\" = " + ob.getNumeroExemplares() 
+                    + ",id_genero = " +  genero + ",descricao = '" + ob.getDescricao()
                     + "',id_couator = " + coautor
                     + " WHERE \"idLivros\"='" + ob.getIdLivro() + "'";
 
@@ -208,7 +210,7 @@ public class LivroDAO {
                     JOptionPane.showMessageDialog(null,"Alterado com sucesso");
                 }
             }catch(SQLException ex){
-//                    Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);
+                Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);
                 JOptionPane.showMessageDialog(null,"Erro ao Alterar");
             }
         }

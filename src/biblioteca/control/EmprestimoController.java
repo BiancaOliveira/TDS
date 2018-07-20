@@ -11,6 +11,7 @@ import biblioteca.model.livros.Emprestimo;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -43,6 +44,11 @@ public class EmprestimoController {
     }
 
     public void atualiza(int id) throws BancoException, SQLException, ClassNotFoundException {
-        EmprestimoDAO.atualizaTabela(id, false);
+        boolean x = EmprestimoDAO.atualizaTabela(id, false);
+        if(x == true){
+            JOptionPane.showMessageDialog(null,"Devolução concluída");
+        }else{
+            JOptionPane.showMessageDialog(null,"Erro ao executar a devolução");
+        }
     }
 }

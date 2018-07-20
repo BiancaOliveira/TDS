@@ -190,6 +190,7 @@ public class livrosTelaController implements Initializable {
 
     public void cadastra(ActionEvent actionEvent) throws BancoException, SQLException, ClassNotFoundException {
         LivroController controleLivro = new LivroController();
+        System.out.println(coautor.getSelectionModel().getSelectedItem().getNome());
 
         if(coautor.getSelectionModel().getSelectedItem().getNome()=="-"){
             controleLivro.cadastrar(0,titulo.getText(),Integer.parseInt(exemplares.getText()),

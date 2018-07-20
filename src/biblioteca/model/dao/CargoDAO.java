@@ -88,7 +88,7 @@ public class CargoDAO {
                 }
             }catch(SQLException ex){
 //                Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);
-                JOptionPane.showMessageDialog(null,"Erro ao remover");
+                JOptionPane.showMessageDialog(null,"Erro ao excluir, cargo associado a um usuario");
             }
     }
     

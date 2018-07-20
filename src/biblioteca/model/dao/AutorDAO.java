@@ -12,6 +12,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
@@ -81,15 +82,16 @@ public class AutorDAO {
     public static void excluir(Autor ob) throws BancoException, ClassNotFoundException, SQLException{
         String sql = " Delete  FROM \"Autor\""
                 + "WHERE autor ='" + ob.getNome() + "'";
-        
+       
         PreparedStatement stmt = PostgreDAO.getConnection().prepareStatement(sql);
             try{
                 if (stmt.executeUpdate() > 0){
                     JOptionPane.showMessageDialog(null,"Removido com sucesso");
                 }
             }catch(SQLException ex){
-//                Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);     
-                JOptionPane.showMessageDialog(null,"Erro ao remover");
+                Logger.getLogger(AutorDAO.class.getName()).log(Level.SEVERE,null,ex);     
+                JOptionPane.showMessageDialog(null,"Erro ao excluir");
+                
             }
     }
   

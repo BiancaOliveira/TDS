@@ -161,10 +161,19 @@ public class alteraLivroController implements Initializable {
     public void altera(ActionEvent actionEvent) throws BancoException, SQLException, ClassNotFoundException {
         LivroController controleLivro = new LivroController();
 
-        Livro b = new Livro(Integer.parseInt(id.getText()), titulo.getText(), Integer.parseInt(exemplares.getText()),
+        Livro b;
+        
+        if(coautor.getSelectionModel().getSelectedItem().getNome()=="-"){
+            b = new Livro(Integer.parseInt(id.getText()), titulo.getText(), Integer.parseInt(exemplares.getText()),
+                descricao.getText(), autor.getSelectionModel().getSelectedItem().getNome(),
+                editora.getSelectionModel().getSelectedItem().getNome(), genero.getSelectionModel().getSelectedItem().getNome(),
+                autor.getSelectionModel().getSelectedItem().getNome());
+        }else{
+            b = new Livro(Integer.parseInt(id.getText()), titulo.getText(), Integer.parseInt(exemplares.getText()),
                 descricao.getText(), autor.getSelectionModel().getSelectedItem().getNome(),
                 editora.getSelectionModel().getSelectedItem().getNome(), genero.getSelectionModel().getSelectedItem().getNome(),
                 coautor.getSelectionModel().getSelectedItem().getNome());
+        }
 
         controleLivro.altera(b);
 

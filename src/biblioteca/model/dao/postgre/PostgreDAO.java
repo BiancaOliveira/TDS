@@ -20,7 +20,7 @@ public abstract class PostgreDAO {
     private static final String URL 
             = "jdbc:postgresql://localhost:5432/tds";
     private static final String USUARIO = "postgres";
-    private static final String SENHA = "root";
+    private static final String SENHA = "batata";
     
     public static Connection getConnection() throws BancoException, ClassNotFoundException {
         if (conn == null) {

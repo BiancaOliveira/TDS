@@ -91,7 +91,7 @@ public class GeneroDAO {
             }catch(SQLException ex){
 //                Logger.getLogger(CargoDAO.class.getName()).log(Level.SEVERE,null,ex);
                 
-                JOptionPane.showMessageDialog(null,"Erro ao remover");
+                JOptionPane.showMessageDialog(null,"Erro ao excluir, genero associado a um livro");
             }
     }
     /**
